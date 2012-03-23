@@ -7,6 +7,7 @@
 extern FILE* yyin;
 extern int yyparse(pro_state*);
 extern int yydebug;
+extern int yy_flex_debug;
 
 
 static int process_file(pro_state* state, const char* arg)
@@ -28,7 +29,12 @@ static int process_flag(pro_state* state, const char* flag)
         yydebug = 1;
         return 0;
     }
-    
+    else if (strcmp(flag, "yy_flex_debug") == 0)
+    {
+        yy_flex_debug = 1;
+        return 0;
+    }
+
     return -1;
 }
 
@@ -50,7 +56,8 @@ static int process_args(pro_state* state, const char* arg)
 int main(int argc, char** argv)
 {
     yydebug = 0;
-
+    yy_flex_debug = 0;
+    
     pro_state* state = pro_state_create();
     for (unsigned int i = 1; i < argc; ++i)
     {
