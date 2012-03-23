@@ -1,0 +1,632 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		89ABF6B6151C24E100DE1A07 /* pro_list_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89ABF6B4151C24E100DE1A07 /* pro_list_expr.c */; };
+		89ABF6B7151C24E100DE1A07 /* pro_list_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89ABF6B5151C24E100DE1A07 /* pro_list_expr.h */; };
+		89ABF6C6151C2AF500DE1A07 /* prosopon.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC74151241E600F78EB0 /* prosopon.c */; };
+		89ABF6C7151C2AF500DE1A07 /* pro_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FCB81512457A00F78EB0 /* pro_expr.c */; };
+		89ABF6C8151C2AF500DE1A07 /* pro_become_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5B151241E600F78EB0 /* pro_become_expr.c */; };
+		89ABF6C9151C2AF500DE1A07 /* pro_expr_list.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5D151241E600F78EB0 /* pro_expr_list.c */; };
+		89ABF6CA151C2AF500DE1A07 /* pro_list_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89ABF6B4151C24E100DE1A07 /* pro_list_expr.c */; };
+		89ABF6CB151C2AF500DE1A07 /* pro_expr_type.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5F151241E600F78EB0 /* pro_expr_type.c */; };
+		89ABF6CC151C2AF500DE1A07 /* pro_identifier_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC62151241E600F78EB0 /* pro_identifier_expr.c */; };
+		89ABF6CD151C2AF500DE1A07 /* pro_let_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC64151241E600F78EB0 /* pro_let_expr.c */; };
+		89ABF6CE151C2AF500DE1A07 /* pro_number_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC68151241E600F78EB0 /* pro_number_expr.c */; };
+		89ABF6CF151C2AF500DE1A07 /* pro_send_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC6C151241E600F78EB0 /* pro_send_expr.c */; };
+		89ABF6D0151C2AF500DE1A07 /* pro_string_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC72151241E600F78EB0 /* pro_string_expr.c */; };
+		89ABF6D1151C2AF500DE1A07 /* pro_case_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FCBE151249CA00F78EB0 /* pro_case_expr.c */; };
+		89ABF6D2151C2AF500DE1A07 /* pro_message_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD48151B839F009472C2 /* pro_message_expr.c */; };
+		89ABF6D3151C2AF500DE1A07 /* pro_constructor_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD4A151B865C009472C2 /* pro_constructor_expr.c */; };
+		89ABF6D4151C2AF500DE1A07 /* pro_actor_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD4E151B8915009472C2 /* pro_actor_expr.c */; };
+		89ABF6D5151C2B0200DE1A07 /* scan.l in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC78151241E600F78EB0 /* scan.l */; };
+		89ABF6D6151C2B0200DE1A07 /* gram.y in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC59151241E600F78EB0 /* gram.y */; };
+		89ABF6DB151C2B1C00DE1A07 /* libprosopon-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D1FCB4151242AF00F78EB0 /* libprosopon-core.dylib */; };
+		89ABF6DC151C2B1C00DE1A07 /* libprosopon.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */; };
+		89D1FC79151241E600F78EB0 /* gram.y in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC59151241E600F78EB0 /* gram.y */; };
+		89D1FC7B151241E600F78EB0 /* pro_become_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5B151241E600F78EB0 /* pro_become_expr.c */; };
+		89D1FC7C151241E600F78EB0 /* pro_become_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FC5C151241E600F78EB0 /* pro_become_expr.h */; };
+		89D1FC7D151241E600F78EB0 /* pro_expr_list.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5D151241E600F78EB0 /* pro_expr_list.c */; };
+		89D1FC7E151241E600F78EB0 /* pro_expr_list.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FC5E151241E600F78EB0 /* pro_expr_list.h */; };
+		89D1FC7F151241E600F78EB0 /* pro_expr_type.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5F151241E600F78EB0 /* pro_expr_type.c */; };
+		89D1FC80151241E600F78EB0 /* pro_expr_type.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FC60151241E600F78EB0 /* pro_expr_type.h */; };
+		89D1FC81151241E600F78EB0 /* pro_expressions.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FC61151241E600F78EB0 /* pro_expressions.h */; };
+		89D1FC82151241E600F78EB0 /* pro_identifier_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC62151241E600F78EB0 /* pro_identifier_expr.c */; };
+		89D1FC83151241E600F78EB0 /* pro_identifier_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FC63151241E600F78EB0 /* pro_identifier_expr.h */; };
+		89D1FC84151241E600F78EB0 /* pro_let_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC64151241E600F78EB0 /* pro_let_expr.c */; };
+		89D1FC85151241E600F78EB0 /* pro_let_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FC65151241E600F78EB0 /* pro_let_expr.h */; };
+		89D1FC88151241E600F78EB0 /* pro_number_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC68151241E600F78EB0 /* pro_number_expr.c */; };
+		89D1FC89151241E600F78EB0 /* pro_number_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FC69151241E600F78EB0 /* pro_number_expr.h */; };
+		89D1FC8C151241E600F78EB0 /* pro_send_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC6C151241E600F78EB0 /* pro_send_expr.c */; };
+		89D1FC8D151241E600F78EB0 /* pro_send_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FC6D151241E600F78EB0 /* pro_send_expr.h */; };
+		89D1FC92151241E600F78EB0 /* pro_string_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC72151241E600F78EB0 /* pro_string_expr.c */; };
+		89D1FC93151241E600F78EB0 /* pro_string_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FC73151241E600F78EB0 /* pro_string_expr.h */; };
+		89D1FC94151241E600F78EB0 /* prosopon.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC74151241E600F78EB0 /* prosopon.c */; };
+		89D1FC98151241E600F78EB0 /* scan.l in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC78151241E600F78EB0 /* scan.l */; };
+		89D1FCAA1512425000F78EB0 /* libprosopon.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */; };
+		89D1FCB7151242BE00F78EB0 /* libprosopon-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D1FCB4151242AF00F78EB0 /* libprosopon-core.dylib */; };
+		89D1FCBA1512457A00F78EB0 /* pro_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FCB81512457A00F78EB0 /* pro_expr.c */; };
+		89D1FCBB1512457A00F78EB0 /* pro_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FCB91512457A00F78EB0 /* pro_expr.h */; };
+		89D1FCBD151249C000F78EB0 /* pro_case_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FCBC151249C000F78EB0 /* pro_case_expr.h */; };
+		89D1FCBF151249CA00F78EB0 /* pro_case_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FCBE151249CA00F78EB0 /* pro_case_expr.c */; };
+		89D1FCC21512559100F78EB0 /* pro_constructor_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89D1FCC11512559100F78EB0 /* pro_constructor_expr.h */; };
+		89E7FD47151B837F009472C2 /* pro_message_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89E7FD46151B837F009472C2 /* pro_message_expr.h */; };
+		89E7FD49151B839F009472C2 /* pro_message_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD48151B839F009472C2 /* pro_message_expr.c */; };
+		89E7FD4B151B865C009472C2 /* pro_constructor_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD4A151B865C009472C2 /* pro_constructor_expr.c */; };
+		89E7FD4D151B88FE009472C2 /* pro_actor_expr.h in Headers */ = {isa = PBXBuildFile; fileRef = 89E7FD4C151B88FD009472C2 /* pro_actor_expr.h */; };
+		89E7FD4F151B8915009472C2 /* pro_actor_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD4E151B8915009472C2 /* pro_actor_expr.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		89ABF6DD151C2B2900DE1A07 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = sourcecode.yacc;
+			isEditable = 1;
+			outputFiles = (
+				"${DERIVED_FILES_DIR}/gram.tab.h",
+				"${DERIVED_FILES_DIR}/gram.tab.c",
+			);
+			script = "cd $DERIVED_FILES_DIR\n${DEVELOPER_BIN_DIR}/bison --debug -d ${INPUT_FILE_PATH}\n";
+		};
+		89ABF6DE151C2E0D00DE1A07 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = sourcecode.lex;
+			isEditable = 1;
+			outputFiles = (
+				"${DERIVED_FILES_DIR}/lex.yy.c",
+			);
+			script = "cd $DERIVED_FILES_DIR\n${DEVELOPER_BIN_DIR}/flex -dv ${INPUT_FILE_PATH}\n";
+		};
+		89D1FC511512417300F78EB0 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = sourcecode.yacc;
+			isEditable = 1;
+			outputFiles = (
+				"${DERIVED_FILES_DIR}/gram.tab.h",
+				"${DERIVED_FILES_DIR}/gram.tab.c",
+			);
+			script = "cd $DERIVED_FILES_DIR\n${DEVELOPER_BIN_DIR}/bison --debug -d ${INPUT_FILE_PATH}\n\n";
+		};
+		89D1FC531512417D00F78EB0 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = sourcecode.lex;
+			isEditable = 1;
+			outputFiles = (
+				"${DERIVED_FILES_DIR}/lex.yy.c",
+			);
+			script = "cd $DERIVED_FILES_DIR\n${DEVELOPER_BIN_DIR}/flex -dv ${INPUT_FILE_PATH}\n";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXContainerItemProxy section */
+		89ABF6D7151C2B1200DE1A07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89D1FCAB151242AE00F78EB0 /* prosopon-core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8900248B1511A2300012E749;
+			remoteInfo = "prosopon-core";
+		};
+		89ABF6D9151C2B1200DE1A07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 890024E71511A3430012E749;
+			remoteInfo = prosopon;
+		};
+		89D1FC9D1512421E00F78EB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 890024E81511A3430012E749;
+			remoteInfo = prosopon;
+		};
+		89D1FCA81512424A00F78EB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 890024E71511A3430012E749;
+			remoteInfo = prosopon;
+		};
+		89D1FCB3151242AF00F78EB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89D1FCAB151242AE00F78EB0 /* prosopon-core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8900248C1511A2300012E749;
+			remoteInfo = "prosopon-core";
+		};
+		89D1FCB5151242BA00F78EB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89D1FCAB151242AE00F78EB0 /* prosopon-core.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8900248B1511A2300012E749;
+			remoteInfo = "prosopon-core";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		89ABF6BA151C29E500DE1A07 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8900250A1512409A0012E749 /* libprosopon-interpreter.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libprosopon-interpreter.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89ABF6B4151C24E100DE1A07 /* pro_list_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_list_expr.c; sourceTree = "<group>"; };
+		89ABF6B5151C24E100DE1A07 /* pro_list_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_list_expr.h; sourceTree = "<group>"; };
+		89ABF6BC151C29E500DE1A07 /* prosopon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = prosopon; sourceTree = BUILT_PRODUCTS_DIR; };
+		89D1FC59151241E600F78EB0 /* gram.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; path = gram.y; sourceTree = "<group>"; };
+		89D1FC5B151241E600F78EB0 /* pro_become_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_become_expr.c; sourceTree = "<group>"; };
+		89D1FC5C151241E600F78EB0 /* pro_become_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_become_expr.h; sourceTree = "<group>"; };
+		89D1FC5D151241E600F78EB0 /* pro_expr_list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_expr_list.c; sourceTree = "<group>"; };
+		89D1FC5E151241E600F78EB0 /* pro_expr_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_expr_list.h; sourceTree = "<group>"; };
+		89D1FC5F151241E600F78EB0 /* pro_expr_type.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_expr_type.c; sourceTree = "<group>"; };
+		89D1FC60151241E600F78EB0 /* pro_expr_type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_expr_type.h; sourceTree = "<group>"; };
+		89D1FC61151241E600F78EB0 /* pro_expressions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_expressions.h; sourceTree = "<group>"; };
+		89D1FC62151241E600F78EB0 /* pro_identifier_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_identifier_expr.c; sourceTree = "<group>"; };
+		89D1FC63151241E600F78EB0 /* pro_identifier_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_identifier_expr.h; sourceTree = "<group>"; };
+		89D1FC64151241E600F78EB0 /* pro_let_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_let_expr.c; sourceTree = "<group>"; };
+		89D1FC65151241E600F78EB0 /* pro_let_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_let_expr.h; sourceTree = "<group>"; };
+		89D1FC68151241E600F78EB0 /* pro_number_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_number_expr.c; sourceTree = "<group>"; };
+		89D1FC69151241E600F78EB0 /* pro_number_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_number_expr.h; sourceTree = "<group>"; };
+		89D1FC6C151241E600F78EB0 /* pro_send_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_send_expr.c; sourceTree = "<group>"; };
+		89D1FC6D151241E600F78EB0 /* pro_send_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_send_expr.h; sourceTree = "<group>"; };
+		89D1FC72151241E600F78EB0 /* pro_string_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_string_expr.c; sourceTree = "<group>"; };
+		89D1FC73151241E600F78EB0 /* pro_string_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_string_expr.h; sourceTree = "<group>"; };
+		89D1FC74151241E600F78EB0 /* prosopon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = prosopon.c; sourceTree = "<group>"; };
+		89D1FC78151241E600F78EB0 /* scan.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = scan.l; sourceTree = "<group>"; };
+		89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = prosopon.xcodeproj; path = ../prosopon/prosopon.xcodeproj; sourceTree = "<group>"; };
+		89D1FCAB151242AE00F78EB0 /* prosopon-core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "prosopon-core.xcodeproj"; path = "../prosopon-core/prosopon-core.xcodeproj"; sourceTree = "<group>"; };
+		89D1FCB81512457A00F78EB0 /* pro_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_expr.c; sourceTree = "<group>"; };
+		89D1FCB91512457A00F78EB0 /* pro_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_expr.h; sourceTree = "<group>"; };
+		89D1FCBC151249C000F78EB0 /* pro_case_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_case_expr.h; sourceTree = "<group>"; };
+		89D1FCBE151249CA00F78EB0 /* pro_case_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_case_expr.c; sourceTree = "<group>"; };
+		89D1FCC11512559100F78EB0 /* pro_constructor_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_constructor_expr.h; sourceTree = "<group>"; };
+		89E7FD46151B837F009472C2 /* pro_message_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_message_expr.h; sourceTree = "<group>"; };
+		89E7FD48151B839F009472C2 /* pro_message_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_message_expr.c; sourceTree = "<group>"; };
+		89E7FD4A151B865C009472C2 /* pro_constructor_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_constructor_expr.c; sourceTree = "<group>"; };
+		89E7FD4C151B88FD009472C2 /* pro_actor_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_actor_expr.h; sourceTree = "<group>"; };
+		89E7FD4E151B8915009472C2 /* pro_actor_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_actor_expr.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		890025071512409A0012E749 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89D1FCB7151242BE00F78EB0 /* libprosopon-core.dylib in Frameworks */,
+				89D1FCAA1512425000F78EB0 /* libprosopon.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89ABF6B9151C29E500DE1A07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89ABF6DB151C2B1C00DE1A07 /* libprosopon-core.dylib in Frameworks */,
+				89ABF6DC151C2B1C00DE1A07 /* libprosopon.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		890024FF1512409A0012E749 = {
+			isa = PBXGroup;
+			children = (
+				89D1FCAB151242AE00F78EB0 /* prosopon-core.xcodeproj */,
+				89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */,
+				89D1FC58151241E600F78EB0 /* src */,
+				8900250B1512409A0012E749 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8900250B1512409A0012E749 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8900250A1512409A0012E749 /* libprosopon-interpreter.dylib */,
+				89ABF6BC151C29E500DE1A07 /* prosopon */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		89D1FC58151241E600F78EB0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				89D1FC74151241E600F78EB0 /* prosopon.c */,
+				89D1FCB91512457A00F78EB0 /* pro_expr.h */,
+				89D1FCB81512457A00F78EB0 /* pro_expr.c */,
+				89D1FC78151241E600F78EB0 /* scan.l */,
+				89D1FC59151241E600F78EB0 /* gram.y */,
+				89D1FC61151241E600F78EB0 /* pro_expressions.h */,
+				89D1FC5C151241E600F78EB0 /* pro_become_expr.h */,
+				89D1FC5B151241E600F78EB0 /* pro_become_expr.c */,
+				89D1FC5E151241E600F78EB0 /* pro_expr_list.h */,
+				89D1FC5D151241E600F78EB0 /* pro_expr_list.c */,
+				89ABF6B5151C24E100DE1A07 /* pro_list_expr.h */,
+				89ABF6B4151C24E100DE1A07 /* pro_list_expr.c */,
+				89D1FC60151241E600F78EB0 /* pro_expr_type.h */,
+				89D1FC5F151241E600F78EB0 /* pro_expr_type.c */,
+				89D1FC63151241E600F78EB0 /* pro_identifier_expr.h */,
+				89D1FC62151241E600F78EB0 /* pro_identifier_expr.c */,
+				89D1FC65151241E600F78EB0 /* pro_let_expr.h */,
+				89D1FC64151241E600F78EB0 /* pro_let_expr.c */,
+				89D1FC69151241E600F78EB0 /* pro_number_expr.h */,
+				89D1FC68151241E600F78EB0 /* pro_number_expr.c */,
+				89D1FC6D151241E600F78EB0 /* pro_send_expr.h */,
+				89D1FC6C151241E600F78EB0 /* pro_send_expr.c */,
+				89D1FC73151241E600F78EB0 /* pro_string_expr.h */,
+				89D1FC72151241E600F78EB0 /* pro_string_expr.c */,
+				89D1FCBC151249C000F78EB0 /* pro_case_expr.h */,
+				89D1FCBE151249CA00F78EB0 /* pro_case_expr.c */,
+				89E7FD46151B837F009472C2 /* pro_message_expr.h */,
+				89E7FD48151B839F009472C2 /* pro_message_expr.c */,
+				89D1FCC11512559100F78EB0 /* pro_constructor_expr.h */,
+				89E7FD4A151B865C009472C2 /* pro_constructor_expr.c */,
+				89E7FD4C151B88FD009472C2 /* pro_actor_expr.h */,
+				89E7FD4E151B8915009472C2 /* pro_actor_expr.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		89D1FC9A1512421D00F78EB0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		89D1FCAC151242AE00F78EB0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				89D1FCB4151242AF00F78EB0 /* libprosopon-core.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		890025081512409A0012E749 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89D1FC7C151241E600F78EB0 /* pro_become_expr.h in Headers */,
+				89D1FC7E151241E600F78EB0 /* pro_expr_list.h in Headers */,
+				89D1FC80151241E600F78EB0 /* pro_expr_type.h in Headers */,
+				89D1FC81151241E600F78EB0 /* pro_expressions.h in Headers */,
+				89D1FC83151241E600F78EB0 /* pro_identifier_expr.h in Headers */,
+				89D1FC85151241E600F78EB0 /* pro_let_expr.h in Headers */,
+				89D1FC89151241E600F78EB0 /* pro_number_expr.h in Headers */,
+				89D1FC8D151241E600F78EB0 /* pro_send_expr.h in Headers */,
+				89D1FC93151241E600F78EB0 /* pro_string_expr.h in Headers */,
+				89D1FCBB1512457A00F78EB0 /* pro_expr.h in Headers */,
+				89D1FCBD151249C000F78EB0 /* pro_case_expr.h in Headers */,
+				89D1FCC21512559100F78EB0 /* pro_constructor_expr.h in Headers */,
+				89E7FD47151B837F009472C2 /* pro_message_expr.h in Headers */,
+				89E7FD4D151B88FE009472C2 /* pro_actor_expr.h in Headers */,
+				89ABF6B7151C24E100DE1A07 /* pro_list_expr.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		890025091512409A0012E749 /* prosopon-interpreter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8900250E1512409A0012E749 /* Build configuration list for PBXNativeTarget "prosopon-interpreter" */;
+			buildPhases = (
+				890025061512409A0012E749 /* Sources */,
+				890025071512409A0012E749 /* Frameworks */,
+				890025081512409A0012E749 /* Headers */,
+			);
+			buildRules = (
+				89D1FC531512417D00F78EB0 /* PBXBuildRule */,
+				89D1FC511512417300F78EB0 /* PBXBuildRule */,
+			);
+			dependencies = (
+				89D1FCA91512424A00F78EB0 /* PBXTargetDependency */,
+				89D1FCB6151242BA00F78EB0 /* PBXTargetDependency */,
+			);
+			name = "prosopon-interpreter";
+			productName = "prosopon-interpreter";
+			productReference = 8900250A1512409A0012E749 /* libprosopon-interpreter.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		89ABF6BB151C29E500DE1A07 /* prosopon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89ABF6C3151C29E500DE1A07 /* Build configuration list for PBXNativeTarget "prosopon" */;
+			buildPhases = (
+				89ABF6B8151C29E500DE1A07 /* Sources */,
+				89ABF6B9151C29E500DE1A07 /* Frameworks */,
+				89ABF6BA151C29E500DE1A07 /* CopyFiles */,
+			);
+			buildRules = (
+				89ABF6DE151C2E0D00DE1A07 /* PBXBuildRule */,
+				89ABF6DD151C2B2900DE1A07 /* PBXBuildRule */,
+			);
+			dependencies = (
+				89ABF6D8151C2B1200DE1A07 /* PBXTargetDependency */,
+				89ABF6DA151C2B1200DE1A07 /* PBXTargetDependency */,
+			);
+			name = prosopon;
+			productName = prosopon;
+			productReference = 89ABF6BC151C29E500DE1A07 /* prosopon */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		890025011512409A0012E749 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 890025041512409A0012E749 /* Build configuration list for PBXProject "prosopon-interpreter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 890024FF1512409A0012E749;
+			productRefGroup = 8900250B1512409A0012E749 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 89D1FCAC151242AE00F78EB0 /* Products */;
+					ProjectRef = 89D1FCAB151242AE00F78EB0 /* prosopon-core.xcodeproj */;
+				},
+				{
+					ProductGroup = 89D1FC9A1512421D00F78EB0 /* Products */;
+					ProjectRef = 89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				890025091512409A0012E749 /* prosopon-interpreter */,
+				89ABF6BB151C29E500DE1A07 /* prosopon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libprosopon.dylib;
+			remoteRef = 89D1FC9D1512421E00F78EB0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		89D1FCB4151242AF00F78EB0 /* libprosopon-core.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = "libprosopon-core.dylib";
+			remoteRef = 89D1FCB3151242AF00F78EB0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		890025061512409A0012E749 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89D1FC79151241E600F78EB0 /* gram.y in Sources */,
+				89D1FC7B151241E600F78EB0 /* pro_become_expr.c in Sources */,
+				89D1FC7D151241E600F78EB0 /* pro_expr_list.c in Sources */,
+				89D1FC7F151241E600F78EB0 /* pro_expr_type.c in Sources */,
+				89D1FC82151241E600F78EB0 /* pro_identifier_expr.c in Sources */,
+				89D1FC84151241E600F78EB0 /* pro_let_expr.c in Sources */,
+				89D1FC88151241E600F78EB0 /* pro_number_expr.c in Sources */,
+				89D1FC8C151241E600F78EB0 /* pro_send_expr.c in Sources */,
+				89D1FC92151241E600F78EB0 /* pro_string_expr.c in Sources */,
+				89D1FC94151241E600F78EB0 /* prosopon.c in Sources */,
+				89D1FC98151241E600F78EB0 /* scan.l in Sources */,
+				89D1FCBA1512457A00F78EB0 /* pro_expr.c in Sources */,
+				89D1FCBF151249CA00F78EB0 /* pro_case_expr.c in Sources */,
+				89E7FD49151B839F009472C2 /* pro_message_expr.c in Sources */,
+				89E7FD4B151B865C009472C2 /* pro_constructor_expr.c in Sources */,
+				89E7FD4F151B8915009472C2 /* pro_actor_expr.c in Sources */,
+				89ABF6B6151C24E100DE1A07 /* pro_list_expr.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89ABF6B8151C29E500DE1A07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89ABF6D5151C2B0200DE1A07 /* scan.l in Sources */,
+				89ABF6D6151C2B0200DE1A07 /* gram.y in Sources */,
+				89ABF6C6151C2AF500DE1A07 /* prosopon.c in Sources */,
+				89ABF6C7151C2AF500DE1A07 /* pro_expr.c in Sources */,
+				89ABF6C8151C2AF500DE1A07 /* pro_become_expr.c in Sources */,
+				89ABF6C9151C2AF500DE1A07 /* pro_expr_list.c in Sources */,
+				89ABF6CA151C2AF500DE1A07 /* pro_list_expr.c in Sources */,
+				89ABF6CB151C2AF500DE1A07 /* pro_expr_type.c in Sources */,
+				89ABF6CC151C2AF500DE1A07 /* pro_identifier_expr.c in Sources */,
+				89ABF6CD151C2AF500DE1A07 /* pro_let_expr.c in Sources */,
+				89ABF6CE151C2AF500DE1A07 /* pro_number_expr.c in Sources */,
+				89ABF6CF151C2AF500DE1A07 /* pro_send_expr.c in Sources */,
+				89ABF6D0151C2AF500DE1A07 /* pro_string_expr.c in Sources */,
+				89ABF6D1151C2AF500DE1A07 /* pro_case_expr.c in Sources */,
+				89ABF6D2151C2AF500DE1A07 /* pro_message_expr.c in Sources */,
+				89ABF6D3151C2AF500DE1A07 /* pro_constructor_expr.c in Sources */,
+				89ABF6D4151C2AF500DE1A07 /* pro_actor_expr.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		89ABF6D8151C2B1200DE1A07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "prosopon-core";
+			targetProxy = 89ABF6D7151C2B1200DE1A07 /* PBXContainerItemProxy */;
+		};
+		89ABF6DA151C2B1200DE1A07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = prosopon;
+			targetProxy = 89ABF6D9151C2B1200DE1A07 /* PBXContainerItemProxy */;
+		};
+		89D1FCA91512424A00F78EB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = prosopon;
+			targetProxy = 89D1FCA81512424A00F78EB0 /* PBXContainerItemProxy */;
+		};
+		89D1FCB6151242BA00F78EB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "prosopon-core";
+			targetProxy = 89D1FCB5151242BA00F78EB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8900250C1512409A0012E749 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROSOPON_BUILD_ROOT)/**";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				PROSOPON_BUILD_DIR = "$(PROSOPON_ROOT_DIR)/build";
+				PROSOPON_BUILD_ROOT = "$(PROSOPON_ROOT_DIR)/build";
+				PROSOPON_ROOT_DIR = ..;
+				SDKROOT = macosx;
+				SYMROOT = "$(PROSOPON_BUILD_ROOT)";
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
+			};
+			name = Debug;
+		};
+		8900250D1512409A0012E749 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROSOPON_BUILD_ROOT)/**";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PROSOPON_BUILD_DIR = "$(PROSOPON_ROOT_DIR)/build";
+				PROSOPON_BUILD_ROOT = "$(PROSOPON_ROOT_DIR)/build";
+				PROSOPON_ROOT_DIR = ..;
+				SDKROOT = macosx;
+				SYMROOT = "$(PROSOPON_BUILD_ROOT)";
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
+			};
+			name = Release;
+		};
+		8900250F1512409A0012E749 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = "$(PROSOPON_BUILD_ROOT)/**";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROSOPON_BUILD_ROOT = "$(PROSOPON_ROOT_DIR)/build";
+				PROSOPON_ROOT_DIR = ..;
+				SYMROOT = "$(PROSOPON_BUILD_ROOT)";
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
+			};
+			name = Debug;
+		};
+		890025101512409A0012E749 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = "$(PROSOPON_BUILD_ROOT)/**";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROSOPON_BUILD_ROOT = "$(PROSOPON_ROOT_DIR)/build";
+				PROSOPON_ROOT_DIR = ..;
+				SYMROOT = "$(PROSOPON_BUILD_ROOT)";
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
+			};
+			name = Release;
+		};
+		89ABF6C4151C29E500DE1A07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		89ABF6C5151C29E500DE1A07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		890025041512409A0012E749 /* Build configuration list for PBXProject "prosopon-interpreter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8900250C1512409A0012E749 /* Debug */,
+				8900250D1512409A0012E749 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8900250E1512409A0012E749 /* Build configuration list for PBXNativeTarget "prosopon-interpreter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8900250F1512409A0012E749 /* Debug */,
+				890025101512409A0012E749 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89ABF6C3151C29E500DE1A07 /* Build configuration list for PBXNativeTarget "prosopon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89ABF6C4151C29E500DE1A07 /* Debug */,
+				89ABF6C5151C29E500DE1A07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 890025011512409A0012E749 /* Project object */;
+}
