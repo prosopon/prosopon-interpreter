@@ -21,6 +21,18 @@ static int process_file(pro_state* state, const char* arg)
 }
 
 
+static int process_flag(pro_state* state, const char* flag)
+{
+    if (strcmp(flag, "yydebug") == 0)
+    {
+        yydebug = 1;
+        return 0;
+    }
+    
+    return -1;
+}
+
+
 static int process_args(pro_state* state, const char* arg)
 {
     size_t len = strlen(arg);
@@ -29,16 +41,17 @@ static int process_args(pro_state* state, const char* arg)
         
     switch (arg[0])
     {
-    default:
-        return process_file(state, arg);
+    case '-':   return process_flag(state, arg + 1);
+    default:    return process_file(state, arg);
     }
 }
 
 
 int main(int argc, char** argv)
 {
-    pro_state* state = pro_state_create();
     yydebug = 0;
+
+    pro_state* state = pro_state_create();
     for (unsigned int i = 1; i < argc; ++i)
     {
         int status = process_args(state, argv[i]);
