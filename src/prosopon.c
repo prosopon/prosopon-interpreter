@@ -66,5 +66,6 @@ int main(int argc, char** argv)
             return -1;
     }
     
+    pro_state_release(state);
     return 0;
 }
