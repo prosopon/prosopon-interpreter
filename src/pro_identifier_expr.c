@@ -9,7 +9,7 @@ static void identifier_expr_eval(pro_state* s, pro_expr* t)
     assert(pro_expr_get_type(t) == PRO_IDENTIFIER_EXPR_TYPE);
 }
 
-static void identifier_expr_print(pro_state* s, pro_expr* t)
+static void identifier_expr_print(pro_state* s, pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_IDENTIFIER_EXPR_TYPE);
     char* value = t->value.identifier;

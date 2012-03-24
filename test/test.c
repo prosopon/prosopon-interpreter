@@ -8,6 +8,7 @@ int main(int argc, char** argv)
 {
     CU_SuiteInfo suites[] = {
         pro_expr_test_suite,
+        pro_identifier_expr_test_suite,
         pro_let_expr_test_suite,
         CU_SUITE_INFO_NULL
     };

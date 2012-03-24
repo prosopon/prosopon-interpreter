@@ -7,16 +7,18 @@
 
 
 
-PRO_INTERNAL void pro_print_expr_list(pro_state* s, pro_expr_list* t)
+PRO_INTERNAL void pro_print_expr_list(pro_state* s, pro_expr_list* t, const char* end)
 {    
     pro_expr_list* list = t;
     while (list) 
     {
         pro_expr* value = list->value;
         if (value)
-            pro_print_expr(s, value);
+            pro_print_expr(s, value, list->next ? ", " : "");
         list = list->next;
     }
+    
+    printf("%s", end);
 }
 
 

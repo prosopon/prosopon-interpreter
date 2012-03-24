@@ -12,12 +12,11 @@ static void number_expr_eval(pro_state* s, pro_expr* t)
     t->data.lookup = pro_number_create(s, t->value.number);
 }
 
-static void number_expr_print(pro_state* s, pro_expr* t)
+static void number_expr_print(pro_state* s, pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_NUMBER_EXPR_TYPE);
     double value = t->value.number;
-    
-    printf("<number %f>", value);
+    printf("<number %f>%s", value, end);
 }
 
 

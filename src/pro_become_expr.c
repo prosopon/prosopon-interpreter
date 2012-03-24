@@ -9,16 +9,16 @@ static void become_expr_eval(pro_state* s, pro_expr* t)
     assert(pro_expr_get_type(t) == PRO_BECOME_EXPR_TYPE);
 }
 
-static void become_expr_print(pro_state* s, pro_expr* t)
+static void become_expr_print(pro_state* s, pro_expr* t, const char* end)
 {
     pro_expr* left = t->value.binary.left;
     pro_expr* right = t->value.binary.right;
 
     printf("<Become id:");
-    pro_print_expr(s, left);
-    printf(" value:");
-    pro_print_expr(s, right);
-    printf(">\n");
+    pro_print_expr(s, left, " ");
+    printf("value:");
+    pro_print_expr(s, right, "");
+    printf(">%s", end);
 }
 
 const pro_expr_type_info pro_become_expr_type_info = {

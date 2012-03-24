@@ -28,17 +28,17 @@ static void let_expr_eval(pro_state* s, pro_expr* t)
     }
 }
 
-static void let_expr_print(pro_state* s, pro_expr* t)
+static void let_expr_print(pro_state* s, pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
     pro_expr* identifier =  t->value.binary.left;
     pro_expr* value = t->value.binary.right;
     
     printf("<let identifier:");
-    pro_print_expr(s, identifier);
-    printf(" value:");
-    pro_print_expr(s, value);
-    printf(">\n");
+    pro_print_expr(s, identifier, " ");
+    printf("value:");
+    pro_print_expr(s, value, "");
+    printf(">%s", end);
 }
 
 const pro_expr_type_info pro_let_expr_type_info = {

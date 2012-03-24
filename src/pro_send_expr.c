@@ -9,7 +9,7 @@ static void send_expr_eval(pro_state* s, pro_expr* t)
     assert(pro_expr_get_type(t) == PRO_SEND_EXPR_TYPE);
 }
 
-static void send_expr_print(pro_state* s, pro_expr* t)
+static void send_expr_print(pro_state* s, pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_SEND_EXPR_TYPE);
     
@@ -17,10 +17,10 @@ static void send_expr_print(pro_state* s, pro_expr* t)
     pro_expr* msg = t->value.binary.right;
     
     printf("<send identifier:");
-    pro_print_expr(s, identifier);
-    printf(" message:");
-    pro_print_expr(s, msg);
-    printf(">\n");
+    pro_print_expr(s, identifier, " ");
+    printf("message:");
+    pro_print_expr(s, msg, "");
+    printf(">%s", end);
 }
 
 const pro_expr_type_info pro_send_expr_type_info = {

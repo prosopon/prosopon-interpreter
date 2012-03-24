@@ -9,11 +9,11 @@ static void string_expr_eval(pro_state* s, pro_expr* t)
     assert(pro_expr_get_type(t) == PRO_STRING_EXPR_TYPE);
 }
 
-static void string_expr_print(pro_state* s, pro_expr* t)
+static void string_expr_print(pro_state* s, pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_STRING_EXPR_TYPE);
-    char* value = t->value.string;
-    printf("<string %s>\n", value);
+    const char* value = t->value.string;
+    printf("<string %s>%s", value, end);
 }
 
 const pro_expr_type_info pro_string_expr_type_info = {

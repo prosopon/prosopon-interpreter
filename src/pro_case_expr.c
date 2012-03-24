@@ -10,7 +10,7 @@ static void case_expr_eval(pro_state* s, pro_expr* t)
 }
 
 
-static void case_expr_print(pro_state* s, pro_expr* t)
+static void case_expr_print(pro_state* s, pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_CASE_EXPR_TYPE);
     
@@ -18,10 +18,10 @@ static void case_expr_print(pro_state* s, pro_expr* t)
     pro_expr* body = t->value.binary.right;
     
     printf("<case pattern:");
-    pro_print_expr(s, pattern);
-    printf(" body:");
-    pro_print_expr(s, body);
-    printf(">\n");
+    pro_print_expr(s, pattern, " ");
+    printf("body:");
+    pro_print_expr(s, body, "");
+    printf(">%s", end);
 }
 
 const pro_expr_type_info pro_case_expr_type_info = {

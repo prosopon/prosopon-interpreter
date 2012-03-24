@@ -12,13 +12,13 @@ static void constructor_expr_eval(pro_state* s, pro_expr* t)
     
 }
 
-static void constructor_expr_print(pro_state* s, pro_expr* t)
+static void constructor_expr_print(pro_state* s, pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_CONSTRUCTOR_EXPR_TYPE);
     
     printf("<constructor %s list arguments:", t->value.constructor.identifier);
-    pro_print_expr_list(s, t->value.constructor.arguments);
-    printf(">\n");
+    pro_print_expr_list(s, t->value.constructor.arguments, "");
+    printf(">%s", end);
 }
 
 const pro_expr_type_info pro_constructor_expr_type_info = {
