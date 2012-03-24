@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "pro_actor_expr.h"
+
 
 typedef struct {
     pro_env_lookup* env;
@@ -48,7 +50,9 @@ static pro_lookup* contructor(pro_state* s, pro_lookup_list* arguments, void* d)
     
     // Create a new actor in the new environment.
     actor = pro_actor_create(s);
-    pro_actor_become(s, actor, pro_actor_expr_get_behavior(s, actor_expr));
+    void* become_data = 0;
+    pro_behavior* behavior = pro_actor_expr_get_behavior(s, actor_expr, &become_data);
+    pro_become(s, actor, behavior, become_data);
 
     // Restore the old environment.
     pro_pop_env(s);
@@ -75,7 +79,7 @@ static void let_expr_eval(pro_state* s, pro_expr* t)
         data->env = pro_get_env(s);
         data->constructor_expr = left;
         data->actor_expr = right;
-        pro_constructor_create(s, contructor, data);
+        t->data.lookup = pro_constructor_create(s, contructor, data);
     }   break;
     default:
         assert(0);

@@ -31,3 +31,12 @@ PRO_INTERNAL pro_expr* pro_actor_expr_create(pro_expr* behavior)
     t->value.behavior = behavior;
     return t;
 }
+
+
+PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state* s, 
+    pro_expr* t, void** data)
+{
+    assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
+    
+    return 0;
+}

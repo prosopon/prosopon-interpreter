@@ -12,4 +12,12 @@ extern const pro_expr_type_info pro_actor_expr_type_info;
 
 PRO_INTERNAL pro_expr* pro_actor_expr_create(pro_expr* behavior);
 
+/**
+ * Gets the behavior for a given actor expr
+ *
+ * @return
+ */
+PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state*,
+    pro_expr* t, void** data);
+
 #endif
