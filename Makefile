@@ -1,32 +1,39 @@
 SHELL=/bin/bash
 
-#
-#	define version of c compiler, linker, and lex
-#
 CC = gcc
 LINK = gcc
 LEX = flex
 BISON = bison
 
-#
-#	define yacc lex and compiler flags
-#
 BISON_FLAGS = --debug -d
 LEX_FLAGS = -dv -ll
-CFLAGS = -g
+CFLAGS = -std=c99
 
-SRC = src/pro_actor.c src/pro_behavior.c src/pro_env.c src/pro_lookup.c \
-    src/pro_object.c src/pro_state.c
-    
-OBJ = pro_actor.o pro_behavior.o pro_env.o pro_lookup.o pro_object.o pro_state.o
+LFLAGS=-L../mylib -lmymathlib /System/Library/Frameworks/kecLib.framework/Versions/A/vecLib
 
-all : $(SRC)
-    gcc -c -fPIC $(SRC) -o $(obj)
-    gcc -shared -Wl,-soname,libprosopon.so.1 -o libprosopon.so.1.0.1 $(OBJ)
+SRC_DIR = src
+
+OBJS = pro_actor_expr.o pro_become_expr.o pro_case_expr.o pro_constructor_expr.o pro_expr.o \
+    pro_expr_list.o pro_expr_type.o pro_identifier_expr.o pro_let_expr.o pro_list_expr.o \
+    pro_message_expr.o pro_number_expr.o pro_send_expr.o pro_string_expr.o prosopon.o \
+    lex.yy.c gram.tab.o
+
+OUT_DIR = build
+OUT_OBJS = $(addprefix $(OUT_DIR)/,$(OBJS))
+
+
+all : $(OUT_OBJS)
+	$(CC) -o $(OUT_DIR)/prosopon $<
+
+$(OUT_DIR)/%.o : $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUT_DIR)/lex.yy.c : $(SRC_DIR)/scan.l
+	$(LEX) $(LEX_FLAGS) -o $@ $<
+
+$(OUT_DIR)/gram.tab.c : $(SRC_DIR)/gram.y
+	$(BISON) $(BISON_FLAGS) -o $@ $<
 
 clean :
-    rm -f gram.tab.* lex.yy.c *.o prosopon
-    rm -rf prosopon.dSYM
-
-
+	rm -f $(OUT_DIR)/*
 

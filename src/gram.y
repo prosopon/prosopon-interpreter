@@ -84,6 +84,7 @@ program
     : statements
     {
         pro_print_expr(state, $1);
+        pro_eval_expr(state, $1);
     }
     ;
 

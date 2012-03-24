@@ -17,7 +17,7 @@ static void let_expr_eval(pro_state* s, pro_expr* t)
     {
     case PRO_IDENTIFIER_EXPR_TYPE:
         pro_eval_expr(s, right);
-        pro_lookup_bind(s, right->data.lookup, left->value.identifier);
+        pro_bind(s, right->data.lookup, left->value.identifier);
         break;
     case PRO_CONSTRUCTOR_EXPR_TYPE:
         
