@@ -45,6 +45,7 @@
 		89CE9C82151D76B400CE5511 /* pro_message_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD48151B839F009472C2 /* pro_message_expr.c */; };
 		89CE9C83151D76B400CE5511 /* pro_constructor_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD4A151B865C009472C2 /* pro_constructor_expr.c */; };
 		89CE9C84151D76B400CE5511 /* pro_actor_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD4E151B8915009472C2 /* pro_actor_expr.c */; };
+		89CE9C87151E1BCD00CE5511 /* test-expressions.c in Sources */ = {isa = PBXBuildFile; fileRef = 89CE9C85151E1A6800CE5511 /* test-expressions.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -154,6 +155,7 @@
 		89CE9C5F151D751800CE5511 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
 		89CE9C6B151D75B600CE5511 /* libcunit.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcunit.1.dylib; path = ../../../../../usr/local/lib/libcunit.1.dylib; sourceTree = "<group>"; };
 		89CE9C74151D767B00CE5511 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		89CE9C85151E1A6800CE5511 /* test-expressions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-expressions.c"; sourceTree = "<group>"; };
 		89D1FC59151241E600F78EB0 /* gram.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; path = gram.y; sourceTree = "<group>"; };
 		89D1FC5B151241E600F78EB0 /* pro_become_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = pro_become_expr.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		89D1FC5C151241E600F78EB0 /* pro_become_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_become_expr.h; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			children = (
 				89CE9C51151D747200CE5511 /* test.c */,
 				89CE9C57151D74B100CE5511 /* test-expressions.h */,
+				89CE9C85151E1A6800CE5511 /* test-expressions.c */,
 				89CE9C59151D74F900CE5511 /* test-pro_let_expr.c */,
 			);
 			path = test;
@@ -447,6 +450,7 @@
 				89CE9C84151D76B400CE5511 /* pro_actor_expr.c in Sources */,
 				89CE9C69151D753800CE5511 /* test.c in Sources */,
 				89CE9C6D151D75E000CE5511 /* test-pro_let_expr.c in Sources */,
+				89CE9C87151E1BCD00CE5511 /* test-expressions.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

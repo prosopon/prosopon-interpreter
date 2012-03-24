@@ -47,7 +47,7 @@ struct pro_expr
 
 
 /**
- * Creates a new exprssion of a given type.
+ * @return A new exprssion of a given type.
  */
 PRO_INTERNAL pro_expr* pro_expr_create(pro_expr_type type);
 

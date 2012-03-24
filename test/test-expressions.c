@@ -2,6 +2,8 @@
 
 #include "prosopon.h"
 
+#include "pro_expr.h"
+
 
 static pro_state* state;
 
@@ -25,17 +27,27 @@ static int cleanup(void)
 
 static void test_create(void)
 {
-    //pro_expr()
+    pro_expr* t = pro_expr_create(PRO_LET_EXPR_TYPE);
+    CU_ASSERT(0 != t);
+    CU_ASSERT(PRO_LET_EXPR_TYPE == t->type);
+}
+
+static void test_get_type(void)
+{
+    pro_expr* t = pro_expr_create(PRO_LET_EXPR_TYPE);
+    CU_ASSERT(pro_expr_get_type(t) == t->type);
+    CU_ASSERT(PRO_LET_EXPR_TYPE == pro_expr_get_type(t));
 }
 
 static CU_TestInfo tests[] = {
     {"create", test_create},
+    {"get_type", test_get_type},
     CU_TEST_INFO_NULL,
 };
 
 
-CU_SuiteInfo pro_let_expr_test_suite = {
-    "pro_let_expr",
+CU_SuiteInfo pro_expr_test_suite = {
+    "expressions",
     init,
     cleanup,
     tests
