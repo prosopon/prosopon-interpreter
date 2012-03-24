@@ -10,6 +10,6 @@
 extern const pro_expr_type_info pro_number_expr_type_info;
 
 
-PRO_INTERNAL pro_expr* pro_number_expr_create(pro_state*, double value);
+PRO_INTERNAL pro_expr* pro_number_expr_create(double value);
 
 #endif

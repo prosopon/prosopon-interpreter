@@ -49,7 +49,7 @@ struct pro_expr
 /**
  * Creates a new exprssion of a given type.
  */
-PRO_INTERNAL pro_expr* pro_expr_create(pro_state*, pro_expr_type type);
+PRO_INTERNAL pro_expr* pro_expr_create(pro_expr_type type);
 
 /**
  * Evaluates a given expression.
@@ -64,7 +64,7 @@ PRO_INTERNAL void pro_eval_expr(pro_state*, pro_expr*);
 /**
  * @returns The type identifier of a given expression.
  */
-PRO_INTERNAL pro_expr_type pro_expr_get_type(pro_state*, const pro_expr*);
+PRO_INTERNAL pro_expr_type pro_expr_get_type(const pro_expr*);
 
 
 

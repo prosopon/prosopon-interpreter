@@ -8,7 +8,7 @@
 extern const pro_expr_type_info pro_send_expr_type_info;
 
 
-PRO_INTERNAL pro_expr* pro_send_expr_create(pro_state*, pro_expr* identifier, pro_expr* msg);
+PRO_INTERNAL pro_expr* pro_send_expr_create(pro_expr* identifier, pro_expr* msg);
 
 
 #endif

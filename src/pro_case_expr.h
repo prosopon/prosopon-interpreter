@@ -10,6 +10,6 @@
 extern const pro_expr_type_info pro_case_expr_type_info;
 
 
-PRO_INTERNAL pro_expr* pro_case_expr_create(pro_state*, pro_expr* pattern, pro_expr* body);
+PRO_INTERNAL pro_expr* pro_case_expr_create(pro_expr* pattern, pro_expr* body);
 
 #endif

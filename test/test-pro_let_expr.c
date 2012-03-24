@@ -23,9 +23,13 @@ static int cleanup(void)
 #pragma mark -
 #pragma mark Tests
 
-
+static void test_create(void)
+{
+    
+}
 
 static CU_TestInfo tests[] = {
+    {"create", test_create},
     CU_TEST_INFO_NULL,
 };
 

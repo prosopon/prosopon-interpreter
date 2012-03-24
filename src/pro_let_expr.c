@@ -8,12 +8,12 @@
 
 static void let_expr_eval(pro_state* s, pro_expr* t)
 {
-    assert(pro_expr_get_type(s, t) == PRO_LET_EXPR_TYPE);
+    assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
     
     pro_expr* left = t->value.binary.left;
     pro_expr* right = t->value.binary.right;
     
-    switch (pro_expr_get_type(s, left))
+    switch (pro_expr_get_type(left))
     {
     case PRO_IDENTIFIER_EXPR_TYPE:
         pro_eval_expr(s, right);
@@ -30,7 +30,7 @@ static void let_expr_eval(pro_state* s, pro_expr* t)
 
 static void let_expr_print(pro_state* s, pro_expr* t)
 {
-    assert(pro_expr_get_type(s, t) == PRO_LET_EXPR_TYPE);
+    assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
     pro_expr* identifier =  t->value.binary.left;
     pro_expr* value = t->value.binary.right;
     
@@ -47,9 +47,13 @@ const pro_expr_type_info pro_let_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_let_expr_create(pro_state* s, pro_expr* identifier, pro_expr* value)
+PRO_INTERNAL pro_expr* pro_let_expr_create(pro_expr* identifier, pro_expr* value)
 {
-    pro_expr* t = pro_expr_create(s, PRO_LET_EXPR_TYPE);
+    pro_type identifier_type = pro_expr_get_type(identifier);
+    assert(identifier_type == PRO_IDENTIFIER_EXPR_TYPE ||
+        identifier_type == PRO_CONSTRUCTOR_EXPR_TYPE);
+    
+    pro_expr* t = pro_expr_create(PRO_LET_EXPR_TYPE);
     t->value.binary.left = identifier;
     t->value.binary.right = value;
     return t;

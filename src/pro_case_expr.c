@@ -6,13 +6,13 @@
 
 static void case_expr_eval(pro_state* s, pro_expr* t)
 {
-    assert(pro_expr_get_type(s, t) == PRO_CASE_EXPR_TYPE);
+    assert(pro_expr_get_type(t) == PRO_CASE_EXPR_TYPE);
 }
 
 
 static void case_expr_print(pro_state* s, pro_expr* t)
 {
-    assert(pro_expr_get_type(s, t) == PRO_CASE_EXPR_TYPE);
+    assert(pro_expr_get_type(t) == PRO_CASE_EXPR_TYPE);
     
     pro_expr* pattern = t->value.binary.left;
     pro_expr* body = t->value.binary.right;
@@ -30,9 +30,9 @@ const pro_expr_type_info pro_case_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_case_expr_create(pro_state* s, pro_expr* pattern, pro_expr* body)
+PRO_INTERNAL pro_expr* pro_case_expr_create(pro_expr* pattern, pro_expr* body)
 {
-    pro_expr* t = pro_expr_create(s, PRO_CASE_EXPR_TYPE);
+    pro_expr* t = pro_expr_create(PRO_CASE_EXPR_TYPE);
     t->value.binary.left = pattern;
     t->value.binary.right = body;
     return t;
