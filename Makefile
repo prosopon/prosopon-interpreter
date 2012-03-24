@@ -8,7 +8,7 @@ BISON = bison
 BISON_FLAGS = --debug -d
 LEX_FLAGS = -dv -ll
 CFLAGS = -std=c99 -I../prosopon/include -I../prosopon-core/include -Isrc
-LFLAGS = 
+LFLAGS = -lprosopon -lprosopon-core
 
 SRC_DIR = src
 
@@ -24,7 +24,7 @@ OUT_OBJS = $(addprefix $(OUT_DIR)/,$(OBJS))
 all : $(OUT_OBJS)
 	(cd ../prosopon/ ; make)
 	(cd ../prosopon-core/ ; make)
-	$(LINK) $(LFLAGS) ../prosopon/libprosopon.so.1.0.0 ../prosopon-core/libprosopon-core.so.1.0.0 -o prosopon $^
+	$(LINK) $(LFLAGS) -o prosopon $^
 
 $(OUT_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
