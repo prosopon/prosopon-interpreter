@@ -23,8 +23,8 @@ OUT_OBJS = $(addprefix $(OUT_DIR)/,$(OBJS))
 
 all : $(OUT_OBJS)
 	(cd ../prosopon/ ; make)
-	(cd ../prosopon/ ; make)
-	$(LINK) $(LFLAGS) ../prosopon/libprosopon.so.1.0.0 -o $(OUT_DIR) $^
+	(cd ../prosopon-core/ ; make)
+	$(LINK) $(LFLAGS) ../prosopon/libprosopon.so.1.0.0 ../prosopon-core/libprosopon-core.so.1.0.0 -o prosopon $^
 
 $(OUT_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -45,4 +45,5 @@ doc :
 .PHONY : clean
 clean :
 	rm -f $(OUT_DIR)/*
+	if [ -f prosopon ]; then rm prosopon; fi
 
