@@ -42,7 +42,8 @@ static void constructor_expr_eval(pro_state* s, pro_expr* t)
     t->data.lookup = pro_constructor_call(s, constructor, arg_list);
 }
 
-static void constructor_expr_print(pro_state* s, pro_expr* t, const char* end)
+static void constructor_expr_print(pro_state* s,
+    const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_CONSTRUCTOR_EXPR_TYPE);
     

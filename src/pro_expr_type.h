@@ -38,7 +38,8 @@ typedef void(pro_expr_eval)(pro_state*, struct pro_expr* t);
  * @param t This, the instruction to print.
  * @param end A string to append the end of the printing.
  */
-typedef void(pro_expr_print)(pro_state*, struct pro_expr* t, const char* end);
+typedef void(pro_expr_print)(pro_state*,
+    const struct pro_expr* t, const char* end);
 
 
 /**

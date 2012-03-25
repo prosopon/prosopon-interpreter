@@ -25,7 +25,7 @@ static void become_expr_eval(pro_state* s, pro_expr* t)
     pro_become(s, left->data.lookup, behavior, t);
 }
 
-static void become_expr_print(pro_state* s, pro_expr* t, const char* end)
+static void become_expr_print(pro_state* s, const pro_expr* t, const char* end)
 {
     pro_expr* left = t->value.binary.left;
     pro_expr* right = t->value.binary.right;

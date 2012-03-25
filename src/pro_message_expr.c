@@ -21,7 +21,7 @@ static void message_expr_eval(pro_state* s, pro_expr* t)
     t->data.lookup = lookup;
 }
 
-static void message_expr_print(pro_state* s, pro_expr* t, const char* end)
+static void message_expr_print(pro_state* s, const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_MESSAGE_EXPR_TYPE);
     printf("<message ");

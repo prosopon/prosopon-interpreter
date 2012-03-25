@@ -13,7 +13,7 @@ PRO_INTERNAL pro_expr* pro_expr_create(pro_expr_type type)
 }
 
 
-PRO_INTERNAL void pro_print_expr(pro_state* s, pro_expr* t, const char* end)
+PRO_INTERNAL void pro_print_expr(pro_state* s, const pro_expr* t, const char* end)
 {
     assert(t);
     const pro_expr_type type = pro_expr_get_type(t);

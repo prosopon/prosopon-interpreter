@@ -93,7 +93,7 @@ static void let_expr_eval(pro_state* s, pro_expr* t)
 }
 
 
-static void let_expr_print(pro_state* s, pro_expr* t, const char* end)
+static void let_expr_print(pro_state* s, const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
     pro_expr* identifier =  t->value.binary.left;

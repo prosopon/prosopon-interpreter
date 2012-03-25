@@ -59,7 +59,7 @@ PRO_INTERNAL void pro_eval_expr(pro_state*, pro_expr*);
 /**
  * Prints a given expression
  */
- PRO_INTERNAL void pro_print_expr(pro_state*, pro_expr* t, const char* end);
+ PRO_INTERNAL void pro_print_expr(pro_state*, const pro_expr* t, const char* end);
 
 /**
  * @returns The type identifier of a given expression.

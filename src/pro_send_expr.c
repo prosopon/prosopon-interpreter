@@ -16,7 +16,7 @@ static void send_expr_eval(pro_state* s, pro_expr* t)
     pro_send(s, left->data.lookup, msg->data.lookup);
 }
 
-static void send_expr_print(pro_state* s, pro_expr* t, const char* end)
+static void send_expr_print(pro_state* s, const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_SEND_EXPR_TYPE);
     
