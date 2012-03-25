@@ -172,7 +172,7 @@ send
 /**
  * Become
  */
- become
+become
     : BECOME identifier actor
     {
         $$ = pro_become_expr_create($2, $3);

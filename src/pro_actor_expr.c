@@ -3,6 +3,9 @@
 #include <assert.h>
 #include <stdio.h>
 
+#include "pro_case_expr.h"
+
+
 
 #pragma mark Private
 
@@ -34,7 +37,16 @@ static void actor_expr_print(pro_state* s, const pro_expr* t, const char* end)
 static void behavior(pro_state* s,
     pro_lookup* t, pro_lookup* msg, void* data)
 {
-    printf("behavior");
+    pro_expr* behavior_expr = data;
+    pro_expr_list* case_list = behavior_expr->value.list;
+        
+    while (case_list)
+    {
+        pro_expr* case_expr = case_list->value;
+        if (pro_case_expr_match(s, case_expr, msg) != 0)
+            return;
+        case_list = case_list->next;
+    }
 }
 
 
@@ -60,6 +72,8 @@ PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state* s,
     pro_expr* t, void** data)
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
-    
+    pro_expr* behavior_expr = t->value.behavior;
+    *data = behavior_expr;
     return behavior;
 }
+
