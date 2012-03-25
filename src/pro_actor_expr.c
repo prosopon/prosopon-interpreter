@@ -31,6 +31,14 @@ static void actor_expr_print(pro_state* s, pro_expr* t, const char* end)
 }
 
 
+static void behavior(pro_state* s,
+    pro_lookup* t, pro_lookup* msg, void* data)
+{
+    printf("behavior");
+}
+
+
+
 #pragma mark -
 #pragma mark Internal 
 
@@ -53,5 +61,5 @@ PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state* s,
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
     
-    return 0;
+    return behavior;
 }
