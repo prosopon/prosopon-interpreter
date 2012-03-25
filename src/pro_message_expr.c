@@ -9,6 +9,16 @@
 static void message_expr_eval(pro_state* s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_MESSAGE_EXPR_TYPE);
+    
+    pro_lookup* lookup = pro_message_create(s);
+    
+    for (pro_expr_list* list; list; list = list->next)
+    {
+        pro_expr* value = list->value;
+        pro_eval_expr(s, value);
+        pro_message_append(s, value->data.lookup);
+    }
+    t->data.lookup = lookup;
 }
 
 static void message_expr_print(pro_state* s, pro_expr* t, const char* end)

@@ -609,6 +609,7 @@
 				89CE9C68151D751900CE5511 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

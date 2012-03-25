@@ -40,6 +40,8 @@ static void constructor_expr_eval(pro_state* s, pro_expr* t)
     
     // Call the constructor
     pro_constructor_call(s, constructor, arg_list);
+    
+    t->data.lookup = constructor;
 }
 
 static void constructor_expr_print(pro_state* s, pro_expr* t, const char* end)

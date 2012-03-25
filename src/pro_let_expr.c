@@ -15,6 +15,7 @@ typedef struct {
     pro_expr* actor_expr;
 } constructor_data;
 
+
 static void bind_arguments(pro_state* s, pro_expr_list* id_list, pro_lookup_list* values)
 {
     pro_expr_list* list = id_list;
@@ -32,6 +33,7 @@ static void bind_arguments(pro_state* s, pro_expr_list* id_list, pro_lookup_list
         lookup_list = lookup_list->next;
     }
 }
+
 
 static pro_lookup* contructor(pro_state* s, pro_lookup_list* arguments, void* d)
 {
@@ -60,6 +62,7 @@ static pro_lookup* contructor(pro_state* s, pro_lookup_list* arguments, void* d)
     return actor;
 }
 
+
 static void let_expr_eval(pro_state* s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
@@ -79,13 +82,16 @@ static void let_expr_eval(pro_state* s, pro_expr* t)
         data->env = pro_get_env(s);
         data->constructor_expr = left;
         data->actor_expr = right;
-        t->data.lookup = pro_constructor_create(s, contructor, data);
+        pro_lookup* lookup = pro_constructor_create(s, contructor, data);
+        t->data.lookup = lookup;
+        pro_bind(s, lookup, left->value.identifier);
     }   break;
     default:
         assert(0);
         break;
     }
 }
+
 
 static void let_expr_print(pro_state* s, pro_expr* t, const char* end)
 {

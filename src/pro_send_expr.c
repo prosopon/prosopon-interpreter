@@ -8,12 +8,12 @@ static void send_expr_eval(pro_state* s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_SEND_EXPR_TYPE);
     
-    pro_expr* identifier = t->value.binary.left;
+    pro_expr* left = t->value.binary.left;
     pro_expr* msg = t->value.binary.right;
     
-    pro_eval_expr(s, identifier);
+    pro_eval_expr(s, left);
     pro_eval_expr(s, msg);
-    pro_send(s, identifier->data.lookup, msg->data.lookup);
+    pro_send(s, left->data.lookup, msg->data.lookup);
 }
 
 static void send_expr_print(pro_state* s, pro_expr* t, const char* end)
