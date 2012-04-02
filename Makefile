@@ -22,8 +22,6 @@ OUT_OBJS = $(addprefix $(OUT_DIR)/,$(OBJS))
 
 
 all : $(OUT_OBJS)
-	(cd ../prosopon/ ; make)
-	(cd ../prosopon-core/ ; make)
 	$(LINK) $(LFLAGS) -o prosopon $^
 
 $(OUT_DIR)/%.o : $(SRC_DIR)/%.c

@@ -12,6 +12,8 @@ int main(int argc, char** argv)
         pro_string_expr_test_suite,
         pro_number_expr_test_suite,
         pro_let_expr_test_suite,
+        pro_send_expr_test_suite,
+        pro_become_expr_test_suite,
         CU_SUITE_INFO_NULL
     };
     

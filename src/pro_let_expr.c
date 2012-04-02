@@ -51,10 +51,9 @@ static pro_lookup* contructor(pro_state* s, pro_lookup_list* arguments, void* d)
     bind_arguments(s, constructor_expr->value.constructor.arguments, arguments);
     
     // Create a new actor in the new environment.
-    actor = pro_actor_create(s);
-    void* become_data = 0;
-    pro_behavior* behavior = pro_actor_expr_get_behavior(s, actor_expr, &become_data);
-    pro_become(s, actor, behavior, become_data);
+    actor = pro_actor_create(s, 0);
+    pro_behavior behavior = pro_actor_expr_get_behavior(s, actor_expr);
+    pro_become(s, actor, behavior);
 
     // Restore the old environment.
     pro_pop_env(s);
@@ -82,7 +81,11 @@ static void let_expr_eval(pro_state* s, pro_expr* t)
         data->env = pro_get_env(s);
         data->constructor_expr = left;
         data->actor_expr = right;
-        pro_lookup* lookup = pro_constructor_create(s, contructor, data);
+        pro_constructor c = {
+            .impl = contructor,
+            .data = data
+        };
+        pro_lookup* lookup = pro_constructor_create(s, c);
         t->data.lookup = lookup;
         pro_bind(s, lookup, left->value.identifier);
     }   break;

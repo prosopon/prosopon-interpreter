@@ -47,7 +47,7 @@ static void constructor_expr_print(pro_state* s,
 {
     assert(pro_expr_get_type(t) == PRO_CONSTRUCTOR_EXPR_TYPE);
     
-    printf("<constructor %s list arguments:", t->value.constructor.identifier);
+    printf("<constructor %s arguments:", t->value.constructor.identifier);
     pro_print_expr_list(s, t->value.constructor.arguments, "");
     printf(">%s", end);
 }

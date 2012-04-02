@@ -159,6 +159,10 @@ send
     {
         $$ = pro_send_expr_create($2, $3);
     }
+    | SEND literal message
+    {
+        $$ = pro_send_expr_create($2, $3);
+    }
     | SEND actor message
     {
         $$ = pro_send_expr_create($2, $3);

@@ -7,6 +7,8 @@
 static void identifier_expr_eval(pro_state* s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_IDENTIFIER_EXPR_TYPE);
+    
+    t->data.lookup = pro_get_binding(s, pro_get_env(s), t->value.identifier);
 }
 
 static void identifier_expr_print(pro_state* s,

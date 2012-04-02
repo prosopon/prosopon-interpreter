@@ -12,13 +12,12 @@
 static void actor_expr_eval(pro_state* s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
-    pro_lookup* lookup = pro_actor_create(s);
+    pro_lookup* lookup = pro_actor_create(s, 0);
     pro_expr* behavior_expr =  t->value.behavior;
     if (behavior_expr)
     {
-        void* data = 0;
-        pro_behavior* behavior = pro_actor_expr_get_behavior(s, t, &data);
-        pro_become(s, lookup, behavior, data);
+        pro_behavior behavior = pro_actor_expr_get_behavior(s, t);
+        pro_become(s, lookup, behavior);
     }
     t->data.lookup = lookup;
 }
@@ -35,7 +34,7 @@ static void actor_expr_print(pro_state* s, const pro_expr* t, const char* end)
 
 
 static void behavior(pro_state* s,
-    pro_lookup* t, pro_lookup* msg, void* data)
+    const pro_lookup* t, const pro_lookup* msg, void* data)
 {
     pro_expr* behavior_expr = data;
     pro_expr_list* case_list = behavior_expr->value.list;
@@ -68,12 +67,15 @@ PRO_INTERNAL pro_expr* pro_actor_expr_create(pro_expr* behavior)
 }
 
 
-PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state* s, 
-    pro_expr* t, void** data)
+PRO_INTERNAL pro_behavior pro_actor_expr_get_behavior(pro_state* s, 
+    pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
     pro_expr* behavior_expr = t->value.behavior;
-    *data = behavior_expr;
-    return behavior;
+    pro_behavior beh = {
+        .impl = behavior,
+        .data = behavior_expr
+    };
+    return beh;
 }
 

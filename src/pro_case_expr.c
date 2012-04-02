@@ -39,7 +39,7 @@ PRO_INTERNAL pro_expr* pro_case_expr_create(pro_expr* pattern, pro_expr* body)
 
 
 PRO_INTERNAL int pro_case_expr_match(pro_state* s,
-    pro_expr* t, pro_lookup* msg)
+    pro_expr* t, const pro_lookup* msg)
 {
     pro_env_lookup* env = pro_env_create(s, pro_get_env(s));
     pro_push_env(s, env);

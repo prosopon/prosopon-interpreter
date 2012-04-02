@@ -3,11 +3,13 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
+#include <string.h>
 
 
 PRO_INTERNAL pro_expr* pro_expr_create(pro_expr_type type)
 {
     pro_expr* t = malloc(sizeof(*t));
+    memset(t, 0, sizeof(*t));
     t->type = type;
     return t;
 }

@@ -17,7 +17,7 @@ PRO_INTERNAL pro_expr* pro_actor_expr_create(pro_expr* behavior);
  *
  * @return
  */
-PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state*,
-    pro_expr* t, void** data);
+PRO_INTERNAL pro_behavior pro_actor_expr_get_behavior(pro_state*,
+    pro_expr* t);
 
 #endif

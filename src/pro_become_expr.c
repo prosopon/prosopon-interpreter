@@ -7,7 +7,7 @@
 #pragma mark Private
 
 static void behavior(pro_state* s,
-    pro_lookup* t, pro_lookup* msg, void* data)
+    const pro_lookup* t, const pro_lookup* msg, void* data)
 {
     printf("behavior");
 }
@@ -22,7 +22,11 @@ static void become_expr_eval(pro_state* s, pro_expr* t)
     
     pro_eval_expr(s, left);
     pro_eval_expr(s, right);
-    pro_become(s, left->data.lookup, behavior, t);
+    pro_behavior beh = {
+        .impl = behavior,
+        .data = t
+    };
+    pro_become(s, left->data.lookup, beh);
 }
 
 static void become_expr_print(pro_state* s, const pro_expr* t, const char* end)

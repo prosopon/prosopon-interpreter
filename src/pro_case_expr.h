@@ -15,6 +15,6 @@ PRO_INTERNAL pro_expr* pro_case_expr_create(pro_expr* pattern, pro_expr* body);
 
 
 PRO_INTERNAL int pro_case_expr_match(pro_state*,
-    pro_expr* t, pro_lookup* msg);
+    pro_expr* t, const pro_lookup* msg);
 
 #endif
