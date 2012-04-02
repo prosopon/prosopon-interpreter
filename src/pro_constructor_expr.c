@@ -23,19 +23,18 @@ static void constructor_expr_eval(pro_state* s, pro_expr* t)
     pro_lookup_list* arg_list = malloc(sizeof(*arg_list));
     pro_lookup_list* arg = arg_list;
     pro_expr_list* expr_arg_list = t->value.constructor.arguments;
-    pro_expr_list* expr_arg = expr_arg_list;
-    while (expr_arg)
+    
+    for (pro_expr_list* expr_arg = expr_arg_list; expr_arg; expr_arg = expr_arg->next, arg = arg->next)
     {
         pro_expr* value = expr_arg->value;
         if (value)
         {
             pro_eval_expr(s, value);
             arg->value = value->data.lookup;
-            arg->next = malloc(sizeof(*arg));
+            if (expr_arg->next)
+                arg->next = malloc(sizeof(*arg));
+            
         }
-                
-        expr_arg = expr_arg->next;
-        arg = arg->next;
     }
     
     // Call the constructor

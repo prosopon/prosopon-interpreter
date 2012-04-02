@@ -19,7 +19,7 @@ typedef struct {
 static void bind_arguments(pro_state* s, pro_expr_list* id_list, pro_lookup_list* values)
 {
     pro_expr_list* list = id_list;
-    pro_lookup_list* lookup_list;
+    pro_lookup_list* lookup_list = values;
     while (list)
     {
         pro_expr* value = list->value;
@@ -29,7 +29,7 @@ static void bind_arguments(pro_state* s, pro_expr_list* id_list, pro_lookup_list
             assert(pro_expr_get_type(value) == PRO_IDENTIFIER_EXPR_TYPE);
             pro_bind(s, lookup, value->value.identifier);
         }
-        id_list = id_list->next;
+        list = list->next;
         lookup_list = lookup_list->next;
     }
 }
