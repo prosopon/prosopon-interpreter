@@ -68,7 +68,10 @@ PRO_INTERNAL int pro_case_expr_match(pro_state* s,
         default:
             pro_eval_expr(s, match);
             if (!pro_match(s, arg, match->data.lookup))
+            {
+                pro_pop_env(s);
                 return 0;
+            }
             break;
         }
         match_list = match_list->next;

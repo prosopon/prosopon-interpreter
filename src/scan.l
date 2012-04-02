@@ -127,8 +127,9 @@ char* string_literal(const char* yytext, unsigned long yyleng, unsigned int clip
     unsigned long new_length = yyleng - clip * 2;
     if (new_length > 0)
     {
-        char* str = (char*)malloc(sizeof(char) * (new_length + 1));
-        memcpy(str, yytext + clip, new_length + 1);
+        char* str = malloc(sizeof(*str) * (new_length + 1));
+        memcpy(str, yytext + clip, new_length);
+        str[new_length] = 0;
         return str;
     }
     else
