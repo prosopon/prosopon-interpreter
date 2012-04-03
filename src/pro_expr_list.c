@@ -7,7 +7,7 @@
 
 
 
-PRO_INTERNAL void pro_print_expr_list(pro_state* s, pro_expr_list* t, const char* end)
+PRO_INTERNAL void pro_print_expr_list(pro_state_ref s, pro_expr_list* t, const char* end)
 {    
     pro_expr_list* list = t;
     while (list) 

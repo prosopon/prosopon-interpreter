@@ -6,7 +6,7 @@
 
 
 extern FILE* yyin;
-extern int yyparse(pro_state*);
+extern int yyparse(pro_state_ref);
 extern int yydebug;
 extern int yy_flex_debug;
 
@@ -48,7 +48,7 @@ struct cl_state
 /**
  *
  */
-static int process_library(pro_state* state, const char* file)
+static int process_library(pro_state_ref state, const char* file)
 {
     pro_library_load(state, file);
     return 0;
@@ -58,7 +58,7 @@ static int process_library(pro_state* state, const char* file)
 /**
  *
  */
-static int process_file(pro_state* state, const char* arg)
+static int process_file(pro_state_ref state, const char* arg)
 {
     if ((yyin = fopen(arg, "r")))
     {
@@ -73,7 +73,7 @@ static int process_file(pro_state* state, const char* arg)
 /**
  *
  */
-static int process_flag(cl_state* cl, pro_state* state, const char* flag, size_t len)
+static int process_flag(cl_state* cl, pro_state_ref state, const char* flag, size_t len)
 {
     if (len == 0)
         return -1;
@@ -116,7 +116,7 @@ static int process_flag(cl_state* cl, pro_state* state, const char* flag, size_t
  * Arguments beginning with '-' are processed as flags.
  * Everything else is processed depending on the current state. 
  */
-static int process_args(cl_state* cl, pro_state* state, const char* arg)
+static int process_args(cl_state* cl, pro_state_ref state, const char* arg)
 {
     size_t len = strlen(arg);
     if (len == 0)
@@ -177,7 +177,10 @@ int main(int argc, char** argv)
     yy_flex_debug = 0;
     
     // process command line arguments
-    pro_state* state = pro_state_create();
+    pro_state_ref state;
+    if (pro_state_create(&state) != PRO_OK)
+        return 0;
+    
     for (unsigned int i = 1; i < argc; ++i)
     {
         int status = process_args(&cl, state, argv[i]);

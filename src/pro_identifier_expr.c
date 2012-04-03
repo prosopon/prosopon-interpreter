@@ -4,14 +4,16 @@
 #include <stdio.h>
 
 
-static void identifier_expr_eval(pro_state* s, pro_expr* t)
+static void identifier_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_IDENTIFIER_EXPR_TYPE);
     
-    t->data.lookup = pro_get_binding(s, pro_get_env(s), t->value.identifier);
+    pro_env_ref env;
+    pro_get_env(s, &env);
+    t->data.lookup = pro_get_binding(s, env, t->value.identifier);
 }
 
-static void identifier_expr_print(pro_state* s,
+static void identifier_expr_print(pro_state_ref s,
     const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_IDENTIFIER_EXPR_TYPE);

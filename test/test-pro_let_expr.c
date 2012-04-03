@@ -9,7 +9,7 @@
 #include "pro_constructor_expr.h"
 
 
-static pro_state* state;
+static pro_state_ref state;
 
 
 static int init(void)

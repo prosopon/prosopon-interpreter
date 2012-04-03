@@ -4,13 +4,13 @@
 #include <assert.h>
 
 
-static void case_expr_eval(pro_state* s, pro_expr* t)
+static void case_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(0);
 }
 
 
-static void case_expr_print(pro_state* s, const pro_expr* t, const char* end)
+static void case_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_CASE_EXPR_TYPE);
     
@@ -38,10 +38,12 @@ PRO_INTERNAL pro_expr* pro_case_expr_create(pro_expr* pattern, pro_expr* body)
 }
 
 
-PRO_INTERNAL int pro_case_expr_match(pro_state* s,
-    pro_expr* t, const pro_lookup* msg)
+PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
+    pro_expr* t, pro_ref msg)
 {
-    pro_env_lookup* env = pro_env_create(s, pro_get_env(s));
+    pro_env_ref current_env;
+    pro_get_env(s, &current_env);
+    pro_env_ref env = pro_env_create(s, current_env);
     pro_push_env(s, env);
     
     pro_expr* pattern = t->value.binary.left;
@@ -57,7 +59,7 @@ PRO_INTERNAL int pro_case_expr_match(pro_state* s,
             pro_pop_env(s);
             return 0;
         }
-        pro_lookup* arg = pro_message_get(s, msg, index);
+        pro_ref arg = pro_message_get(s, msg, index);
         pro_expr* match = match_list->value;
         
         switch (pro_expr_get_type(match))

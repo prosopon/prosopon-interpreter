@@ -8,20 +8,22 @@
 #include <stdlib.h>
 
 
-static void constructor_expr_eval(pro_state* s, pro_expr* t)
+static void constructor_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_CONSTRUCTOR_EXPR_TYPE);
     
     char* identifier = t->value.constructor.identifier;
     
-    // lookup the constructor 
-    pro_lookup* constructor = pro_get_binding(s, pro_get_env(s), identifier);
+    // lookup the constructor
+    pro_env_ref env;
+    pro_get_env(s, &env);
+    pro_ref constructor = pro_get_binding(s, env, identifier);
     if (0 == constructor)
         return;
     
     // build the list of arguments
-    pro_lookup_list* arg_list = malloc(sizeof(*arg_list));
-    pro_lookup_list* arg = arg_list;
+    pro_ref_list arg_list = malloc(sizeof(*arg_list));
+    pro_ref_list arg = arg_list;
     pro_expr_list* expr_arg_list = t->value.constructor.arguments;
     
     for (pro_expr_list* expr_arg = expr_arg_list; expr_arg; expr_arg = expr_arg->next, arg = arg->next)
@@ -41,7 +43,7 @@ static void constructor_expr_eval(pro_state* s, pro_expr* t)
     t->data.lookup = pro_constructor_call(s, constructor, arg_list);
 }
 
-static void constructor_expr_print(pro_state* s,
+static void constructor_expr_print(pro_state_ref s,
     const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_CONSTRUCTOR_EXPR_TYPE);

@@ -10,7 +10,7 @@
 
 #define YYDEBUG 1
 
-void yyerror(pro_state*, const char *p);
+void yyerror(pro_state_ref, const char *p);
 
 extern int yydebug;
 
@@ -19,8 +19,8 @@ extern int yydebug;
 %debug
 
 // Pass a prosopon state to the parser and lexer
-%parse-param {pro_state* state} 
-%lex-param   {pro_state* state}
+%parse-param {pro_state_ref state} 
+%lex-param   {pro_state_ref state}
 
 
 %union
@@ -285,7 +285,7 @@ case
     
 %%
 
-void yyerror(pro_state* s, const char *p)
+void yyerror(pro_state_ref s, const char *p)
 {
     fprintf(stderr, "Error! %s\n", p);
     fflush(stderr);

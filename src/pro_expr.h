@@ -40,7 +40,7 @@ struct pro_expr
     } value;
     union
     {
-        pro_lookup* lookup;
+        pro_ref lookup;
     } data;
 };
 
@@ -54,12 +54,12 @@ PRO_INTERNAL pro_expr* pro_expr_create(pro_expr_type type);
 /**
  * Evaluates a given expression.
  */
-PRO_INTERNAL void pro_eval_expr(pro_state*, pro_expr*);
+PRO_INTERNAL void pro_eval_expr(pro_state_ref, pro_expr*);
 
 /**
  * Prints a given expression
  */
- PRO_INTERNAL void pro_print_expr(pro_state*, const pro_expr* t, const char* end);
+ PRO_INTERNAL void pro_print_expr(pro_state_ref, const pro_expr* t, const char* end);
 
 /**
  * @returns The type identifier of a given expression.

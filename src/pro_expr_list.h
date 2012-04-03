@@ -30,7 +30,7 @@ PRO_INTERNAL pro_expr_list* pro_expr_list_join(
 /**
  * Prints out an expression list.
  */
-PRO_INTERNAL void pro_print_expr_list(pro_state*, pro_expr_list*, const char* end);
+PRO_INTERNAL void pro_print_expr_list(pro_state_ref, pro_expr_list*, const char* end);
 
 
 #endif

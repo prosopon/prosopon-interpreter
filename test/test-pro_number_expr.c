@@ -5,7 +5,7 @@
 #include "pro_expr.h"
 #include "pro_number_expr.h"
 
-static pro_state* state;
+static pro_state_ref state;
 
 
 static int init(void)

@@ -10,20 +10,20 @@
 
 
 typedef struct {
-    pro_env_lookup* env;
+    pro_env_ref env;
     pro_expr* constructor_expr;
     pro_expr* actor_expr;
 } constructor_data;
 
 
-static void bind_arguments(pro_state* s, pro_expr_list* id_list, pro_lookup_list* values)
+static void bind_arguments(pro_state_ref s, pro_expr_list* id_list, pro_ref_list values)
 {
     pro_expr_list* list = id_list;
-    pro_lookup_list* lookup_list = values;
+    pro_ref_list lookup_list = values;
     while (list)
     {
         pro_expr* value = list->value;
-        pro_lookup* lookup = lookup_list->value;
+        pro_ref lookup = lookup_list->value;
         if (value)
         {
             assert(pro_expr_get_type(value) == PRO_IDENTIFIER_EXPR_TYPE);
@@ -35,16 +35,16 @@ static void bind_arguments(pro_state* s, pro_expr_list* id_list, pro_lookup_list
 }
 
 
-static pro_lookup* contructor(pro_state* s, pro_lookup_list* arguments, void* d)
+static pro_ref contructor(pro_state_ref s, pro_ref_list arguments, void* d)
 {
-    pro_lookup* actor = 0;
+    pro_ref actor = 0;
     const constructor_data* data = d;
     
     pro_expr* constructor_expr = data->constructor_expr;
     pro_expr* actor_expr = data->actor_expr;
 
     // Create a new environment and make it current.
-    pro_env_lookup* env = pro_env_create(s, data->env);
+    pro_env_ref env = pro_env_create(s, data->env);
     pro_push_env(s, env);
     
     // bind all arguments in the new environment
@@ -62,7 +62,7 @@ static pro_lookup* contructor(pro_state* s, pro_lookup_list* arguments, void* d)
 }
 
 
-static void let_expr_eval(pro_state* s, pro_expr* t)
+static void let_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
     
@@ -78,14 +78,14 @@ static void let_expr_eval(pro_state* s, pro_expr* t)
     case PRO_CONSTRUCTOR_EXPR_TYPE:
     {
         constructor_data* data = malloc(sizeof(*data));
-        data->env = pro_get_env(s);
+        pro_get_env(s, &(data->env));
         data->constructor_expr = left;
         data->actor_expr = right;
         pro_constructor c = {
             .impl = contructor,
             .data = data
         };
-        pro_lookup* lookup = pro_constructor_create(s, c);
+        pro_ref lookup = pro_constructor_create(s, c);
         t->data.lookup = lookup;
         pro_bind(s, lookup, left->value.identifier);
     }   break;
@@ -96,7 +96,7 @@ static void let_expr_eval(pro_state* s, pro_expr* t)
 }
 
 
-static void let_expr_print(pro_state* s, const pro_expr* t, const char* end)
+static void let_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
     pro_expr* identifier =  t->value.binary.left;
