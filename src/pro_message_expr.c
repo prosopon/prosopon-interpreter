@@ -10,7 +10,8 @@ static void message_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_MESSAGE_EXPR_TYPE);
     
-    pro_ref msg = pro_message_create(s);
+    pro_ref msg;
+    pro_message_create(s, &msg);
     
     for (pro_expr_list* list = t->value.list; list; list = list->next)
     {
@@ -23,7 +24,7 @@ static void message_expr_eval(pro_state_ref s, pro_expr* t)
         {
             pro_env_ref env;
             pro_get_env(s, &env);
-            lookup = pro_get_binding(s, env, value->value.identifier);
+            pro_get_binding(s, env, value->value.identifier, &lookup);
         }   break;
         default:
             pro_eval_expr(s, value);

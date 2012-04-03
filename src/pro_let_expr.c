@@ -86,8 +86,8 @@ static void let_expr_eval(pro_state_ref s, pro_expr* t)
             .impl = contructor,
             .data = data
         };
-        pro_ref lookup = pro_constructor_create(s, c);
-        t->data.lookup = lookup;
+        pro_ref lookup;
+        pro_constructor_create(s, c, &lookup);
         pro_bind(s, lookup, left->value.identifier);
     }   break;
     default:

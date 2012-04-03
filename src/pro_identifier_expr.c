@@ -10,7 +10,7 @@ static void identifier_expr_eval(pro_state_ref s, pro_expr* t)
     
     pro_env_ref env;
     pro_get_env(s, &env);
-    t->data.lookup = pro_get_binding(s, env, t->value.identifier);
+    pro_get_binding(s, env, t->value.identifier, &(t->data.lookup));
 }
 
 static void identifier_expr_print(pro_state_ref s,

@@ -41,16 +41,16 @@ PRO_INTERNAL pro_expr* pro_case_expr_create(pro_expr* pattern, pro_expr* body)
 PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     pro_expr* t, pro_ref msg)
 {
-    pro_env_ref current_env;
+    pro_env_ref current_env, env;
     pro_get_env(s, &current_env);
-    pro_env_ref env;
     pro_env_create(s, current_env, &env);
     pro_push_env(s, env);
     
     pro_expr* pattern = t->value.binary.left;
     pro_expr* body = t->value.binary.right;
 
-    unsigned int msg_length = pro_message_length(s, msg);
+    unsigned int msg_length;
+    pro_message_length(s, msg, &msg_length);
     
     pro_expr_list* match_list = pattern->value.list;
     for (unsigned int index = 0; match_list; ++index)
@@ -60,7 +60,8 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
             pro_pop_env(s);
             return 0;
         }
-        pro_ref arg = pro_message_get(s, msg, index);
+        pro_ref arg;
+        pro_message_get(s, msg, index, &arg);
         pro_expr* match = match_list->value;
         
         switch (pro_expr_get_type(match))

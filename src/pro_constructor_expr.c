@@ -17,7 +17,8 @@ static void constructor_expr_eval(pro_state_ref s, pro_expr* t)
     // lookup the constructor
     pro_env_ref env;
     pro_get_env(s, &env);
-    pro_ref constructor = pro_get_binding(s, env, identifier);
+    pro_ref constructor;
+    pro_get_binding(s, env, identifier, &constructor);
     if (0 == constructor)
         return;
     
@@ -40,7 +41,7 @@ static void constructor_expr_eval(pro_state_ref s, pro_expr* t)
     }
     
     // Call the constructor
-    t->data.lookup = pro_constructor_call(s, constructor, arg_list);
+    pro_constructor_call(s, constructor, arg_list, &(t->data.lookup));
 }
 
 static void constructor_expr_print(pro_state_ref s,
