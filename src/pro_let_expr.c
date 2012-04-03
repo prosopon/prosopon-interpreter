@@ -44,7 +44,8 @@ static pro_ref contructor(pro_state_ref s, pro_ref_list arguments, void* d)
     pro_expr* actor_expr = data->actor_expr;
 
     // Create a new environment and make it current.
-    pro_env_ref env = pro_env_create(s, data->env);
+    pro_env_ref env;
+    pro_env_create(s, data->env, &env);
     pro_push_env(s, env);
     
     // bind all arguments in the new environment

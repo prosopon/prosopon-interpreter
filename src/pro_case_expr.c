@@ -43,7 +43,8 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
 {
     pro_env_ref current_env;
     pro_get_env(s, &current_env);
-    pro_env_ref env = pro_env_create(s, current_env);
+    pro_env_ref env;
+    pro_env_create(s, current_env, &env);
     pro_push_env(s, env);
     
     pro_expr* pattern = t->value.binary.left;
