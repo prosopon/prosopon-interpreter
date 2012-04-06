@@ -65,7 +65,7 @@ PRO_INTERNAL void pro_print_expr(pro_state_ref, const pro_expr* t,
 /**
  * Releases a given expression for memory collection.
  */
-PRO_INTERNAL void pro_release_expr(const pro_expr* t);
+PRO_INTERNAL void pro_release_expr(pro_expr* t);
 
 
 /**

@@ -56,8 +56,13 @@ PRO_INTERNAL pro_expr* pro_list_expr_join(
 {
     assert(list1); // o1 must be an expression but o2 may be null
     assert(pro_expr_get_type(list1) == PRO_LIST_EXPR_TYPE);
-    assert(!list2 || pro_expr_get_type(list2) == PRO_LIST_EXPR_TYPE);
-    
-    pro_expr_list_join(list1->value.list, list2->value.list);
-    return list1;
+    if (!list2)
+        return list1;
+    else
+    {
+        assert(pro_expr_get_type(list2) == PRO_LIST_EXPR_TYPE);
+        
+        pro_expr_list_join(list1->value.list, list2->value.list);
+        return list1;
+    }
 }
