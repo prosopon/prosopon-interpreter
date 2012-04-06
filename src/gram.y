@@ -85,6 +85,7 @@ program
     {
         pro_print_expr(state, $1, "\n");
         pro_eval_expr(state, $1);
+        pro_run(state);
     }
     ;
 

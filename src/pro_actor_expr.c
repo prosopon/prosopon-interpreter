@@ -12,14 +12,15 @@
 static void actor_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
-    pro_ref lookup = pro_actor_create(s, 0);
+    pro_ref ref;
+    pro_actor_create(s, 0, &ref);
     pro_expr* behavior_expr =  t->value.behavior;
     if (behavior_expr)
     {
         pro_behavior behavior = pro_actor_expr_get_behavior(s, t);
-        pro_become(s, lookup, behavior);
+        pro_become(s, ref, behavior);
     }
-    t->data.lookup = lookup;
+    t->data.lookup = ref;
 }
 
 static void actor_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
