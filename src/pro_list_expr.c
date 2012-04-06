@@ -4,6 +4,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 static void list_expr_eval(pro_state_ref s, pro_expr* t)
@@ -29,9 +30,16 @@ static void list_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
     printf(">%s", end);
 }
 
+static void list_expr_release(pro_expr* t)
+{
+    pro_release_expr_list(t->value.list);
+    free(t);
+}
+
 const pro_expr_type_info pro_list_expr_type_info = {
     .eval = list_expr_eval,
-    .print = list_expr_print
+    .print = list_expr_print,
+    .release = list_expr_release
 };
 
 

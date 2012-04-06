@@ -35,11 +35,18 @@ typedef void(pro_expr_eval)(pro_state_ref, struct pro_expr* t);
 /**
  * Print out the human readable representation of an expression.
  *
- * @param t This, the instruction to print.
+ * @param t This, the expression to print.
  * @param end A string to append the end of the printing.
  */
 typedef void(pro_expr_print)(pro_state_ref,
     const struct pro_expr* t, const char* end);
+
+/**
+ * Release an expression for memory collection.
+ *
+ * @param t This, the expression to release.
+ */
+typedef void(pro_expr_release)(struct pro_expr* t);
 
 
 /**
@@ -49,6 +56,7 @@ typedef struct
 {
     pro_expr_eval* const eval;
     pro_expr_print* const print;
+    pro_expr_release* const release;
 } pro_expr_type_info;
 
 

@@ -6,6 +6,24 @@
 #include <stdlib.h>
 
 
+#pragma mark Private
+
+static pro_expr_list* pro_expr_list_tail(pro_expr_list* t)
+{
+    if (!t)
+        return 0;
+    else
+    {
+        pro_expr_list* tail = t;
+        for (pro_expr_list* next; (next = tail->next);)
+             tail = next;
+        return tail;
+    }
+}
+
+
+#pragma mark -
+#pragma mark Internal
 
 PRO_INTERNAL void pro_print_expr_list(pro_state_ref s, pro_expr_list* t, const char* end)
 {    
@@ -31,21 +49,7 @@ PRO_INTERNAL pro_expr_list* pro_expr_list_create(
     return t;
 }
 
-/**
- * @returns The last element of an expression list or null if none.
- */
-static pro_expr_list* pro_expr_list_tail(pro_expr_list* t)
-{
-    if (!t)
-        return 0;
-    else
-    {
-        pro_expr_list* tail = t;
-        for (pro_expr_list* next; (next = tail->next);)
-             tail = next;
-        return tail;
-    }
-}
+
 
 PRO_INTERNAL pro_expr_list* pro_expr_list_join(pro_expr_list* o1, pro_expr_list* o2)
 {
@@ -54,4 +58,22 @@ PRO_INTERNAL pro_expr_list* pro_expr_list_join(pro_expr_list* o1, pro_expr_list*
     tail->next = o2;
     return o1;
 }
+
+
+PRO_INTERNAL void pro_release_expr_list(pro_expr_list* t)
+{
+    pro_expr_list* list = t;
+    while (list) 
+    {
+        pro_expr_list* old = list;
+        pro_expr* value = list->value;
+        
+        if (value)
+            pro_release_expr(value);
+        list = list->next;
+    
+        free(old);
+    }
+}
+
 

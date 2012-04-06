@@ -2,6 +2,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 static void identifier_expr_eval(pro_state_ref s, pro_expr* t)
@@ -22,9 +23,20 @@ static void identifier_expr_print(pro_state_ref s,
     printf("<identifier %s>\n", value);
 }
 
+static void string_expr_release(pro_expr* t)
+{
+    free(t->value.string);
+    free(t);
+}
+
+
+#pragma mark -
+#pragma mark Internal
+
 const pro_expr_type_info pro_identifier_expr_type_info = {
     .eval = identifier_expr_eval,
-    .print = identifier_expr_print
+    .print = identifier_expr_print,
+    .release = string_expr_release
 };
 
 

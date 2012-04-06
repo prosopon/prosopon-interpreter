@@ -2,7 +2,10 @@
 
 #include <stdio.h>
 #include <assert.h>
+#include <stdlib.h>
 
+
+#pragma mark Private
 
 static void send_expr_eval(pro_state_ref s, pro_expr* t)
 {
@@ -30,9 +33,21 @@ static void send_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
     printf(">%s", end);
 }
 
+static void send_expr_release(pro_expr* t)
+{
+    pro_release_expr(t->value.binary.left);
+    pro_release_expr(t->value.binary.right);
+    free(t);
+}
+
+
+#pragma mark -
+#pragma mark Internal
+
 const pro_expr_type_info pro_send_expr_type_info = {
     .eval = send_expr_eval,
-    .print = send_expr_print
+    .print = send_expr_print,
+    .release = send_expr_release
 };
 
 

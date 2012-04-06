@@ -1,10 +1,10 @@
 #include "pro_actor_expr.h"
 
-#include <assert.h>
-#include <stdio.h>
-
 #include "pro_case_expr.h"
 
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 #pragma mark Private
@@ -33,6 +33,11 @@ static void actor_expr_print(pro_state_ref s, const pro_expr* t, const char* end
     printf(">%s", end);
 }
 
+static void actor_expr_release(pro_expr* t)
+{
+    pro_release_expr(t->value.behavior);
+    free(t);
+}
 
 static void behavior(pro_state_ref s,
     pro_ref t, pro_ref msg, void* data)
@@ -56,7 +61,8 @@ static void behavior(pro_state_ref s,
 
 const pro_expr_type_info pro_actor_expr_type_info = {
     .eval = actor_expr_eval,
-    .print = actor_expr_print
+    .print = actor_expr_print,
+    .release = actor_expr_release
 };
 
 

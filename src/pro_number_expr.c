@@ -4,13 +4,17 @@
 
 #include <stdio.h>
 #include <assert.h>
+#include <stdlib.h>
 
+
+#pragma mark Private
 
 static void number_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_NUMBER_EXPR_TYPE);
     t->data.lookup = pro_number_create(s, t->value.number);
 }
+
 
 static void number_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 {
@@ -20,9 +24,19 @@ static void number_expr_print(pro_state_ref s, const pro_expr* t, const char* en
 }
 
 
+static void number_expr_release(pro_expr* t)
+{
+    free(t);
+}
+
+
+#pragma mark -
+#pragma mark Internal 
+
 const pro_expr_type_info pro_number_expr_type_info = {
     .eval = number_expr_eval,
-    .print = number_expr_print
+    .print = number_expr_print,
+    .release = number_expr_release
 };
 
 

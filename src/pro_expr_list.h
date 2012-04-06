@@ -33,4 +33,9 @@ PRO_INTERNAL pro_expr_list* pro_expr_list_join(
 PRO_INTERNAL void pro_print_expr_list(pro_state_ref, pro_expr_list*, const char* end);
 
 
+/**
+ * Releases an expression list for collection.
+ */
+PRO_INTERNAL void pro_release_expr_list(pro_expr_list*);
+
 #endif

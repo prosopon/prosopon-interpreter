@@ -4,7 +4,10 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 
+
+#pragma mark Private
 
 static void string_expr_eval(pro_state_ref s, pro_expr* t)
 {
@@ -19,9 +22,20 @@ static void string_expr_print(pro_state_ref s, const pro_expr* t, const char* en
     printf("<string %s>%s", value, end);
 }
 
+static void string_expr_release(pro_expr* t)
+{
+    free(t->value.string);
+    free(t);
+}
+
+
+#pragma mark -
+#pragma mark Internal
+
 const pro_expr_type_info pro_string_expr_type_info = {
     .eval = string_expr_eval,
-    .print = string_expr_print
+    .print = string_expr_print,
+    .release = string_expr_release
 };
 
 

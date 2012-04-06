@@ -54,9 +54,18 @@ static void constructor_expr_print(pro_state_ref s,
     printf(">%s", end);
 }
 
+
+static void constructor_expr_release(pro_expr* t)
+{
+    free(t->value.constructor.identifier);
+    pro_release_expr_list(t->value.constructor.arguments);
+    free(t);
+}
+
 const pro_expr_type_info pro_constructor_expr_type_info = {
     .eval = constructor_expr_eval,
-    .print = constructor_expr_print
+    .print = constructor_expr_print,
+    .release = constructor_expr_release
 };
 
 

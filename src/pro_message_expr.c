@@ -1,9 +1,10 @@
 #include "pro_message_expr.h"
 
+#include "pro_expr_list.h"
+
 #include <stdio.h>
 #include <assert.h>
-
-#include "pro_expr_list.h"
+#include <stdlib.h>
 
 
 static void message_expr_eval(pro_state_ref s, pro_expr* t)
@@ -36,6 +37,7 @@ static void message_expr_eval(pro_state_ref s, pro_expr* t)
     t->data.lookup = msg;
 }
 
+
 static void message_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_MESSAGE_EXPR_TYPE);
@@ -45,9 +47,20 @@ static void message_expr_print(pro_state_ref s, const pro_expr* t, const char* e
 }
 
 
+static void message_expr_release(pro_expr* t)
+{
+    pro_release_expr_list(t->value.list);
+    free(t);
+}
+
+
+#pragma mark -
+#pragma mark Internal 
+
 const pro_expr_type_info pro_message_expr_type_info = {
     .eval = message_expr_eval,
-    .print = message_expr_print
+    .print = message_expr_print,
+    .release = message_expr_release
 };
 
 

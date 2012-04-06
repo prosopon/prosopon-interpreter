@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <assert.h>
+#include <stdlib.h>
 
 
 static void case_expr_eval(pro_state_ref s, pro_expr* t)
@@ -23,9 +24,22 @@ static void case_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
     printf(">%s", end);
 }
 
+
+static void case_expr_release(pro_expr* t)
+{
+    pro_release_expr(t->value.binary.left);
+    pro_release_expr(t->value.binary.right);
+    free(t);
+}
+
+
+#pragma mark -
+#pragma mark Internal
+
 const pro_expr_type_info pro_case_expr_type_info = {
     .eval = case_expr_eval,
-    .print = case_expr_print
+    .print = case_expr_print,
+    .release = case_expr_release
 };
 
 
@@ -70,13 +84,16 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
             pro_bind(s, arg, match->value.identifier);
             break;
         default:
+        {
             pro_eval_expr(s, match);
-            if (!pro_match(s, arg, match->data.lookup))
+            int do_match;
+            pro_match(s, arg, match->data.lookup, &do_match);
+            if (!do_match)
             {
                 pro_pop_env(s);
                 return 0;
             }
-            break;
+        }   break;
         }
         match_list = match_list->next;
     }
