@@ -35,10 +35,14 @@ static void bind_arguments(pro_state_ref s, pro_expr_list* id_list, pro_ref_list
 }
 
 
-static pro_ref contructor(pro_state_ref s, pro_ref_list arguments, void* d)
+static pro_ref contructor(pro_state_ref s, pro_ref_list arguments, pro_ref d)
 {
     pro_ref actor = 0;
-    const constructor_data* data = d;
+    const constructor_data* data;
+    
+    const void* udptr;
+    pro_ud_read(s, d, &udptr);
+    data = udptr;
     
     pro_expr* constructor_expr = data->constructor_expr;
     pro_expr* actor_expr = data->actor_expr;
@@ -78,16 +82,19 @@ static void let_expr_eval(pro_state_ref s, pro_expr* t)
         break;
     case PRO_CONSTRUCTOR_EXPR_TYPE:
     {
-        constructor_data* data = malloc(sizeof(*data));
-        pro_get_env(s, &(data->env));
-        data->constructor_expr = left;
-        data->actor_expr = right;
-        pro_constructor c = {
-            .impl = contructor,
-            .data = data
-        };
+        constructor_data* cData = 0;
+        pro_ref ud;
+        pro_ud_create(s, sizeof(*cData), PRO_DEFAULT_UD_DECONSTRUCTOR, &ud);
+        pro_ud_write(s, ud, (void**)&cData);
+        
+        pro_env_ref env;
+        pro_get_env(s, &env);
+        cData->actor_expr = right;
+        cData->constructor_expr = left;
+        cData->env = env;
+        
         pro_ref lookup;
-        pro_constructor_create(s, c, &lookup);
+        pro_constructor_create(s, contructor, ud, &lookup);
         pro_bind(s, lookup, left->value.identifier);
     }   break;
     default:
