@@ -52,9 +52,9 @@ static pro_ref contructor(pro_state_ref s, pro_ref_list arguments, void* d)
     bind_arguments(s, constructor_expr->value.constructor.arguments, arguments);
     
     // Create a new actor in the new environment.
-    pro_actor_create(s, 0, &actor);
-    pro_behavior behavior = pro_actor_expr_get_behavior(s, actor_expr);
-    pro_become(s, actor, behavior);
+    pro_ref ud;
+    pro_behavior* behavior = pro_actor_expr_get_behavior(s, actor_expr, &ud);
+    pro_actor_create(s, PRO_DEFAULT_ACTOR_TYPE, behavior, ud, &actor);
 
     // Restore the old environment.
     pro_pop_env(s);

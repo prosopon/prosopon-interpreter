@@ -6,27 +6,13 @@
 
 #pragma mark Private
 
-static void behavior(pro_state_ref s,
-    pro_ref t, pro_ref msg, void* data)
-{
-    printf("behavior");
-}
-
-
 static void become_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_BECOME_EXPR_TYPE);
     
     pro_expr* left = t->value.binary.left;
     pro_expr* right = t->value.binary.right;
-    
-    pro_eval_expr(s, left);
-    pro_eval_expr(s, right);
-    pro_behavior beh = {
-        .impl = behavior,
-        .data = t
-    };
-    pro_become(s, left->data.lookup, beh);
+    pro_become(s, left->data.lookup, right->data.lookup);
 }
 
 static void become_expr_print(pro_state_ref s, const pro_expr* t, const char* end)

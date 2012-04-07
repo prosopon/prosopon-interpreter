@@ -12,14 +12,15 @@
 static void actor_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
-    pro_ref ref;
-    pro_actor_create(s, 0, &ref);
     pro_expr* behavior_expr =  t->value.behavior;
+    
+    pro_behavior* behavior = 0;
+    pro_ref ud = 0;
     if (behavior_expr)
-    {
-        pro_behavior behavior = pro_actor_expr_get_behavior(s, t);
-        pro_become(s, ref, behavior);
-    }
+         behavior = pro_actor_expr_get_behavior(s, t, &ud);
+        
+    pro_ref ref;
+    pro_actor_create(s, PRO_DEFAULT_ACTOR_TYPE, behavior, ud, &ref);
     t->data.lookup = ref;
 }
 
@@ -40,11 +41,13 @@ static void actor_expr_release(pro_expr* t)
 }
 
 static void behavior(pro_state_ref s,
-    pro_ref t, pro_ref msg, void* data)
+    pro_ref t, pro_ref msg, pro_ref data)
 {
-    pro_expr* behavior_expr = data;
-    pro_expr_list* case_list = behavior_expr->value.list;
-        
+    void* d;
+    pro_ud_write(s, data, &d);
+    pro_expr** behavior_expr = d;
+    
+    pro_expr_list* case_list = (*behavior_expr)->value.list;
     while (case_list)
     {
         pro_expr* case_expr = case_list->value;
@@ -53,7 +56,6 @@ static void behavior(pro_state_ref s,
         case_list = case_list->next;
     }
 }
-
 
 
 #pragma mark -
@@ -74,15 +76,23 @@ PRO_INTERNAL pro_expr* pro_actor_expr_create(pro_expr* behavior)
 }
 
 
-PRO_INTERNAL pro_behavior pro_actor_expr_get_behavior(pro_state_ref s, 
-    pro_expr* t)
+PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state_ref s, 
+    pro_expr* t, pro_ref* ud)
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
     pro_expr* behavior_expr = t->value.behavior;
-    pro_behavior beh = {
-        .impl = behavior,
-        .data = behavior_expr
-    };
-    return beh;
+
+    pro_ud_create(s, sizeof(t), PRO_DEFAULT_UD_DECONSTRUCTOR, ud);
+    
+    void* ud_ptr;
+    pro_ud_write(s, *ud, &ud_ptr);
+    pro_expr** expr_data = ud_ptr;
+    *expr_data = behavior_expr;
+    
+    const void* adsaf;
+    pro_ud_read(s, *ud, &adsaf);
+    
+    
+    return behavior;
 }
 
