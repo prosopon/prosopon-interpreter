@@ -4,11 +4,12 @@
 /**
  * Includes for all expression headers.
  */
- #include "pro_list_expr.h"
+#include "pro_list_expr.h"
 #include "pro_let_expr.h"
 #include "pro_string_expr.h"
 #include "pro_expr_list.h"
 #include "pro_number_expr.h"
+#include "pro_capture_identifier_expr.h"
 #include "pro_identifier_expr.h"
 #include "pro_send_expr.h"
 #include "pro_become_expr.h"

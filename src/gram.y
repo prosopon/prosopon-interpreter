@@ -8,8 +8,6 @@
 #include <stdio.h>
 
 
-#define YYDEBUG 1
-
 void yyerror(pro_state_ref, const char *p);
 
 extern int yydebug;
@@ -42,6 +40,7 @@ extern int yydebug;
 %token CONSTRUCTOR_END
 %token ACTOR_START
 %token ACTOR_END
+%token CAPTURE
 
 %token SEND
 %token LET
@@ -51,8 +50,12 @@ extern int yydebug;
 %token END_CASE
 
 
-%type <expr> literal program statements statement expression definition term send become message
-%type <expr> argument_list argument constructor actor behavior case identifier
+%type <expr> literal identifier capture_identifier
+%type <expr> program statements statement expression definition term
+%type <expr> message value_list value
+%type <expr> send send_message send_target
+%type <expr> become become_target
+%type <expr> actor argument_list argument constructor  behavior case  
 
 
 %start program
@@ -74,6 +77,13 @@ identifier
     : IDENTIFIER
     {
         $$ = pro_identifier_expr_create($1);
+    }
+    ;
+    
+capture_identifier
+    : CAPTURE IDENTIFIER
+    {
+        $$ = pro_capture_identifier_expr_create($2);
     }
     ;
 
@@ -157,66 +167,69 @@ term
  * Send
  */
 send
-    : SEND identifier message
+    : SEND send_target send_message
     {
         $$ = pro_send_expr_create($2, $3);
     }
-    | SEND literal message
-    {
-        $$ = pro_send_expr_create($2, $3);
-    }
-    | SEND actor message
-    {
-        $$ = pro_send_expr_create($2, $3);
-    }
-    | SEND constructor message
-    {
-        $$ = pro_send_expr_create($2, $3);
-    }
+    ;
+
+send_target 
+    : identifier
+    | literal
+    | actor
+    | constructor
+    ;
+
+send_message
+    : message
+    | identifier
     ;
 
 /**
  * Become
  */
 become
-    : BECOME identifier actor
+    : BECOME identifier become_target
     {
         $$ = pro_become_expr_create($2, $3);
     }
-    | BECOME identifier constructor
-    {
-        $$ = pro_become_expr_create($2, $3);
-    }
+    ;
+
+become_target
+    : actor
+    | constructor
     ;
 
 /**
  * Message
  */
 message
-    : MESSAGE_START MESSAGE_END
+    : /* empty message */
+    MESSAGE_START MESSAGE_END
     {
         $$ = pro_message_expr_create(0);
     }
-    | MESSAGE_START argument_list MESSAGE_END
+    | /* non empty message */
+    MESSAGE_START value_list MESSAGE_END
     {
         $$ = pro_message_expr_create($2->value.list);
     }
     ;
-
-argument_list
-    : argument_list argument
+    
+value_list
+    : value_list value
     {
         pro_expr_list* list = pro_expr_list_create($2, 0);
         $$ = pro_list_expr_join($1, pro_list_expr_create(list));
     }
-    | argument
+    | value
     {
         pro_expr_list* list = pro_expr_list_create($1, 0);
         $$ = pro_list_expr_create(list);
     }
     ;
 
-argument
+value
     : identifier
     | literal
     | message
@@ -224,30 +237,35 @@ argument
     | constructor
     ;
 
+    
 /**
  * Constructor
  */
 constructor
-    : IDENTIFIER CONSTRUCTOR_START argument_list CONSTRUCTOR_END
-    {
-        $$ = pro_constructor_expr_create($1, $3->value.list);
-    }
-    | IDENTIFIER CONSTRUCTOR_START CONSTRUCTOR_END
+    : /* empty constructor */
+    IDENTIFIER CONSTRUCTOR_START CONSTRUCTOR_END
     {
         $$ = pro_constructor_expr_create($1, 0);
     }
+    | /* non empty constructor */
+    IDENTIFIER CONSTRUCTOR_START value_list CONSTRUCTOR_END
+    {
+        $$ = pro_constructor_expr_create($1, $3->value.list);
+    }
     ;
-    
+
 
 /**
  * Actor
  */    
 actor
-    : ACTOR_START ACTOR_END
+    : /* empty actor */
+    ACTOR_START ACTOR_END
     {
         $$ = pro_actor_expr_create(0);
     }
-    | ACTOR_START behavior ACTOR_END
+    | /* actor with behavior */
+    ACTOR_START behavior ACTOR_END
     {
         $$ = pro_actor_expr_create($2);
     }
@@ -285,6 +303,28 @@ case
     }
     ;
     
+argument_list
+    : argument_list argument
+    {
+        pro_expr_list* list = pro_expr_list_create($2, 0);
+        $$ = pro_list_expr_join($1, pro_list_expr_create(list));
+    }
+    | argument
+    {
+        pro_expr_list* list = pro_expr_list_create($1, 0);
+        $$ = pro_list_expr_create(list);
+    }
+    ;
+
+argument
+    : identifier
+    | capture_identifier
+    | literal
+    | message
+    | actor
+    | constructor
+    ;
+
 %%
 
 void yyerror(pro_state_ref s, const char *p)

@@ -60,7 +60,10 @@ PRO_INTERNAL pro_expr* pro_send_expr_create(pro_expr* identifier, pro_expr* msg)
         type == PRO_STRING_EXPR_TYPE ||
         type == PRO_NUMBER_EXPR_TYPE ||
         type == PRO_ACTOR_EXPR_TYPE);
-    assert(pro_expr_get_type(msg) == PRO_MESSAGE_EXPR_TYPE);
+    pro_type msg_type = pro_expr_get_type(msg);
+    assert(
+        PRO_MESSAGE_EXPR_TYPE == msg_type ||
+        PRO_IDENTIFIER_EXPR_TYPE == msg_type);
 
     pro_expr* t = pro_expr_create(PRO_SEND_EXPR_TYPE);
     t->value.binary.left = identifier;

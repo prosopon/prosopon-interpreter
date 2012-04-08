@@ -16,6 +16,7 @@ const pro_expr_type_info* pro_types[PRO_MAX_EXPR_TYPE] = {
     &pro_case_expr_type_info,
     &pro_string_expr_type_info,
     &pro_number_expr_type_info,
+    &pro_capture_identifier_expr_type_info,
     &pro_identifier_expr_type_info,
     &pro_message_expr_type_info,
     &pro_actor_expr_type_info,

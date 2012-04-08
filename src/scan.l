@@ -56,6 +56,7 @@ whitespace    [ \t\v\n\f]
 "}"                             { return CONSTRUCTOR_END; }
 "<"                             { return ACTOR_START; }
 ">"                             { return ACTOR_END; }
+"\\"                             { return CAPTURE; }
 
 "send"                          { return SEND; }
 "let"                           { return LET; }

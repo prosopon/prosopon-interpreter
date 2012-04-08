@@ -80,7 +80,7 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         
         switch (pro_expr_get_type(match))
         {
-        case PRO_IDENTIFIER_EXPR_TYPE:
+        case PRO_CAPTURE_IDENTIFIER_EXPR_TYPE:
             pro_bind(s, arg, match->value.identifier);
             break;
         default:
