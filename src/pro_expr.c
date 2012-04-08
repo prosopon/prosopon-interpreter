@@ -16,11 +16,11 @@ PRO_INTERNAL pro_expr* pro_expr_create(pro_expr_type type)
 
 
 
-PRO_INTERNAL void pro_eval_expr(pro_state_ref s, pro_expr* t)
+PRO_INTERNAL pro_ref pro_eval_expr(pro_state_ref s, pro_expr* t)
 {
     assert(t);
     const pro_expr_type type = pro_expr_get_type(t);
-    pro_types[type]->eval(s, t);
+    return pro_types[type]->eval(s, t);
 }
 
 

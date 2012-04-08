@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 
-static void message_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_MESSAGE_EXPR_TYPE);
     
@@ -28,13 +28,12 @@ static void message_expr_eval(pro_state_ref s, pro_expr* t)
             pro_get_binding(s, env, value->value.identifier, &lookup);
         }   break;
         default:
-            pro_eval_expr(s, value);
-            lookup = value->data.lookup;
+            lookup = pro_eval_expr(s, value);
             break;
         }
         pro_message_append(s, msg, lookup);
     }
-    t->data.lookup = msg;
+    return msg;
 }
 
 

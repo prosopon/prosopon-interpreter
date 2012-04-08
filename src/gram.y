@@ -127,6 +127,11 @@ definition
     {
         $$ = pro_let_expr_create($2, $3);
     }
+    |
+    LET identifier constructor
+    {
+        $$ = pro_let_expr_create($2, $3);
+    }
     | LET constructor actor
     {
         $$ = pro_let_expr_create($2, $3);
@@ -198,6 +203,7 @@ become
 become_target
     : actor
     | constructor
+    | identifier
     ;
 
 /**

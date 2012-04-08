@@ -39,10 +39,7 @@ static pro_ref contructor(pro_state_ref s, pro_ref_list arguments, pro_ref d)
 {
     pro_ref actor = 0;
     const constructor_data* data;
-    
-    const void* udptr;
-    pro_ud_read(s, d, &udptr);
-    data = udptr;
+    pro_ud_read(s, d, (const void**)&data);
     
     pro_expr* constructor_expr = data->constructor_expr;
     pro_expr* actor_expr = data->actor_expr;
@@ -67,7 +64,7 @@ static pro_ref contructor(pro_state_ref s, pro_ref_list arguments, pro_ref d)
 }
 
 
-static void let_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref let_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
     
@@ -77,8 +74,7 @@ static void let_expr_eval(pro_state_ref s, pro_expr* t)
     switch (pro_expr_get_type(left))
     {
     case PRO_IDENTIFIER_EXPR_TYPE:
-        pro_eval_expr(s, right);
-        pro_bind(s, right->data.lookup, left->value.identifier);
+        pro_bind(s, pro_eval_expr(s, right), left->value.identifier);
         break;
     case PRO_CONSTRUCTOR_EXPR_TYPE:
     {
@@ -101,6 +97,7 @@ static void let_expr_eval(pro_state_ref s, pro_expr* t)
         assert(0);
         break;
     }
+    return PRO_EMPTY_REF;
 }
 
 
@@ -147,7 +144,8 @@ PRO_INTERNAL pro_expr* pro_let_expr_create(pro_expr* identifier, pro_expr* value
         assert(
             value_type == PRO_ACTOR_EXPR_TYPE ||
             value_type == PRO_STRING_EXPR_TYPE ||
-            value_type == PRO_NUMBER_EXPR_TYPE);
+            value_type == PRO_NUMBER_EXPR_TYPE ||
+            value_type == PRO_CONSTRUCTOR_EXPR_TYPE);
         break;
     case PRO_CONSTRUCTOR_EXPR_TYPE:
         assert(value_type == PRO_ACTOR_EXPR_TYPE);

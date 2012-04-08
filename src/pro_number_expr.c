@@ -9,10 +9,10 @@
 
 #pragma mark Private
 
-static void number_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref number_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_NUMBER_EXPR_TYPE);
-    t->data.lookup = pro_number_create(s, t->value.number);
+    return pro_number_create(s, t->value.number);
 }
 
 

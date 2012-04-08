@@ -5,13 +5,15 @@
 #include <stdlib.h>
 
 
-static void identifier_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref identifier_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_IDENTIFIER_EXPR_TYPE);
     
+    pro_ref ref;
     pro_env_ref env;
     pro_get_env(s, &env);
-    pro_get_binding(s, env, t->value.identifier, &(t->data.lookup));
+    pro_get_binding(s, env, t->value.identifier, &ref);
+    return ref;
 }
 
 static void identifier_expr_print(pro_state_ref s,

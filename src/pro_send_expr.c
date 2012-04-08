@@ -7,16 +7,14 @@
 
 #pragma mark Private
 
-static void send_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref send_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_SEND_EXPR_TYPE);
     
     pro_expr* left = t->value.binary.left;
     pro_expr* msg = t->value.binary.right;
-    
-    pro_eval_expr(s, left);
-    pro_eval_expr(s, msg);
-    pro_send(s, left->data.lookup, msg->data.lookup);
+    pro_send(s, pro_eval_expr(s, left),  pro_eval_expr(s, msg));
+    return PRO_EMPTY_REF;
 }
 
 static void send_expr_print(pro_state_ref s, const pro_expr* t, const char* end)

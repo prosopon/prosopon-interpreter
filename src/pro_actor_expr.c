@@ -9,7 +9,7 @@
 
 #pragma mark Private
 
-static void actor_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref actor_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
     pro_expr* behavior_expr =  t->value.behavior;
@@ -21,7 +21,7 @@ static void actor_expr_eval(pro_state_ref s, pro_expr* t)
         
     pro_ref ref;
     pro_actor_create(s, PRO_DEFAULT_ACTOR_TYPE, behavior, ud, &ref);
-    t->data.lookup = ref;
+    return ref;
 }
 
 static void actor_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
@@ -30,13 +30,15 @@ static void actor_expr_print(pro_state_ref s, const pro_expr* t, const char* end
     pro_expr* behavior =  t->value.behavior;
     
     printf("<actor behavior:");
-    pro_print_expr(s, behavior, "");
+    if (behavior)
+        pro_print_expr(s, behavior, "");
     printf(">%s", end);
 }
 
 static void actor_expr_release(pro_expr* t)
 {
-    pro_release_expr(t->value.behavior);
+    if (t->value.behavior)
+        pro_release_expr(t->value.behavior);
     free(t);
 }
 

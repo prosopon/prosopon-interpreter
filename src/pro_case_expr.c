@@ -5,9 +5,10 @@
 #include <stdlib.h>
 
 
-static void case_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref case_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(0);
+    return PRO_EMPTY_REF;
 }
 
 
@@ -87,7 +88,7 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         {
             pro_eval_expr(s, match);
             int do_match;
-            pro_match(s, arg, match->data.lookup, &do_match);
+            pro_match(s, arg, pro_eval_expr(s, match), &do_match);
             if (!do_match)
             {
                 pro_pop_env(s);

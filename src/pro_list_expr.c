@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 
-static void list_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref list_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_LIST_EXPR_TYPE);
     
@@ -19,6 +19,7 @@ static void list_expr_eval(pro_state_ref s, pro_expr* t)
             pro_eval_expr(s, value);
         list = list->next;
     }
+    return PRO_EMPTY_REF;
 }
 
 static void list_expr_print(pro_state_ref s, const pro_expr* t, const char* end)

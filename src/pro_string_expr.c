@@ -9,10 +9,10 @@
 
 #pragma mark Private
 
-static void string_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref string_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_STRING_EXPR_TYPE);
-    t->data.lookup = pro_string_create(s, t->value.string);
+    return pro_string_create(s, t->value.string);
 }
 
 static void string_expr_print(pro_state_ref s, const pro_expr* t, const char* end)

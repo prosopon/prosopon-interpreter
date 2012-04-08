@@ -2,17 +2,19 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 #pragma mark Private
 
-static void become_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref become_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_BECOME_EXPR_TYPE);
     
     pro_expr* left = t->value.binary.left;
     pro_expr* right = t->value.binary.right;
-    pro_become(s, left->data.lookup, right->data.lookup);
+    pro_become(s, pro_eval_expr(s, left), pro_eval_expr(s, right));
+    return PRO_EMPTY_REF;
 }
 
 static void become_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
@@ -27,6 +29,13 @@ static void become_expr_print(pro_state_ref s, const pro_expr* t, const char* en
     printf(">%s", end);
 }
 
+static void become_expr_release(pro_expr* t)
+{
+    pro_release_expr(t->value.binary.left);
+    pro_release_expr(t->value.binary.right);
+    free(t);
+}
+
 
 
 #pragma mark -
@@ -34,7 +43,8 @@ static void become_expr_print(pro_state_ref s, const pro_expr* t, const char* en
 
 const pro_expr_type_info pro_become_expr_type_info = {
     .eval = become_expr_eval,
-    .print = become_expr_print
+    .print = become_expr_print,
+    .release = become_expr_release
 };
 
 

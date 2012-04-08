@@ -38,12 +38,7 @@ struct pro_expr
         pro_expr_list* list;
         pro_expr* behavior;
     } value;
-    union
-    {
-        pro_ref lookup;
-    } data;
 };
-
 
 
 /**
@@ -54,7 +49,7 @@ PRO_INTERNAL pro_expr* pro_expr_create(pro_expr_type type);
 /**
  * Evaluates a given expression.
  */
-PRO_INTERNAL void pro_eval_expr(pro_state_ref, pro_expr*);
+PRO_INTERNAL pro_ref pro_eval_expr(pro_state_ref, pro_expr*);
 
 /**
  * Prints a given expression
