@@ -20,16 +20,22 @@ static void case_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
     pro_expr* body = t->value.binary.right;
     
     printf("<case pattern:");
-    pro_print_expr(s, pattern, " body:");
-    pro_print_expr(s, body, "");
+    if (pattern)
+        pro_print_expr(s, pattern, " body:");
+    if (body)
+        pro_print_expr(s, body, "");
     printf(">%s", end);
 }
 
 
 static void case_expr_release(pro_expr* t)
 {
-    pro_release_expr(t->value.binary.left);
-    pro_release_expr(t->value.binary.right);
+    pro_expr* pattern = t->value.binary.left;
+    pro_expr* body = t->value.binary.right;
+    if (pattern)
+        pro_release_expr(pattern);
+    if (body)
+        pro_release_expr(body);
     free(t);
 }
 
@@ -61,8 +67,8 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     pro_env_create(s, current_env, &env);
     pro_push_env(s, env);
     
-    pro_expr* pattern = t->value.binary.left;
     pro_expr* body = t->value.binary.right;
+    pro_expr* pattern = t->value.binary.left;
 
     unsigned int msg_length;
     pro_message_length(s, msg, &msg_length);
@@ -99,7 +105,8 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         match_list = match_list->next;
     }
     
-    pro_eval_expr(s, body);
+    if (body)
+        pro_eval_expr(s, body);
     pro_pop_env(s);
     return 1;
 }

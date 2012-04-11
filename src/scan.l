@@ -73,7 +73,7 @@ whitespace    [ \t\v\n\f]
 {neg}?{digit}+"."{digit}*({E})?     { yylval.number = float_number(yytext, yyleng); return NUMBER_LITERAL; }
 
     /* Identifier */
-{letter}({letter}|{digit})+     { yylval.identifier = identifier(yytext, yyleng); return IDENTIFIER; }
+{letter}({letter}|{digit})*     { yylval.identifier = identifier(yytext, yyleng); return IDENTIFIER; }
 
 
 {whitespace}+                { } /* skip whitespace */

@@ -91,10 +91,6 @@ PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state_ref s,
     pro_expr** expr_data = ud_ptr;
     *expr_data = behavior_expr;
     
-    const void* adsaf;
-    pro_ud_read(s, *ud, &adsaf);
-    
-    
     return behavior;
 }
 
