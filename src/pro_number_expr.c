@@ -1,6 +1,6 @@
 #include "pro_number_expr.h"
 
-#include "prosopon_libcore.h"
+#include "prosopon_stdlib.h"
 
 #include <stdio.h>
 #include <assert.h>

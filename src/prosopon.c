@@ -52,8 +52,9 @@ struct cl_state
  */
 static int process_library(pro_state_ref state, const char* file)
 {
-    pro_library_load(state, file);
-    return 0;
+    if (pro_library_load(state, file) == PRO_OK)
+        return 0;
+    return 1;
 }
 
 
@@ -186,7 +187,8 @@ int main(int argc, char** argv)
     
     // load standard library
     if (cl.load_standard_library)
-        process_library(state, "/Users/mattbierner/Projects/prosopon/build/Debug/libprosopon-core.dylib"); 
+        if (process_library(state, "/Users/mattbierner/Projects/prosopon/prosopon-stdlib/libprosopon-stdlib.so.1") != 0)
+            return 0;
     
     // load libraries
     file_list* libraries = cl.libraries;

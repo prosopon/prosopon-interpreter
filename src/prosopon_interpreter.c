@@ -8,7 +8,7 @@ extern FILE* yyin;
 extern int yyparse(pro_state_ref);
 
 
-PRO_INTERPRETER int (pro_eval) (pro_state_ref s, const char* file)
+PRO_INTERPRETER int pro_eval(pro_state_ref s, const char* file)
 {
     if ((yyin = fopen(file, "r")))
     {

@@ -93,7 +93,7 @@ capture_identifier
 program
     : statements
     {
-        pro_print_expr(state, $1, "\n");
+      //  pro_print_expr(state, $1, "\n");
         pro_eval_expr(state, $1);
         pro_run(state);
         pro_release_expr($1);
@@ -127,8 +127,7 @@ definition
     {
         $$ = pro_let_expr_create($2, $3);
     }
-    |
-    LET identifier constructor
+    | LET identifier constructor
     {
         $$ = pro_let_expr_create($2, $3);
     }
