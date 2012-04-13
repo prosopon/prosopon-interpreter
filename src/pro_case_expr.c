@@ -53,6 +53,7 @@ const pro_expr_type_info pro_case_expr_type_info = {
 PRO_INTERNAL pro_expr* pro_case_expr_create(pro_expr* pattern, pro_expr* body)
 {
     pro_expr* t = pro_expr_create(PRO_CASE_EXPR_TYPE);
+    if (!t) return 0;
     t->value.binary.left = pattern;
     t->value.binary.right = body;
     return t;
@@ -74,13 +75,14 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     pro_message_length(s, msg, &msg_length);
     
     pro_expr_list* match_list = pattern->value.list;
-    for (unsigned int index = 0; match_list; ++index)
+    for (unsigned int index = 0; match_list; )
     {
         if (index >= msg_length)
         {
             pro_pop_env(s);
             return 0;
         }
+        
         pro_ref arg;
         pro_message_get(s, msg, index, &arg);
         pro_expr* match = match_list->value;
@@ -89,24 +91,32 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         {
         case PRO_CAPTURE_IDENTIFIER_EXPR_TYPE:
             pro_bind(s, arg, match->value.identifier);
+            match_list = match_list->next;
+            ++index;
             break;
         default:
         {
             pro_eval_expr(s, match);
-            int do_match;
+            pro_matching do_match;
             pro_match(s, arg, pro_eval_expr(s, match), &do_match);
-            if (!do_match)
+            switch (do_match)
             {
+            case PRO_MATCH_FAIL:
                 pro_pop_env(s);
                 return 0;
+            case PRO_MATCH_CONTINUE:
+                break;
+            default:
+                match_list = match_list->next;
+                ++index;
             }
         }   break;
         }
-        match_list = match_list->next;
     }
     
     if (body)
         pro_eval_expr(s, body);
+    
     pro_pop_env(s);
     return 1;
 }
