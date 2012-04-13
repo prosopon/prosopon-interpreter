@@ -1,5 +1,7 @@
 #include "prosopon.h"
 
+#include "prosopon_interpreter.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -60,13 +62,7 @@ static int process_library(pro_state_ref state, const char* file)
  */
 static int process_file(pro_state_ref state, const char* arg)
 {
-    if ((yyin = fopen(arg, "r")))
-    {
-        int status = yyparse(state);
-        fclose(yyin);
-        return status;
-    }
-    return -1;
+    return pro_eval(state, arg);
 }
 
 
