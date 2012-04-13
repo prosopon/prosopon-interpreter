@@ -45,9 +45,12 @@ static void actor_expr_release(pro_expr* t)
 static void behavior(pro_state_ref s,
     pro_ref t, pro_ref msg, pro_ref data)
 {
-    void* d;
-    pro_ud_write(s, data, &d);
-    pro_expr** behavior_expr = d;
+    // setup environement
+    pro_bind(s, t, "self"); // setup self
+    pro_bind(s, msg, "msg"); // setup msg
+
+    pro_expr** behavior_expr;
+    pro_ud_write(s, data, (void**)&behavior_expr);
     
     pro_expr_list* case_list = (*behavior_expr)->value.list;
     while (case_list)
