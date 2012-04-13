@@ -27,7 +27,7 @@ int float_number(const char* yytext, unsigned long yyleng);
  
 digit         [0-9]
 neg           \-
-letter        [a-zA-Z_$]
+letter        [a-zA-Z_$\?\*]
 hex_digit     [a-fA-F0-9]
 E             [Ee][+-]?{digit}+
 whitespace    [ \t\v\n\f]

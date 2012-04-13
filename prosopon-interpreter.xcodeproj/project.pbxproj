@@ -28,7 +28,6 @@
 		89ABF6D6151C2B0200DE1A07 /* gram.y in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC59151241E600F78EB0 /* gram.y */; };
 		89ABF6DC151C2B1C00DE1A07 /* libprosopon.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */; };
 		89AF57F91538BA2D008D8426 /* libprosopon-stdlib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89AF57F61538BA17008D8426 /* libprosopon-stdlib.dylib */; };
-		89AF57FA1538BA34008D8426 /* libprosopon-stdlib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89AF57F61538BA17008D8426 /* libprosopon-stdlib.dylib */; };
 		89AFC3811538AE520083E8E8 /* prosopon_interpreter.c in Sources */ = {isa = PBXBuildFile; fileRef = 89AFC3801538AE520083E8E8 /* prosopon_interpreter.c */; };
 		89AFC3821538AE520083E8E8 /* prosopon_interpreter.c in Sources */ = {isa = PBXBuildFile; fileRef = 89AFC3801538AE520083E8E8 /* prosopon_interpreter.c */; };
 		89AFC3841538AED50083E8E8 /* prosopon_interpreter.h in Headers */ = {isa = PBXBuildFile; fileRef = 89AFC37F1538ABEC0083E8E8 /* prosopon_interpreter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -223,7 +222,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89AF57FA1538BA34008D8426 /* libprosopon-stdlib.dylib in Frameworks */,
 				89CE9C73151D762000CE5511 /* libprosopon.dylib in Frameworks */,
 				89CE9C6C151D75B600CE5511 /* libcunit.1.dylib in Frameworks */,
 			);

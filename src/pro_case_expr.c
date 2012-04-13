@@ -75,14 +75,8 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     pro_message_length(s, msg, &msg_length);
     
     pro_expr_list* match_list = pattern->value.list;
-    for (unsigned int index = 0; match_list; )
+    for (unsigned int index = 0; index < msg_length; ++index)
     {
-        if (index >= msg_length)
-        {
-            pro_pop_env(s);
-            return 0;
-        }
-        
         pro_ref arg;
         pro_message_get(s, msg, index, &arg);
         pro_expr* match = match_list->value;
@@ -91,26 +85,28 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         {
         case PRO_CAPTURE_IDENTIFIER_EXPR_TYPE:
             pro_bind(s, arg, match->value.identifier);
-            match_list = match_list->next;
-            ++index;
             break;
         default:
         {
             pro_eval_expr(s, match);
             pro_matching do_match;
-            pro_match(s, arg, pro_eval_expr(s, match), &do_match);
+            pro_match(s, pro_eval_expr(s, match), arg, &do_match);
             switch (do_match)
             {
             case PRO_MATCH_FAIL:
                 pro_pop_env(s);
                 return 0;
             case PRO_MATCH_CONTINUE:
-                break;
-            default:
-                match_list = match_list->next;
-                ++index;
+                continue;
             }
         }   break;
+        }
+        
+        
+        if (!(match_list = match_list->next))
+        {
+            pro_pop_env(s);
+            return 0;
         }
     }
     

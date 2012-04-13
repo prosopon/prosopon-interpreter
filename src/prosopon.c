@@ -186,8 +186,10 @@ int main(int argc, char** argv)
     }
     
     // load standard library
+    // //"/Users/mattbierner/Projects/prosopon/prosopon-stdlib/libprosopon-stdlib.so.1") != 0)
+
     if (cl.load_standard_library)
-        if (process_library(state, "/Users/mattbierner/Projects/prosopon/prosopon-stdlib/libprosopon-stdlib.so.1") != 0)
+        if (process_library(state, "/Users/mattbierner/Projects/prosopon/build/Debug/libprosopon-stdlib.dylib"))
             return 0;
     
     // load libraries
