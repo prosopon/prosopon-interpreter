@@ -26,13 +26,15 @@ static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
             pro_env_ref env;
             pro_get_env(s, &env);
             pro_get_binding(s, env, value->value.identifier, &lookup);
+            pro_env_release(s, env);
         }   break;
         default:
             lookup = pro_eval_expr(s, value);
             break;
         }
-        pro_ref new_msg;
+        pro_ref new_msg = 0;
         pro_message_append(s, msg, lookup, &new_msg);
+        pro_release(s, lookup);
         msg = new_msg;
     }
     return msg;

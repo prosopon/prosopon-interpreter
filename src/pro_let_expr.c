@@ -74,8 +74,11 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_expr* t)
     switch (pro_expr_get_type(left))
     {
     case PRO_IDENTIFIER_EXPR_TYPE:
-        pro_bind(s, pro_eval_expr(s, right), left->value.identifier);
-        break;
+    {
+        pro_ref right_ref = pro_eval_expr(s, right);
+        pro_bind(s, right_ref, left->value.identifier);
+        pro_release(s, right_ref);
+    }   break;
     case PRO_CONSTRUCTOR_EXPR_TYPE:
     {
         constructor_data* cData = 0;
@@ -88,6 +91,7 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_expr* t)
         cData->actor_expr = right;
         cData->constructor_expr = left;
         cData->env = env;
+        pro_env_release(s, env);
         
         pro_ref lookup;
         pro_constructor_create(s, contructor, ud, &lookup);

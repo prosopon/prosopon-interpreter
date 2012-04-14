@@ -13,6 +13,8 @@ static pro_ref identifier_expr_eval(pro_state_ref s, pro_expr* t)
     pro_env_ref env;
     pro_get_env(s, &env);
     pro_get_binding(s, env, t->value.identifier, &ref);
+    pro_env_release(s, env);
+
     return ref;
 }
 

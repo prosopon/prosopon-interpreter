@@ -19,6 +19,8 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_expr* t)
     pro_get_env(s, &env);
     pro_ref constructor;
     pro_get_binding(s, env, identifier, &constructor);
+    pro_env_release(s, env);
+    
     if (0 == constructor)
         return PRO_EMPTY_REF;
     

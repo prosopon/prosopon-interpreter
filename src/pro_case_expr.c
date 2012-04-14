@@ -66,8 +66,10 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     pro_env_ref current_env, env;
     pro_get_env(s, &current_env);
     pro_env_create(s, current_env, &env);
+    pro_env_release(s, current_env);
     pro_push_env(s, env);
-    
+    pro_env_release(s, env);
+
     pro_expr* body = t->value.binary.right;
     pro_expr* pattern = t->value.binary.left;
 
@@ -88,7 +90,6 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
             break;
         default:
         {
-            pro_eval_expr(s, match);
             pro_matching do_match;
             pro_match(s, pro_eval_expr(s, match), arg, &do_match);
             switch (do_match)
@@ -113,9 +114,13 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     }
     
     if (body)
-        pro_eval_expr(s, body);
+    {
+        pro_ref out = pro_eval_expr(s, body);
+        pro_release(s, out);
+    }
     
     pro_pop_env(s);
+    
     return 1;
 }
 

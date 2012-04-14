@@ -16,7 +16,7 @@ static pro_ref list_expr_eval(pro_state_ref s, pro_expr* t)
     {
         pro_expr* value = list->value;
         if (value)
-            pro_eval_expr(s, value);
+            pro_release(s, pro_eval_expr(s, value));
         list = list->next;
     }
     return PRO_EMPTY_REF;
