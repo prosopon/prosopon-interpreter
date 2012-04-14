@@ -28,8 +28,8 @@
 		89ABF6D6151C2B0200DE1A07 /* gram.y in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC59151241E600F78EB0 /* gram.y */; };
 		89ABF6DC151C2B1C00DE1A07 /* libprosopon.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */; };
 		89AF57F91538BA2D008D8426 /* libprosopon-stdlib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89AF57F61538BA17008D8426 /* libprosopon-stdlib.dylib */; };
+		89AF58071539107F008D8426 /* libprosopon-stdlib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89AF57F61538BA17008D8426 /* libprosopon-stdlib.dylib */; };
 		89AFC3811538AE520083E8E8 /* prosopon_interpreter.c in Sources */ = {isa = PBXBuildFile; fileRef = 89AFC3801538AE520083E8E8 /* prosopon_interpreter.c */; };
-		89AFC3821538AE520083E8E8 /* prosopon_interpreter.c in Sources */ = {isa = PBXBuildFile; fileRef = 89AFC3801538AE520083E8E8 /* prosopon_interpreter.c */; };
 		89AFC3841538AED50083E8E8 /* prosopon_interpreter.h in Headers */ = {isa = PBXBuildFile; fileRef = 89AFC37F1538ABEC0083E8E8 /* prosopon_interpreter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89CE9C69151D753800CE5511 /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = 89CE9C51151D747200CE5511 /* test.c */; };
 		89CE9C6C151D75B600CE5511 /* libcunit.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CE9C6B151D75B600CE5511 /* libcunit.1.dylib */; };
@@ -222,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89AF58071539107F008D8426 /* libprosopon-stdlib.dylib in Frameworks */,
 				89CE9C73151D762000CE5511 /* libprosopon.dylib in Frameworks */,
 				89CE9C6C151D75B600CE5511 /* libcunit.1.dylib in Frameworks */,
 			);
@@ -505,7 +506,6 @@
 				89EDA0CA15212CD4004EE3FC /* test-pro_send_expr.c in Sources */,
 				89EDA0CD1521326F004EE3FC /* test-pro_become_expr.c in Sources */,
 				8931DD84153203D800B974C7 /* pro_capture_identifier_expr.c in Sources */,
-				89AFC3821538AE520083E8E8 /* prosopon_interpreter.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

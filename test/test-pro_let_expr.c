@@ -14,7 +14,7 @@ static pro_state_ref state;
 
 static int init(void)
 {
-    state = pro_state_create();
+    pro_state_create(&state);
     return state == 0;
 }
 
