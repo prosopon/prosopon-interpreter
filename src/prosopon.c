@@ -149,6 +149,18 @@ static int process_args(cl_state* cl, pro_state_ref state, const char* arg)
 }
 
 
+// Based on lua_alloc 
+static void* simple_alloc(void* ptr, size_t nsize)
+{
+    if (0 == nsize)
+    {
+        free(ptr);
+        return 0;
+    }
+    else
+        return realloc(ptr, nsize);
+}
+
 
 /**
  * Main function to invoke the interpreter. The command takes the form
@@ -175,7 +187,7 @@ int main(int argc, char** argv)
     
     // process command line arguments
     pro_state_ref state;
-    if (pro_state_create(&state) != PRO_OK)
+    if (pro_state_create(simple_alloc, &state) != PRO_OK)
         return 0;
     
     for (unsigned int i = 1; i < argc; ++i)
