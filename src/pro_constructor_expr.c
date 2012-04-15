@@ -30,9 +30,18 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_expr* t)
     // build the list of arguments
     pro_expr_list* expr_arg_list = t->value.constructor.arguments;
 
-    pro_ref_list arg_list = expr_arg_list ? alloc(0, sizeof(*arg_list)) : 0;
-    arg_list->value = PRO_EMPTY_REF;
-    pro_ref_list arg = arg_list;
+    pro_ref_list arg;
+    pro_ref_list arg_list;
+    if (expr_arg_list)
+    {
+        arg_list = alloc(0, sizeof(*arg_list));
+        arg_list->value = PRO_EMPTY_REF;
+    }
+    else
+        arg_list = 0;
+    
+    arg = arg_list;
+
     
     for (pro_expr_list* expr_arg = expr_arg_list; expr_arg; expr_arg = expr_arg->next, arg = arg->next)
     {
