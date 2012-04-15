@@ -35,8 +35,8 @@ static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
         
         pro_ref new_msg = 0;
         pro_message_append(s, msg, lookup, &new_msg);
-        pro_release(s, lookup);
         pro_release(s, msg);
+        pro_release(s, lookup);
 
         msg = new_msg;
     }
@@ -48,7 +48,9 @@ static void message_expr_print(pro_state_ref s, const pro_expr* t, const char* e
 {
     assert(pro_expr_get_type(t) == PRO_MESSAGE_EXPR_TYPE);
     printf("<message ");
-    pro_print_expr_list(s, t->value.list, "");
+    
+    if (t->value.list)
+        pro_print_expr_list(s, t->value.list, "");
     printf(">%s", end);
 }
 

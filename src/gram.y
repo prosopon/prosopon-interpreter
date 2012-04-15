@@ -103,8 +103,14 @@ program
 statements
     : statements statement
     {
-        pro_expr_list* list = pro_expr_list_create($2, 0);
-        $$ = pro_list_expr_join($1, pro_list_expr_create(list));
+        pro_alloc* alloc;
+        pro_get_alloc(state, &alloc);
+        
+        pro_expr_list* expr_list = pro_expr_list_create($2, 0);
+        pro_expr* list = pro_list_expr_create(expr_list);
+        $$ = pro_list_expr_join($1, list);
+        
+        alloc(list, 0);
     }
     | statement
     {
@@ -147,8 +153,14 @@ definition
 expression
     : expression term
     {
-        pro_expr_list* list = pro_expr_list_create($2, 0);
-        $$ = pro_list_expr_join($1, pro_list_expr_create(list));
+        pro_alloc* alloc;
+        pro_get_alloc(state, &alloc);
+        
+        pro_expr_list* expr_list = pro_expr_list_create($2, 0);
+        pro_expr* list = pro_list_expr_create(expr_list);
+        $$ = pro_list_expr_join($1, list);
+        
+        alloc(list, 0);
     }
     | term
     {
@@ -217,15 +229,26 @@ message
     | /* non empty message */
     MESSAGE_START value_list MESSAGE_END
     {
+        pro_alloc* alloc;
+        pro_get_alloc(state, &alloc);
+        
         $$ = pro_message_expr_create($2->value.list);
+        
+        alloc($2, 0);
     }
     ;
     
 value_list
     : value_list value
     {
-        pro_expr_list* list = pro_expr_list_create($2, 0);
-        $$ = pro_list_expr_join($1, pro_list_expr_create(list));
+        pro_alloc* alloc;
+        pro_get_alloc(state, &alloc);
+        
+        pro_expr_list* expr_list = pro_expr_list_create($2, 0);
+        pro_expr* list = pro_list_expr_create(expr_list);
+        $$ = pro_list_expr_join($1, list);
+        
+        alloc(list, 0);
     }
     | value
     {
@@ -256,6 +279,10 @@ constructor
     IDENTIFIER CONSTRUCTOR_START value_list CONSTRUCTOR_END
     {
         $$ = pro_constructor_expr_create($1, $3->value.list);
+        
+        pro_alloc* alloc;
+        pro_get_alloc(state, &alloc);
+        alloc($3, 0);
     }
     ;
 
@@ -279,8 +306,14 @@ actor
 behavior
     : behavior case
     {
-        pro_expr_list* list = pro_expr_list_create($2, 0);
-        $$ = pro_list_expr_join($1, pro_list_expr_create(list));
+        pro_alloc* alloc;
+        pro_get_alloc(state, &alloc);
+        
+        pro_expr_list* expr_list = pro_expr_list_create($2, 0);
+        pro_expr* list = pro_list_expr_create(expr_list);
+        $$ = pro_list_expr_join($1, list);
+        
+        alloc(list, 0);
     }
     | case
     {
@@ -311,8 +344,15 @@ case
 argument_list
     : argument_list argument
     {
-        pro_expr_list* list = pro_expr_list_create($2, 0);
-        $$ = pro_list_expr_join($1, pro_list_expr_create(list));
+        pro_alloc* alloc;
+        pro_get_alloc(state, &alloc);
+        
+        pro_expr_list* expr_list = pro_expr_list_create($2, 0);
+        pro_expr* list = pro_list_expr_create(expr_list);
+        
+        $$ = pro_list_expr_join($1, list);
+        
+        alloc(list, 0);
     }
     | argument
     {

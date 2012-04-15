@@ -63,6 +63,18 @@ static void behavior(pro_state_ref s,
     }
 }
 
+static void behavior_deconstructor(pro_state_ref s, void* data)
+{
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    
+    pro_expr** expr = data;
+    
+   // pro_release_expr(*expr);
+    alloc(expr, 0);
+}
+
+
 
 #pragma mark -
 #pragma mark Internal 
@@ -88,7 +100,7 @@ PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state_ref s,
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
     pro_expr* behavior_expr = t->value.behavior;
 
-    pro_ud_create(s, sizeof(t), PRO_DEFAULT_UD_DECONSTRUCTOR, ud);
+    pro_ud_create(s, sizeof(t), behavior_deconstructor, ud);
     
     void* ud_ptr;
     pro_ud_write(s, *ud, &ud_ptr);

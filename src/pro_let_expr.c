@@ -16,6 +16,14 @@ typedef struct {
 } constructor_data;
 
 
+static void constructor_data_deconstructor(pro_state_ref s, void* data)
+{
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    
+    alloc(data, 0);
+}
+
 static void bind_arguments(pro_state_ref s, pro_expr_list* id_list, pro_ref_list values)
 {
     pro_expr_list* list = id_list;
@@ -87,7 +95,7 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_expr* t)
     {
         constructor_data* cData = 0;
         pro_ref ud;
-        pro_ud_create(s, sizeof(*cData), PRO_DEFAULT_UD_DECONSTRUCTOR, &ud);
+        pro_ud_create(s, sizeof(*cData), constructor_data_deconstructor, &ud);
         pro_ud_write(s, ud, (void**)&cData);
         
         pro_env_ref env;

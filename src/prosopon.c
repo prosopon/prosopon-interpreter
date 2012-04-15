@@ -209,6 +209,7 @@ int main(int argc, char** argv)
     for (const char* library = 0; library && (library = libraries->file); libraries = libraries->next)
     {
         int status = process_library(state, library);
+        simple_alloc(libraries, 0);
         if (status != 0)
             return -1;
     }
@@ -218,6 +219,7 @@ int main(int argc, char** argv)
     for (const char* file = 0; files && (file = files->file); files = files->next)
     {
         int status = process_file(state, file);
+        simple_alloc(files, 0);
         if (status != 0)
             return -1;
     }
