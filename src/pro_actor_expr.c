@@ -61,9 +61,6 @@ static void behavior(pro_state_ref s,
             break;
         case_list = case_list->next;
     }
-    
-    pro_release(s, t);
-    pro_release(s, msg);
 }
 
 

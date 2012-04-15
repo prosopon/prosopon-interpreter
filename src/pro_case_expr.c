@@ -63,13 +63,15 @@ PRO_INTERNAL pro_expr* pro_case_expr_create(pro_expr* pattern, pro_expr* body)
 PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     pro_expr* t, pro_ref msg)
 {
-    pro_env_ref current_env, env;
-    pro_get_env(s, &current_env);
-    pro_env_create(s, current_env, &env);
-    pro_env_release(s, current_env);
-    pro_push_env(s, env);
-    pro_env_release(s, env);
-
+    {
+        pro_env_ref current_env, env;
+        pro_get_env(s, &current_env);
+        pro_env_create(s, current_env, &env);
+        pro_env_release(s, current_env);
+        pro_push_env(s, env);
+        pro_env_release(s, env);
+    }
+    
     pro_expr* body = t->value.binary.right;
     pro_expr* pattern = t->value.binary.left;
 
@@ -101,6 +103,7 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
                 pro_pop_env(s);
                 return 0;
             case PRO_MATCH_CONTINUE:
+                pro_release(s, arg);
                 continue;
             }
         }   break;
@@ -109,7 +112,7 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         ++index;
         pro_release(s, arg);
         
-        if (!(match_list = match_list->next) && index != msg_length )
+        if (!(match_list = match_list->next) && index != msg_length)
         {
             pro_pop_env(s);
             return 0;
