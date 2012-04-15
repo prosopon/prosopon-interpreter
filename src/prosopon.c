@@ -29,6 +29,8 @@ struct file_list
 static file_list* file_list_new(const char* file, file_list* next)
 {
     file_list* l = malloc(sizeof(*l));
+    if (!l) return 0;
+    
     l->file = file;
     l->next = next;
     return l;
@@ -206,22 +208,28 @@ int main(int argc, char** argv)
     
     // load libraries
     file_list* libraries = cl.libraries;
-    for (const char* library = 0; library && (library = libraries->file); libraries = libraries->next)
+    for (const char* library = 0; library && (library = libraries->file); )
     {
+        file_list* next = libraries->next;
         int status = process_library(state, library);
         simple_alloc(libraries, 0);
         if (status != 0)
             return -1;
+        
+        libraries = next;
     }
     
     // process files
     file_list* files = cl.files;
-    for (const char* file = 0; files && (file = files->file); files = files->next)
+    for (const char* file = 0; files && (file = files->file); )
     {
+        file_list* next = files->next;
         int status = process_file(state, file);
         simple_alloc(files, 0);
         if (status != 0)
             return -1;
+            
+        files = next;
     }
     
     pro_state_release(state);
