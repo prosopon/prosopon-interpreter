@@ -21,6 +21,7 @@ static pro_ref actor_expr_eval(pro_state_ref s, pro_expr* t)
         
     pro_ref ref;
     pro_actor_create(s, PRO_DEFAULT_ACTOR_TYPE, behavior, ud, &ref);
+    pro_release(s, ud);
     return ref;
 }
 
@@ -57,9 +58,12 @@ static void behavior(pro_state_ref s,
     {
         pro_expr* case_expr = case_list->value;
         if (pro_case_expr_match(s, case_expr, msg) != 0)
-            return;
+            break;
         case_list = case_list->next;
     }
+    
+    pro_release(s, t);
+    pro_release(s, msg);
 }
 
 

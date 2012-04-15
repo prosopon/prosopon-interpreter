@@ -14,6 +14,9 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_expr* t)
     
     char* identifier = t->value.constructor.identifier;
     
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    
     // lookup the constructor
     pro_env_ref env;
     pro_get_env(s, &env);
@@ -25,9 +28,11 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_expr* t)
         return PRO_EMPTY_REF;
     
     // build the list of arguments
-    pro_ref_list arg_list = malloc(sizeof(*arg_list));
-    pro_ref_list arg = arg_list;
     pro_expr_list* expr_arg_list = t->value.constructor.arguments;
+
+    pro_ref_list arg_list = expr_arg_list ? alloc(0, sizeof(*arg_list)) : 0;
+    arg_list->value = PRO_EMPTY_REF;
+    pro_ref_list arg = arg_list;
     
     for (pro_expr_list* expr_arg = expr_arg_list; expr_arg; expr_arg = expr_arg->next, arg = arg->next)
     {
@@ -36,14 +41,26 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_expr* t)
         {
             arg->value = pro_eval_expr(s, value);
             if (expr_arg->next)
-                arg->next = malloc(sizeof(*arg));
-            
+                arg->next = alloc(0, sizeof(*arg));
+            else
+                arg->next = 0;
         }
     }
     
     // Call the constructor
     pro_ref ref;
     pro_constructor_call(s, constructor, arg_list, &ref);
+    pro_release(s, constructor);
+    
+    // Release the argument list
+    for (pro_ref_list arg = arg_list; arg; )
+    {
+        pro_release(s, arg->value);
+        pro_ref_list old = arg;
+        arg = arg->next;
+        alloc(old, 0);
+    }
+    
     return ref;
 }
 

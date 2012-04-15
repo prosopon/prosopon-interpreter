@@ -13,7 +13,13 @@ static pro_ref send_expr_eval(pro_state_ref s, pro_expr* t)
     
     pro_expr* left = t->value.binary.left;
     pro_expr* msg = t->value.binary.right;
-    pro_send(s, pro_eval_expr(s, left),  pro_eval_expr(s, msg));
+    
+    pro_ref target_val = pro_eval_expr(s, left);
+    pro_ref msg_val = pro_eval_expr(s, msg);
+    pro_send(s, target_val,  msg_val);
+    pro_release(s, target_val);
+    pro_release(s, msg_val);
+    
     return PRO_EMPTY_REF;
 }
 

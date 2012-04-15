@@ -91,10 +91,13 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         default:
         {
             pro_matching do_match;
-            pro_match(s, pro_eval_expr(s, match), arg, &do_match);
+            pro_ref match_ref = pro_eval_expr(s, match);
+            pro_match(s, match_ref, arg, &do_match);
+            pro_release(s, match_ref);
             switch (do_match)
             {
             case PRO_MATCH_FAIL:
+                pro_release(s, arg);
                 pro_pop_env(s);
                 return 0;
             case PRO_MATCH_CONTINUE:
@@ -104,7 +107,7 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         }
         
         ++index;
-        
+        pro_release(s, arg);
         
         if (!(match_list = match_list->next) && index != msg_length )
         {

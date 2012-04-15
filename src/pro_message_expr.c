@@ -32,9 +32,12 @@ static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
             lookup = pro_eval_expr(s, value);
             break;
         }
+        
         pro_ref new_msg = 0;
         pro_message_append(s, msg, lookup, &new_msg);
         pro_release(s, lookup);
+        pro_release(s, msg);
+
         msg = new_msg;
     }
     return msg;
