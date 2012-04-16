@@ -55,7 +55,8 @@ const pro_expr_type_info pro_send_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_send_expr_create(pro_expr* identifier, pro_expr* msg)
+PRO_INTERNAL pro_expr* pro_send_expr_create(pro_state_ref s,
+    pro_expr* identifier, pro_expr* msg)
 {
     pro_type type = pro_expr_get_type(identifier);
     assert(
@@ -69,7 +70,7 @@ PRO_INTERNAL pro_expr* pro_send_expr_create(pro_expr* identifier, pro_expr* msg)
         PRO_MESSAGE_EXPR_TYPE == msg_type ||
         PRO_IDENTIFIER_EXPR_TYPE == msg_type);
 
-    pro_expr* t = pro_expr_create(PRO_SEND_EXPR_TYPE);
+    pro_expr* t = pro_expr_create(s, PRO_SEND_EXPR_TYPE);
     t->value.binary.left = identifier;
     t->value.binary.right = msg;
     return t;

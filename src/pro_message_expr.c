@@ -72,9 +72,10 @@ const pro_expr_type_info pro_message_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_message_expr_create(pro_expr_list* list)
+PRO_INTERNAL pro_expr* pro_message_expr_create(pro_state_ref s,
+    pro_expr_list* list)
 {
-    pro_expr* t = pro_expr_create(PRO_MESSAGE_EXPR_TYPE);
+    pro_expr* t = pro_expr_create(s, PRO_MESSAGE_EXPR_TYPE);
     t->value.list = list;
     return t;
 }

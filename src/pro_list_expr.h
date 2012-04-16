@@ -10,7 +10,8 @@
 extern const pro_expr_type_info pro_list_expr_type_info;
 
 
-PRO_INTERNAL pro_expr* pro_list_expr_create(pro_expr_list* list);
+PRO_INTERNAL pro_expr* pro_list_expr_create(pro_state_ref s,
+    pro_expr_list* list);
 
 /**
  * Appends expression list 2 to expression list 1.

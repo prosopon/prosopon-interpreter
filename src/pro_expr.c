@@ -3,17 +3,18 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
-#include <string.h>
 
 
-PRO_INTERNAL pro_expr* pro_expr_create(pro_expr_type type)
+PRO_INTERNAL pro_expr* pro_expr_create(pro_state_ref s, pro_expr_type type)
 {
-    pro_expr* t = malloc(sizeof(*t));
-    memset(t, 0, sizeof(*t));
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    pro_expr* t = alloc(0, sizeof(*t));
+    if (!t) return 0;
+    
     t->type = type;
     return t;
 }
-
 
 
 PRO_INTERNAL pro_ref pro_eval_expr(pro_state_ref s, pro_expr* t)

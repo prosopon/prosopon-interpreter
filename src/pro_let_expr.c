@@ -140,7 +140,8 @@ const pro_expr_type_info pro_let_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_let_expr_create(pro_expr* identifier, pro_expr* value)
+PRO_INTERNAL pro_expr* pro_let_expr_create(pro_state_ref s,
+    pro_expr* identifier, pro_expr* value)
 {
     pro_type identifier_type = pro_expr_get_type(identifier);
     pro_type value_type = pro_expr_get_type(value);
@@ -162,7 +163,7 @@ PRO_INTERNAL pro_expr* pro_let_expr_create(pro_expr* identifier, pro_expr* value
         break;
     }
     
-    pro_expr* t = pro_expr_create(PRO_LET_EXPR_TYPE);
+    pro_expr* t = pro_expr_create(s, PRO_LET_EXPR_TYPE);
     t->value.binary.left = identifier;
     t->value.binary.right = value;
     return t;

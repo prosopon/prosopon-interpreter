@@ -10,6 +10,7 @@
 extern const pro_expr_type_info pro_message_expr_type_info;
 
 
-PRO_INTERNAL pro_expr* pro_message_expr_create(pro_expr_list* list);
+PRO_INTERNAL pro_expr* pro_message_expr_create(pro_state_ref s,
+    pro_expr_list* list);
 
 #endif

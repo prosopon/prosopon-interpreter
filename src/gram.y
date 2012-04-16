@@ -65,25 +65,25 @@ extern int yydebug;
 literal
     : STRING_LITERAL
     {
-        $$ = pro_string_expr_create($1);
+        $$ = pro_string_expr_create(state, $1);
     }
     | NUMBER_LITERAL
     {
-        $$ = pro_number_expr_create($1);
+        $$ = pro_number_expr_create(state, $1);
     }
     ;
     
 identifier
     : IDENTIFIER
     {
-        $$ = pro_identifier_expr_create($1);
+        $$ = pro_identifier_expr_create(state, $1);
     }
     ;
     
 capture_identifier
     : CAPTURE IDENTIFIER
     {
-        $$ = pro_capture_identifier_expr_create($2);
+        $$ = pro_capture_identifier_expr_create(state, $2);
     }
     ;
 
@@ -107,7 +107,7 @@ statements
         pro_get_alloc(state, &alloc);
         
         pro_expr_list* expr_list = pro_expr_list_create($2, 0);
-        pro_expr* list = pro_list_expr_create(expr_list);
+        pro_expr* list = pro_list_expr_create(state, expr_list);
         $$ = pro_list_expr_join($1, list);
         
         alloc(list, 0);
@@ -115,7 +115,7 @@ statements
     | statement
     {
         pro_expr_list* list = pro_expr_list_create($1, 0);
-        $$ = pro_list_expr_create(list);
+        $$ = pro_list_expr_create(state, list);
     }
     ;
     
@@ -131,19 +131,19 @@ statement
 definition
     : LET identifier actor
     {
-        $$ = pro_let_expr_create($2, $3);
+        $$ = pro_let_expr_create(state, $2, $3);
     }
     | LET identifier constructor
     {
-        $$ = pro_let_expr_create($2, $3);
+        $$ = pro_let_expr_create(state, $2, $3);
     }
     | LET constructor actor
     {
-        $$ = pro_let_expr_create($2, $3);
+        $$ = pro_let_expr_create(state, $2, $3);
     }
     | LET identifier literal
     {
-        $$ = pro_let_expr_create($2, $3);
+        $$ = pro_let_expr_create(state, $2, $3);
     }
     ;
     
@@ -157,7 +157,7 @@ expression
         pro_get_alloc(state, &alloc);
         
         pro_expr_list* expr_list = pro_expr_list_create($2, 0);
-        pro_expr* list = pro_list_expr_create(expr_list);
+        pro_expr* list = pro_list_expr_create(state, expr_list);
         $$ = pro_list_expr_join($1, list);
         
         alloc(list, 0);
@@ -165,7 +165,7 @@ expression
     | term
     {
         pro_expr_list* list = pro_expr_list_create($1, 0);
-        $$ = pro_list_expr_create(list);
+        $$ = pro_list_expr_create(state, list);
     }
     ;
 
@@ -185,7 +185,7 @@ term
 send
     : SEND send_target send_message
     {
-        $$ = pro_send_expr_create($2, $3);
+        $$ = pro_send_expr_create(state, $2, $3);
     }
     ;
 
@@ -207,7 +207,7 @@ send_message
 become
     : BECOME identifier become_target
     {
-        $$ = pro_become_expr_create($2, $3);
+        $$ = pro_become_expr_create(state, $2, $3);
     }
     ;
 
@@ -224,7 +224,7 @@ message
     : /* empty message */
     MESSAGE_START MESSAGE_END
     {
-        $$ = pro_message_expr_create(0);
+        $$ = pro_message_expr_create(state, 0);
     }
     | /* non empty message */
     MESSAGE_START value_list MESSAGE_END
@@ -232,7 +232,7 @@ message
         pro_alloc* alloc;
         pro_get_alloc(state, &alloc);
         
-        $$ = pro_message_expr_create($2->value.list);
+        $$ = pro_message_expr_create(state, $2->value.list);
         
         alloc($2, 0);
     }
@@ -245,7 +245,7 @@ value_list
         pro_get_alloc(state, &alloc);
         
         pro_expr_list* expr_list = pro_expr_list_create($2, 0);
-        pro_expr* list = pro_list_expr_create(expr_list);
+        pro_expr* list = pro_list_expr_create(state, expr_list);
         $$ = pro_list_expr_join($1, list);
         
         alloc(list, 0);
@@ -253,7 +253,7 @@ value_list
     | value
     {
         pro_expr_list* list = pro_expr_list_create($1, 0);
-        $$ = pro_list_expr_create(list);
+        $$ = pro_list_expr_create(state, list);
     }
     ;
 
@@ -273,12 +273,12 @@ constructor
     : /* empty constructor */
     IDENTIFIER CONSTRUCTOR_START CONSTRUCTOR_END
     {
-        $$ = pro_constructor_expr_create($1, 0);
+        $$ = pro_constructor_expr_create(state, $1, 0);
     }
     | /* non empty constructor */
     IDENTIFIER CONSTRUCTOR_START value_list CONSTRUCTOR_END
     {
-        $$ = pro_constructor_expr_create($1, $3->value.list);
+        $$ = pro_constructor_expr_create(state, $1, $3->value.list);
         
         pro_alloc* alloc;
         pro_get_alloc(state, &alloc);
@@ -294,12 +294,12 @@ actor
     : /* empty actor */
     ACTOR_START ACTOR_END
     {
-        $$ = pro_actor_expr_create(0);
+        $$ = pro_actor_expr_create(state, 0);
     }
     | /* actor with behavior */
     ACTOR_START behavior ACTOR_END
     {
-        $$ = pro_actor_expr_create($2);
+        $$ = pro_actor_expr_create(state, $2);
     }
     ;
 
@@ -310,7 +310,7 @@ behavior
         pro_get_alloc(state, &alloc);
         
         pro_expr_list* expr_list = pro_expr_list_create($2, 0);
-        pro_expr* list = pro_list_expr_create(expr_list);
+        pro_expr* list = pro_list_expr_create(state, expr_list);
         $$ = pro_list_expr_join($1, list);
         
         alloc(list, 0);
@@ -318,26 +318,26 @@ behavior
     | case
     {
         pro_expr_list* list = pro_expr_list_create($1, 0);
-        $$ = pro_list_expr_create(list);
+        $$ = pro_list_expr_create(state, list);
     }
     ;
 
 case
     : CASE argument_list  END_CASE_PATTERN expression   END_CASE
     {
-        $$ = pro_case_expr_create($2, $4);
+        $$ = pro_case_expr_create(state, $2, $4);
     }
     | CASE argument_list  END_CASE_PATTERN              END_CASE
     {
-        $$ = pro_case_expr_create($2, 0);
+        $$ = pro_case_expr_create(state, $2, 0);
     }
     | CASE                END_CASE_PATTERN expression   END_CASE
     {
-        $$ = pro_case_expr_create(0, $3);
+        $$ = pro_case_expr_create(state, 0, $3);
     }
     | CASE                END_CASE_PATTERN              END_CASE
     {
-        $$ = pro_case_expr_create(0, 0);
+        $$ = pro_case_expr_create(state, 0, 0);
     }
     ;
     
@@ -348,7 +348,7 @@ argument_list
         pro_get_alloc(state, &alloc);
         
         pro_expr_list* expr_list = pro_expr_list_create($2, 0);
-        pro_expr* list = pro_list_expr_create(expr_list);
+        pro_expr* list = pro_list_expr_create(state, expr_list);
         
         $$ = pro_list_expr_join($1, list);
         
@@ -357,7 +357,7 @@ argument_list
     | argument
     {
         pro_expr_list* list = pro_expr_list_create($1, 0);
-        $$ = pro_list_expr_create(list);
+        $$ = pro_list_expr_create(state, list);
     }
     ;
 

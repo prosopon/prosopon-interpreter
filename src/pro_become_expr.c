@@ -48,9 +48,10 @@ const pro_expr_type_info pro_become_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_become_expr_create(pro_expr* identifier, pro_expr* value)
+PRO_INTERNAL pro_expr* pro_become_expr_create(pro_state_ref s,
+    pro_expr* identifier, pro_expr* value)
 {
-    pro_expr* t = pro_expr_create(PRO_BECOME_EXPR_TYPE);
+    pro_expr* t = pro_expr_create(s, PRO_BECOME_EXPR_TYPE);
     t->value.binary.left = identifier;
     t->value.binary.right = value;
     return t;

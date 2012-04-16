@@ -50,9 +50,10 @@ const pro_expr_type_info pro_case_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_case_expr_create(pro_expr* pattern, pro_expr* body)
+PRO_INTERNAL pro_expr* pro_case_expr_create(pro_state_ref s,
+    pro_expr* pattern, pro_expr* body)
 {
-    pro_expr* t = pro_expr_create(PRO_CASE_EXPR_TYPE);
+    pro_expr* t = pro_expr_create(s, PRO_CASE_EXPR_TYPE);
     if (!t) return 0;
     t->value.binary.left = pattern;
     t->value.binary.right = body;

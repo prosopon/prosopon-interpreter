@@ -40,9 +40,9 @@ const pro_expr_type_info pro_number_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_number_expr_create(double value)
+PRO_INTERNAL pro_expr* pro_number_expr_create(pro_state_ref s, double value)
 {
-    pro_expr* t = pro_expr_create(PRO_NUMBER_EXPR_TYPE);
+    pro_expr* t = pro_expr_create(s, PRO_NUMBER_EXPR_TYPE);
     t->value.number = value;
     return t;
 }

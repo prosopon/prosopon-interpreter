@@ -86,9 +86,10 @@ const pro_expr_type_info pro_actor_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_actor_expr_create(pro_expr* behavior)
+PRO_INTERNAL pro_expr* pro_actor_expr_create(pro_state_ref s,
+    pro_expr* behavior)
 {
-    pro_expr* t = pro_expr_create(PRO_ACTOR_EXPR_TYPE);
+    pro_expr* t = pro_expr_create(s, PRO_ACTOR_EXPR_TYPE);
     t->value.behavior = behavior;
     return t;
 }

@@ -10,7 +10,8 @@
 extern const pro_expr_type_info pro_actor_expr_type_info;
 
 
-PRO_INTERNAL pro_expr* pro_actor_expr_create(pro_expr* behavior);
+PRO_INTERNAL pro_expr* pro_actor_expr_create(pro_state_ref s,
+    pro_expr* behavior);
 
 /**
  * Gets the behavior for a given actor expr
