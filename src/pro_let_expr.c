@@ -24,26 +24,29 @@ static void constructor_data_deconstructor(pro_state_ref s, void* data)
     alloc(data, 0);
 }
 
-static void bind_arguments(pro_state_ref s, pro_expr_list* id_list, pro_ref_list values)
+static void bind_arguments(pro_state_ref s, pro_expr_list* id_list, pro_ref values)
 {
     pro_expr_list* list = id_list;
-    pro_ref_list lookup_list = values;
-    while (list)
+    
+    unsigned int len;
+    pro_list_length(s, values, &len);
+    for (unsigned int i = 0; i < len; ++i)
     {
         pro_expr* value = list->value;
-        pro_ref lookup = lookup_list->value;
+        pro_ref lookup;
+        pro_list_get(s, values, i, &lookup);
         if (value)
         {
             assert(pro_expr_get_type(value) == PRO_IDENTIFIER_EXPR_TYPE);
             pro_bind(s, lookup, value->value.identifier);
         }
+        pro_release(s, lookup);
         list = list->next;
-        lookup_list = lookup_list->next;
     }
 }
 
 
-static pro_ref contructor(pro_state_ref s, pro_ref_list arguments, pro_ref d)
+static pro_ref contructor(pro_state_ref s, pro_ref arguments, pro_ref d)
 {
     pro_ref actor = 0;
     const constructor_data* data;

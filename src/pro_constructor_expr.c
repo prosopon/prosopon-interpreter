@@ -30,29 +30,20 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_expr* t)
     // build the list of arguments
     pro_expr_list* expr_arg_list = t->value.constructor.arguments;
 
-    pro_ref_list arg;
-    pro_ref_list arg_list;
-    if (expr_arg_list)
-    {
-        arg_list = alloc(0, sizeof(*arg_list));
-        arg_list->value = PRO_EMPTY_REF;
-    }
-    else
-        arg_list = 0;
-    
-    arg = arg_list;
+    pro_ref arg_list;
+    pro_list_create(s, &arg_list);
 
-    
-    for (pro_expr_list* expr_arg = expr_arg_list; expr_arg; expr_arg = expr_arg->next, arg = arg->next)
+    for (pro_expr_list* expr_arg = expr_arg_list; expr_arg; expr_arg = expr_arg->next)
     {
         pro_expr* value = expr_arg->value;
         if (value)
         {
-            arg->value = pro_eval_expr(s, value);
-            if (expr_arg->next)
-                arg->next = alloc(0, sizeof(*arg));
-            else
-                arg->next = 0;
+            pro_ref new_list = PRO_EMPTY_REF;
+            pro_ref lookup = pro_eval_expr(s, value);
+            pro_list_append(s, arg_list, lookup, &new_list);
+            pro_release(s, lookup);
+            pro_release(s, arg_list);
+            arg_list = new_list;
         }
     }
     
@@ -61,14 +52,7 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_expr* t)
     pro_constructor_call(s, constructor, arg_list, &ref);
     pro_release(s, constructor);
     
-    // Release the argument list
-    for (pro_ref_list arg = arg_list; arg; )
-    {
-        pro_release(s, arg->value);
-        pro_ref_list old = arg;
-        arg = arg->next;
-        alloc(old, 0);
-    }
+    pro_release(s, arg_list);
     
     return ref;
 }

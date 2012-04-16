@@ -76,13 +76,13 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     pro_expr* pattern = t->value.binary.left;
 
     unsigned int msg_length;
-    pro_message_length(s, msg, &msg_length);
+    pro_list_length(s, msg, &msg_length);
     
     pro_expr_list* match_list = pattern->value.list;
     for (unsigned int index = 0; index < msg_length; )
     {
         pro_ref arg;
-        pro_message_get(s, msg, index, &arg);
+        pro_list_get(s, msg, index, &arg);
         pro_expr* match = match_list->value;
         
         switch (pro_expr_get_type(match))

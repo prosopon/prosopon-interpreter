@@ -12,7 +12,7 @@ static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
     assert(pro_expr_get_type(t) == PRO_MESSAGE_EXPR_TYPE);
     
     pro_ref msg;
-    pro_message_create(s, &msg);
+    pro_list_create(s, &msg);
     
     for (pro_expr_list* list = t->value.list; list; list = list->next)
     {
@@ -34,7 +34,7 @@ static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
         }
         
         pro_ref new_msg = 0;
-        pro_message_append(s, msg, lookup, &new_msg);
+        pro_list_append(s, msg, lookup, &new_msg);
         pro_release(s, msg);
         pro_release(s, lookup);
 
