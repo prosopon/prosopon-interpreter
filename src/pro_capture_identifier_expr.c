@@ -2,7 +2,6 @@
 
 #include <assert.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 
 static pro_ref identifier_expr_eval(pro_state_ref s, pro_expr* t)
@@ -20,10 +19,12 @@ static void identifier_expr_print(pro_state_ref s,
     printf("<capture_identifier %s>\n", value);
 }
 
-static void string_expr_release(pro_expr* t)
+static void string_expr_release(pro_state_ref s, pro_expr* t)
 {
-    free(t->value.string);
-    free(t);
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    alloc(t->value.string, 0);
+    alloc(t, 0);
 }
 
 

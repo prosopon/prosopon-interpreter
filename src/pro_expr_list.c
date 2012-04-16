@@ -3,7 +3,6 @@
 
 #include <assert.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 
 #pragma mark Private
@@ -40,10 +39,14 @@ PRO_INTERNAL void pro_print_expr_list(pro_state_ref s, pro_expr_list* t, const c
 }
 
 
-PRO_INTERNAL pro_expr_list* pro_expr_list_create(
+PRO_INTERNAL pro_expr_list* pro_expr_list_create(pro_state_ref s, 
     pro_expr* value, pro_expr_list* next)
 {
-    pro_expr_list* t = malloc(sizeof(*t));
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    pro_expr_list* t = alloc(0, sizeof(*t));
+    if (!t) return 0;
+    
     t->value = value;
     t->next = next;
     return t;
@@ -60,8 +63,11 @@ PRO_INTERNAL pro_expr_list* pro_expr_list_join(pro_expr_list* o1, pro_expr_list*
 }
 
 
-PRO_INTERNAL void pro_release_expr_list(pro_expr_list* t)
+PRO_INTERNAL void pro_release_expr_list(pro_state_ref s, pro_expr_list* t)
 {
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    
     pro_expr_list* list = t;
     while (list) 
     {
@@ -69,10 +75,10 @@ PRO_INTERNAL void pro_release_expr_list(pro_expr_list* t)
         pro_expr* value = list->value;
         
         if (value)
-            pro_release_expr(value);
+            pro_release_expr(s, value);
         list = list->next;
         
-        free(old);
+        alloc(old, 0);
     }
 }
 

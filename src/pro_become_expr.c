@@ -2,7 +2,6 @@
 
 #include <assert.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 
 #pragma mark Private
@@ -29,11 +28,13 @@ static void become_expr_print(pro_state_ref s, const pro_expr* t, const char* en
     printf(">%s", end);
 }
 
-static void become_expr_release(pro_expr* t)
+static void become_expr_release(pro_state_ref s, pro_expr* t)
 {
-    pro_release_expr(t->value.binary.left);
-    pro_release_expr(t->value.binary.right);
-    free(t);
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    pro_release_expr(s, t->value.binary.left);
+    pro_release_expr(s, t->value.binary.right);
+    alloc(t, 0);
 }
 
 

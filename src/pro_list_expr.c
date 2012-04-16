@@ -31,10 +31,12 @@ static void list_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
     printf(">%s", end);
 }
 
-static void list_expr_release(pro_expr* t)
+static void list_expr_release(pro_state_ref s, pro_expr* t)
 {
-    pro_release_expr_list(t->value.list);
-    free(t);
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    pro_release_expr_list(s, t->value.list);
+    alloc(t, 0);
 }
 
 const pro_expr_type_info pro_list_expr_type_info = {

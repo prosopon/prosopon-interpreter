@@ -36,11 +36,13 @@ static void actor_expr_print(pro_state_ref s, const pro_expr* t, const char* end
     printf(">%s", end);
 }
 
-static void actor_expr_release(pro_expr* t)
+static void actor_expr_release(pro_state_ref s, pro_expr* t)
 {
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
     if (t->value.behavior)
-        pro_release_expr(t->value.behavior);
-    free(t);
+        pro_release_expr(s, t->value.behavior);
+    alloc(t, 0);
 }
 
 static void behavior(pro_state_ref s,

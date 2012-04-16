@@ -33,11 +33,11 @@ PRO_INTERNAL void pro_print_expr(pro_state_ref s, const pro_expr* t, const char*
 }
 
 
-PRO_INTERNAL void pro_release_expr(pro_expr* t)
+PRO_INTERNAL void pro_release_expr(pro_state_ref s, pro_expr* t)
 {
     assert(t);
     const pro_expr_type type = pro_expr_get_type(t);
-    pro_types[type]->release(t);
+    pro_types[type]->release(s, t);
 }
 
 

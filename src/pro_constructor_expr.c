@@ -68,11 +68,13 @@ static void constructor_expr_print(pro_state_ref s,
 }
 
 
-static void constructor_expr_release(pro_expr* t)
+static void constructor_expr_release(pro_state_ref s, pro_expr* t)
 {
-    free(t->value.constructor.identifier);
-    pro_release_expr_list(t->value.constructor.arguments);
-    free(t);
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    alloc(t->value.constructor.identifier, 0);
+    pro_release_expr_list(s, t->value.constructor.arguments);
+    alloc(t, 0);
 }
 
 const pro_expr_type_info pro_constructor_expr_type_info = {

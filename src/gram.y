@@ -96,7 +96,7 @@ program
       //  pro_print_expr(state, $1, "\n");
         pro_release(state, pro_eval_expr(state, $1));
         pro_run(state);
-        pro_release_expr($1);
+        pro_release_expr(state, $1);
     }
     ;
 
@@ -106,7 +106,7 @@ statements
         pro_alloc* alloc;
         pro_get_alloc(state, &alloc);
         
-        pro_expr_list* expr_list = pro_expr_list_create($2, 0);
+        pro_expr_list* expr_list = pro_expr_list_create(state, $2, 0);
         pro_expr* list = pro_list_expr_create(state, expr_list);
         $$ = pro_list_expr_join($1, list);
         
@@ -114,7 +114,7 @@ statements
     }
     | statement
     {
-        pro_expr_list* list = pro_expr_list_create($1, 0);
+        pro_expr_list* list = pro_expr_list_create(state, $1, 0);
         $$ = pro_list_expr_create(state, list);
     }
     ;
@@ -156,7 +156,7 @@ expression
         pro_alloc* alloc;
         pro_get_alloc(state, &alloc);
         
-        pro_expr_list* expr_list = pro_expr_list_create($2, 0);
+        pro_expr_list* expr_list = pro_expr_list_create(state, $2, 0);
         pro_expr* list = pro_list_expr_create(state, expr_list);
         $$ = pro_list_expr_join($1, list);
         
@@ -164,7 +164,7 @@ expression
     }
     | term
     {
-        pro_expr_list* list = pro_expr_list_create($1, 0);
+        pro_expr_list* list = pro_expr_list_create(state, $1, 0);
         $$ = pro_list_expr_create(state, list);
     }
     ;
@@ -244,7 +244,7 @@ value_list
         pro_alloc* alloc;
         pro_get_alloc(state, &alloc);
         
-        pro_expr_list* expr_list = pro_expr_list_create($2, 0);
+        pro_expr_list* expr_list = pro_expr_list_create(state, $2, 0);
         pro_expr* list = pro_list_expr_create(state, expr_list);
         $$ = pro_list_expr_join($1, list);
         
@@ -252,7 +252,7 @@ value_list
     }
     | value
     {
-        pro_expr_list* list = pro_expr_list_create($1, 0);
+        pro_expr_list* list = pro_expr_list_create(state, $1, 0);
         $$ = pro_list_expr_create(state, list);
     }
     ;
@@ -309,7 +309,7 @@ behavior
         pro_alloc* alloc;
         pro_get_alloc(state, &alloc);
         
-        pro_expr_list* expr_list = pro_expr_list_create($2, 0);
+        pro_expr_list* expr_list = pro_expr_list_create(state, $2, 0);
         pro_expr* list = pro_list_expr_create(state, expr_list);
         $$ = pro_list_expr_join($1, list);
         
@@ -317,7 +317,7 @@ behavior
     }
     | case
     {
-        pro_expr_list* list = pro_expr_list_create($1, 0);
+        pro_expr_list* list = pro_expr_list_create(state, $1, 0);
         $$ = pro_list_expr_create(state, list);
     }
     ;
@@ -347,7 +347,7 @@ argument_list
         pro_alloc* alloc;
         pro_get_alloc(state, &alloc);
         
-        pro_expr_list* expr_list = pro_expr_list_create($2, 0);
+        pro_expr_list* expr_list = pro_expr_list_create(state, $2, 0);
         pro_expr* list = pro_list_expr_create(state, expr_list);
         
         $$ = pro_list_expr_join($1, list);
@@ -356,7 +356,7 @@ argument_list
     }
     | argument
     {
-        pro_expr_list* list = pro_expr_list_create($1, 0);
+        pro_expr_list* list = pro_expr_list_create(state, $1, 0);
         $$ = pro_list_expr_create(state, list);
     }
     ;

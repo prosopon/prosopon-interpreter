@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 #include <assert.h>
-#include <stdlib.h>
 
 
 static pro_ref case_expr_eval(pro_state_ref s, pro_expr* t)
@@ -28,15 +27,18 @@ static void case_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 }
 
 
-static void case_expr_release(pro_expr* t)
+static void case_expr_release(pro_state_ref s, pro_expr* t)
 {
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+
     pro_expr* pattern = t->value.binary.left;
     pro_expr* body = t->value.binary.right;
     if (pattern)
-        pro_release_expr(pattern);
+        pro_release_expr(s, pattern);
     if (body)
-        pro_release_expr(body);
-    free(t);
+        pro_release_expr(s, body);
+    alloc(t, 0);
 }
 
 

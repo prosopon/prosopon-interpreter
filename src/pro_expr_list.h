@@ -15,7 +15,8 @@
  *
  * @returns The new list expression.
  */
-PRO_INTERNAL pro_expr_list* pro_expr_list_create(pro_expr* value, pro_expr_list* next);
+PRO_INTERNAL pro_expr_list* pro_expr_list_create(pro_state_ref s,
+    pro_expr* value, pro_expr_list* next);
 
 
 /**
@@ -36,6 +37,6 @@ PRO_INTERNAL void pro_print_expr_list(pro_state_ref, pro_expr_list*, const char*
 /**
  * Releases an expression list for collection.
  */
-PRO_INTERNAL void pro_release_expr_list(pro_expr_list*);
+PRO_INTERNAL void pro_release_expr_list(pro_state_ref, pro_expr_list*);
 
 #endif
