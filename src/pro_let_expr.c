@@ -10,7 +10,6 @@
 
 
 typedef struct {
-    pro_env_ref env;
     pro_expr* constructor_expr;
     pro_expr* actor_expr;
 } constructor_data;
@@ -54,14 +53,6 @@ static pro_ref contructor(pro_state_ref s, pro_ref arguments, pro_ref d)
     
     pro_expr* constructor_expr = data->constructor_expr;
     pro_expr* actor_expr = data->actor_expr;
-
-    // Create a new environment and make it current.
-    {
-        pro_env_ref env;
-        pro_env_create(s, data->env, &env);
-        pro_push_env(s, env);
-        pro_env_release(s, env);
-    }
     
     // bind all arguments in the new environment
     bind_arguments(s, constructor_expr->value.constructor.arguments, arguments);
@@ -71,9 +62,6 @@ static pro_ref contructor(pro_state_ref s, pro_ref arguments, pro_ref d)
     pro_behavior* behavior = pro_actor_expr_get_behavior(s, actor_expr, &ud);
     pro_actor_create(s, PRO_DEFAULT_ACTOR_TYPE, behavior, ud, &actor);
     pro_release(s, ud);
-    
-    // Restore the old environment.
-    pro_pop_env(s);
     
     return actor;
 }
@@ -105,8 +93,6 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_expr* t)
         pro_get_env(s, &env);
         cData->actor_expr = right;
         cData->constructor_expr = left;
-        cData->env = env;
-        //pro_env_release(s, env);
         
         pro_ref lookup;
         pro_constructor_create(s, contructor, ud, &lookup);
