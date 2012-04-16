@@ -12,7 +12,14 @@ static pro_ref become_expr_eval(pro_state_ref s, pro_expr* t)
     
     pro_expr* left = t->value.binary.left;
     pro_expr* right = t->value.binary.right;
-    pro_become(s, pro_eval_expr(s, left), pro_eval_expr(s, right));
+    
+    pro_ref left_result = pro_eval_expr(s, left);
+    pro_ref right_result = pro_eval_expr(s, right);
+    pro_become(s, left_result, right_result);
+
+    pro_release(s, left_result);
+    pro_release(s, right_result);
+    
     return PRO_EMPTY_REF;
 }
 
