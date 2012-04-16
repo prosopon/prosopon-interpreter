@@ -83,7 +83,7 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     pro_list_length(s, msg, &msg_length);
     
     pro_expr_list* match_list = pattern->value.list;
-    for (unsigned int index = 0; index < msg_length; )
+    for (unsigned int index = 0; index < msg_length; ++index)
     {
         pro_ref arg;
         pro_list_get(s, msg, index, &arg);
@@ -113,10 +113,10 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         }   break;
         }
         
-        ++index;
+        
         pro_release(s, arg);
         
-        if (!(match_list = match_list->next) && index != msg_length)
+        if (!(match_list = match_list->next) && (index + 1) != msg_length)
         {
             pro_pop_env(s);
             return 0;
