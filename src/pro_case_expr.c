@@ -66,6 +66,7 @@ PRO_INTERNAL pro_expr* pro_case_expr_create(pro_state_ref s,
 PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     pro_expr* t, pro_ref msg)
 {
+    // Setup the environment for matching.
     {
         pro_env_ref current_env, env;
         pro_get_env(s, &current_env);
@@ -86,8 +87,8 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     {
         pro_ref arg;
         pro_list_get(s, msg, index, &arg);
-        pro_expr* match = match_list->value;
         
+        pro_expr* match = match_list->value;
         switch (pro_expr_get_type(match))
         {
         case PRO_CAPTURE_IDENTIFIER_EXPR_TYPE:

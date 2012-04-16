@@ -55,6 +55,9 @@
 		89CE9C90151E238B00CE5511 /* test-pro_number_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89CE9C8E151E233E00CE5511 /* test-pro_number_expr.c */; };
 		89EDA0CA15212CD4004EE3FC /* test-pro_send_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89EDA0C815212CD4004EE3FC /* test-pro_send_expr.c */; };
 		89EDA0CD1521326F004EE3FC /* test-pro_become_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89EDA0CB1521326F004EE3FC /* test-pro_become_expr.c */; };
+		89FCC670153BCB1D006C6FFF /* pro_alloc.h in Headers */ = {isa = PBXBuildFile; fileRef = 89FCC66F153BCB1C006C6FFF /* pro_alloc.h */; };
+		89FCC672153BCB27006C6FFF /* pro_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 89FCC671153BCB26006C6FFF /* pro_alloc.c */; };
+		89FCC673153BCB27006C6FFF /* pro_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 89FCC671153BCB26006C6FFF /* pro_alloc.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -206,6 +209,8 @@
 		89E7FD4E151B8915009472C2 /* pro_actor_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = pro_actor_expr.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		89EDA0C815212CD4004EE3FC /* test-pro_send_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-pro_send_expr.c"; sourceTree = "<group>"; };
 		89EDA0CB1521326F004EE3FC /* test-pro_become_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-pro_become_expr.c"; sourceTree = "<group>"; };
+		89FCC66F153BCB1C006C6FFF /* pro_alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_alloc.h; sourceTree = "<group>"; };
+		89FCC671153BCB26006C6FFF /* pro_alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_alloc.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +329,8 @@
 				89E7FD4A151B865C009472C2 /* pro_constructor_expr.c */,
 				89E7FD4C151B88FD009472C2 /* pro_actor_expr.h */,
 				89E7FD4E151B8915009472C2 /* pro_actor_expr.c */,
+				89FCC66F153BCB1C006C6FFF /* pro_alloc.h */,
+				89FCC671153BCB26006C6FFF /* pro_alloc.c */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -345,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89AFC3841538AED50083E8E8 /* prosopon_interpreter.h in Headers */,
+				89FCC670153BCB1D006C6FFF /* pro_alloc.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +484,7 @@
 				89ABF6D4151C2AF500DE1A07 /* pro_actor_expr.c in Sources */,
 				8931DD83153203D800B974C7 /* pro_capture_identifier_expr.c in Sources */,
 				89AFC3811538AE520083E8E8 /* prosopon_interpreter.c in Sources */,
+				89FCC672153BCB27006C6FFF /* pro_alloc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +515,7 @@
 				89EDA0CA15212CD4004EE3FC /* test-pro_send_expr.c in Sources */,
 				89EDA0CD1521326F004EE3FC /* test-pro_become_expr.c in Sources */,
 				8931DD84153203D800B974C7 /* pro_capture_identifier_expr.c in Sources */,
+				89FCC673153BCB27006C6FFF /* pro_alloc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

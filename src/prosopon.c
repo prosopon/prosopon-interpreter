@@ -2,6 +2,8 @@
 
 #include "prosopon_interpreter.h"
 
+#include "pro_alloc.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -26,9 +28,13 @@ struct file_list
     const char* file;
 };
 
-static file_list* file_list_new(const char* file, file_list* next)
+static file_list* file_list_new(pro_state_ref s,
+    const char* file, file_list* next)
 {
-    file_list* l = malloc(sizeof(*l));
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+
+    file_list* l = alloc(0, sizeof(*l));
     if (!l) return 0;
     
     l->file = file;
@@ -130,7 +136,7 @@ static int process_args(cl_state* cl, pro_state_ref state, const char* arg)
         {
         case CL_STATE_FLAG_NONE:
         {
-            file_list* t = file_list_new(arg, 0);
+            file_list* t = file_list_new(state, arg, 0);
             if (!cl->files)
                 cl->files = t;
             else
@@ -148,19 +154,6 @@ static int process_args(cl_state* cl, pro_state_ref state, const char* arg)
         default: return -1;
         }
     }
-}
-
-
-// Based on lua_alloc 
-static void* simple_alloc(void* ptr, size_t nsize)
-{
-    if (0 == nsize)
-    {
-        free(ptr);
-        return 0;
-    }
-    else
-        return realloc(ptr, nsize);
 }
 
 
