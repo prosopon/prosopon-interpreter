@@ -162,6 +162,7 @@
 		8931DD81153203D700B974C7 /* pro_capture_identifier_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_capture_identifier_expr.c; sourceTree = "<group>"; };
 		8931DD82153203D700B974C7 /* pro_capture_identifier_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_capture_identifier_expr.h; sourceTree = "<group>"; };
 		89A2892015448D06006FE304 /* prosopon_interpreter_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prosopon_interpreter_config.h; sourceTree = "<group>"; };
+		89A2892215449229006FE304 /* boolean.pro */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = boolean.pro; sourceTree = "<group>"; };
 		89ABF6B4151C24E100DE1A07 /* pro_list_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = pro_list_expr.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		89ABF6B5151C24E100DE1A07 /* pro_list_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_list_expr.h; sourceTree = "<group>"; };
 		89ABF6BC151C29E500DE1A07 /* prosopon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = prosopon; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +242,7 @@
 		890024FF1512409A0012E749 = {
 			isa = PBXGroup;
 			children = (
+				89A2892215449229006FE304 /* boolean.pro */,
 				89CE9C74151D767B00CE5511 /* Makefile */,
 				89CE9C6B151D75B600CE5511 /* libcunit.1.dylib */,
 				89AFC3851538B9710083E8E8 /* prosopon-stdlib.xcodeproj */,

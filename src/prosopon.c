@@ -91,7 +91,8 @@ static int load_stdlib_library(pro_state_ref state, const char* path)
             if (strcmp (".pro", &(entry->d_name[len - 4])) == 0)
             {
                 snprintf(buffer, 1024, "%s/%s", path, entry->d_name);
-                process_file(state, buffer);
+                if (process_file(state, buffer))
+                    return -1;
             }
         }
     }
