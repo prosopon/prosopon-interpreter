@@ -103,14 +103,7 @@ program
 statements
     : statements statement
     {
-        pro_alloc* alloc;
-        pro_get_alloc(state, &alloc);
-        
-        pro_expr_list* expr_list = pro_expr_list_create(state, $2, 0);
-        pro_expr* list = pro_list_expr_create(state, expr_list);
-        $$ = pro_list_expr_join($1, list);
-        
-        alloc(list, 0);
+        pro_list_expr_append(state, $1, $2);
     }
     | statement
     {
@@ -153,14 +146,7 @@ definition
 expression
     : expression term
     {
-        pro_alloc* alloc;
-        pro_get_alloc(state, &alloc);
-        
-        pro_expr_list* expr_list = pro_expr_list_create(state, $2, 0);
-        pro_expr* list = pro_list_expr_create(state, expr_list);
-        $$ = pro_list_expr_join($1, list);
-        
-        alloc(list, 0);
+        pro_list_expr_append(state, $1, $2);
     }
     | term
     {
@@ -241,14 +227,7 @@ message
 value_list
     : value_list value
     {
-        pro_alloc* alloc;
-        pro_get_alloc(state, &alloc);
-        
-        pro_expr_list* expr_list = pro_expr_list_create(state, $2, 0);
-        pro_expr* list = pro_list_expr_create(state, expr_list);
-        $$ = pro_list_expr_join($1, list);
-        
-        alloc(list, 0);
+        pro_list_expr_append(state, $1, $2);
     }
     | value
     {
@@ -306,14 +285,7 @@ actor
 behavior
     : behavior case
     {
-        pro_alloc* alloc;
-        pro_get_alloc(state, &alloc);
-        
-        pro_expr_list* expr_list = pro_expr_list_create(state, $2, 0);
-        pro_expr* list = pro_list_expr_create(state, expr_list);
-        $$ = pro_list_expr_join($1, list);
-        
-        alloc(list, 0);
+        pro_list_expr_append(state, $1, $2);
     }
     | case
     {
@@ -344,15 +316,7 @@ case
 argument_list
     : argument_list argument
     {
-        pro_alloc* alloc;
-        pro_get_alloc(state, &alloc);
-        
-        pro_expr_list* expr_list = pro_expr_list_create(state, $2, 0);
-        pro_expr* list = pro_list_expr_create(state, expr_list);
-        
-        $$ = pro_list_expr_join($1, list);
-        
-        alloc(list, 0);
+        pro_list_expr_append(state, $1, $2);
     }
     | argument
     {

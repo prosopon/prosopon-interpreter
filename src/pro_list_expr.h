@@ -20,6 +20,8 @@ PRO_INTERNAL pro_expr* pro_list_expr_create(pro_state_ref s,
  */
 PRO_INTERNAL pro_expr* pro_list_expr_join(
     pro_expr* list1, pro_expr* list2);
-
+    
+PRO_INTERNAL pro_expr* pro_list_expr_append(pro_state_ref s,
+    pro_expr* expr, pro_expr* list);
 
 #endif
