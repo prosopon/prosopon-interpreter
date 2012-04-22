@@ -32,7 +32,7 @@ static void string_expr_release(pro_state_ref s, void* data)
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
     alloc(t->value.string, 0);
-    alloc(t, 0);
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
 

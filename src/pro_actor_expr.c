@@ -42,9 +42,7 @@ static void actor_expr_release(pro_state_ref s, void* data)
     if (t->value.behavior)
         pro_release(s, t->value.behavior);
         
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
-    alloc(t, 0);
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
 static void behavior(pro_state_ref s,

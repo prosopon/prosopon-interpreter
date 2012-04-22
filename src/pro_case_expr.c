@@ -30,16 +30,15 @@ static void case_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 static void case_expr_release(pro_state_ref s, void* data)
 {
     pro_expr* t = data;
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
-
+    
     pro_ref pattern = t->value.binary.left;
     pro_ref body = t->value.binary.right;
     if (pattern)
         pro_release(s, pattern);
     if (body)
         pro_release(s, body);
-    alloc(t, 0);
+        
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
 

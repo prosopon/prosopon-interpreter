@@ -39,11 +39,9 @@ static void send_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 static void send_expr_release(pro_state_ref s, void* data)
 {
     pro_expr* t = data;
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
     pro_release(s, t->value.binary.left);
     pro_release(s, t->value.binary.right);
-    alloc(t, 0);
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
 

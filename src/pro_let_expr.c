@@ -16,10 +16,8 @@ typedef struct {
 
 static void constructor_data_deconstructor(pro_state_ref s, void* data)
 {
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
-    
-    alloc(data, 0);
+    // TODO
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
 static void bind_arguments(pro_state_ref s, pro_expr_list* id_list, pro_ref values)
@@ -130,10 +128,7 @@ static void let_expr_release(pro_state_ref s, void* data)
     pro_expr* t = data;
     pro_release(s, t->value.binary.left);
     pro_release(s, t->value.binary.right);
-    
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
-    alloc(t, 0);
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
 

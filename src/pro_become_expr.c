@@ -40,12 +40,8 @@ static void become_expr_release(pro_state_ref s, void* data)
     pro_expr* t = data;
     pro_release(s, t->value.binary.left);
     pro_release(s, t->value.binary.right);
-    
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
-    alloc(t, 0);
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
-
 
 
 #pragma mark -

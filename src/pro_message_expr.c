@@ -61,11 +61,8 @@ static void message_expr_print(pro_state_ref s, const pro_expr* t, const char* e
 static void message_expr_release(pro_state_ref s, void* data)
 {
     pro_expr* t = data;
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
-
     pro_release_expr_list(s, t->value.list);
-    alloc(t, 0);
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
 

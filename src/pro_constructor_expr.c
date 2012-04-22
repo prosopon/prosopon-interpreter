@@ -75,7 +75,7 @@ static void constructor_expr_release(pro_state_ref s, void* data)
     pro_get_alloc(s, &alloc);
     alloc(t->value.constructor.identifier, 0);
     pro_release_expr_list(s, t->value.constructor.arguments);
-    alloc(t, 0);
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
 const pro_expr_type_info pro_constructor_expr_type_info = {

@@ -23,14 +23,6 @@ static void number_expr_print(pro_state_ref s, const pro_expr* t, const char* en
 }
 
 
-static void number_expr_release(pro_state_ref s, pro_expr* t)
-{
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
-    alloc(t, 0);
-}
-
-
 #pragma mark -
 #pragma mark Internal 
 
