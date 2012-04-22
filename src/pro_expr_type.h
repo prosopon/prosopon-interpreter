@@ -47,7 +47,7 @@ typedef void(pro_expr_print)(pro_state_ref,
  *
  * @param t This, the expression to release.
  */
-typedef void(pro_expr_release)(pro_state_ref, struct pro_expr* t);
+typedef void(pro_expr_release)(pro_state_ref, /*struct pro_expr*/void* t);
 
 
 /**

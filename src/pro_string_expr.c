@@ -22,8 +22,9 @@ static void string_expr_print(pro_state_ref s, const pro_expr* t, const char* en
     printf("<string %s>%s", value, end);
 }
 
-static void string_expr_release(pro_state_ref s, pro_expr* t)
+static void string_expr_release(pro_state_ref s, void* data)
 {
+    pro_expr* t = data;
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
     

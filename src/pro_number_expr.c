@@ -37,7 +37,7 @@ static void number_expr_release(pro_state_ref s, pro_expr* t)
 const pro_expr_type_info pro_number_expr_type_info = {
     .eval = number_expr_eval,
     .print = number_expr_print,
-    .release = number_expr_release
+    .release = PRO_DEFAULT_UD_DECONSTRUCTOR
 };
 
 

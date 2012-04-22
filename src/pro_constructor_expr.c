@@ -68,8 +68,9 @@ static void constructor_expr_print(pro_state_ref s,
 }
 
 
-static void constructor_expr_release(pro_state_ref s, pro_expr* t)
+static void constructor_expr_release(pro_state_ref s, void* data)
 {
+    pro_expr* t = data;
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
     alloc(t->value.constructor.identifier, 0);

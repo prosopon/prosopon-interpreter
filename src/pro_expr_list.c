@@ -79,7 +79,7 @@ PRO_INTERNAL void pro_release_expr_list(pro_state_ref s, pro_expr_list* t)
         pro_ref value = list->value;
         
         if (value)
-            pro_release_expr(s, value);
+            pro_release(s, value);
         list = list->next;
         
         alloc(old, 0);

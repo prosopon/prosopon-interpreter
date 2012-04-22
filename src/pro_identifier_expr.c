@@ -26,8 +26,9 @@ static void identifier_expr_print(pro_state_ref s,
     printf("<identifier %s>\n", value);
 }
 
-static void string_expr_release(pro_state_ref s, pro_expr* t)
+static void string_expr_release(pro_state_ref s, void* data)
 {
+    pro_expr* t = data;
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
     alloc(t->value.string, 0);

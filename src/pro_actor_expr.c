@@ -36,12 +36,14 @@ static void actor_expr_print(pro_state_ref s, const pro_expr* t, const char* end
     printf(">%s", end);
 }
 
-static void actor_expr_release(pro_state_ref s, pro_expr* t)
+static void actor_expr_release(pro_state_ref s, void* data)
 {
+    pro_expr* t = data;
+    if (t->value.behavior)
+        pro_release(s, t->value.behavior);
+        
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
-    if (t->value.behavior)
-        pro_release_expr(s, t->value.behavior);
     alloc(t, 0);
 }
 
@@ -77,7 +79,7 @@ static void behavior_deconstructor(pro_state_ref s, void* data)
     
     pro_expr** expr = data;
     
-   // pro_release_expr(*expr);
+   // pro_release(*expr);
     alloc(expr, 0);
 }
 
