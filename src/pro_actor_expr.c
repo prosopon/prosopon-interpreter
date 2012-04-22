@@ -28,7 +28,7 @@ static pro_ref actor_expr_eval(pro_state_ref s, pro_expr* t)
 static void actor_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
-    pro_expr* behavior =  t->value.behavior;
+    pro_ref behavior =  t->value.behavior;
     
     printf("<actor behavior:");
     if (behavior)
@@ -72,13 +72,9 @@ static void behavior(pro_state_ref s,
 
 static void behavior_deconstructor(pro_state_ref s, void* data)
 {
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
-    
-    pro_expr** expr = data;
-    
-   // pro_release(*expr);
-    alloc(expr, 0);
+    pro_ref expr = data;
+    pro_release(s, expr);
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
 
@@ -108,7 +104,8 @@ PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state_ref s,
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
     pro_ref behavior_expr = t->value.behavior;
-
+    pro_retain(s, behavior_expr);
+    
     pro_ud_create(s, sizeof(t), behavior_deconstructor, ud);
     
     pro_ref* expr_data;

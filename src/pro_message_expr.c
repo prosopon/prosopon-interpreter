@@ -78,12 +78,18 @@ const pro_expr_type_info pro_message_expr_type_info = {
 
 PRO_INTERNAL pro_ref pro_message_expr_create(pro_state_ref s,
     pro_ref list_ref)
-{
-    pro_expr* list;
-    pro_ud_write(s, list_ref, (void**)&list);
-    
+{    
     pro_expr* t;
     pro_ref ref = pro_expr_create(s, PRO_MESSAGE_EXPR_TYPE, &t);
-    t->value.list = list->value.list;
+    
+    if (list_ref)
+    {
+        pro_expr* list;
+        pro_ud_write(s, list_ref, (void**)&list);
+        t->value.list = list->value.list;
+    }
+    else
+        t->value.list = 0;
+        
     return ref;
 }

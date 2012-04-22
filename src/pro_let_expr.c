@@ -9,14 +9,17 @@
 
 
 typedef struct {
-    pro_expr* constructor_expr;
-    pro_expr* actor_expr;
+    pro_ref constructor_expr;
+    pro_ref actor_expr;
 } constructor_data;
 
 
 static void constructor_data_deconstructor(pro_state_ref s, void* data)
 {
-    // TODO
+    constructor_data* t = data;
+    
+    pro_release(s, t->actor_expr);
+    pro_release(s, t->constructor_expr);
     PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
@@ -50,8 +53,13 @@ static pro_ref contructor(pro_state_ref s, pro_ref arguments, pro_ref d)
     const constructor_data* data;
     pro_ud_read(s, d, (const void**)&data);
     
-    pro_expr* constructor_expr = data->constructor_expr;
-    pro_expr* actor_expr = data->actor_expr;
+    pro_ref constructor_ref = data->constructor_expr;
+    pro_ref actor_ref = data->actor_expr;
+    pro_expr* constructor_expr;
+    pro_expr* actor_expr;
+
+    pro_ud_write(s, constructor_ref, (void**)&constructor_expr);
+    pro_ud_write(s, actor_ref, (void**)&actor_expr);
     
     // bind all arguments in the new environment
     bind_arguments(s, constructor_expr->value.constructor.arguments, arguments);
@@ -92,8 +100,11 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_expr* t)
         pro_ref ud;
         pro_ud_create(s, sizeof(*cData), constructor_data_deconstructor, &ud);
         pro_ud_write(s, ud, (void**)&cData);
-        cData->actor_expr = right;
-        cData->constructor_expr = left;
+        
+        pro_retain(s, right_ref);
+        pro_retain(s, left_ref);
+        cData->actor_expr = right_ref;
+        cData->constructor_expr = left_ref;
         
         pro_ref lookup;
         pro_constructor_create(s, contructor, ud, &lookup);
