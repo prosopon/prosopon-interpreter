@@ -15,8 +15,8 @@ static void case_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_CASE_EXPR_TYPE);
     
-    pro_expr* pattern = t->value.binary.left;
-    pro_expr* body = t->value.binary.right;
+    pro_ref pattern = t->value.binary.left;
+    pro_ref body = t->value.binary.right;
     
     printf("<case pattern:");
     if (pattern)
@@ -52,14 +52,15 @@ const pro_expr_type_info pro_case_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_case_expr_create(pro_state_ref s,
-    pro_expr* pattern, pro_expr* body)
+PRO_INTERNAL pro_ref pro_case_expr_create(pro_state_ref s,
+    pro_ref pattern, pro_ref body)
 {
-    pro_expr* t = pro_expr_create(s, PRO_CASE_EXPR_TYPE);
+    pro_expr* t;
+    pro_ref ref = pro_expr_create(s, PRO_CASE_EXPR_TYPE, &t);
     if (!t) return 0;
     t->value.binary.left = pattern;
     t->value.binary.right = body;
-    return t;
+    return ref;
 }
 
 
@@ -76,8 +77,13 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         pro_env_release(s, env);
     }
     
-    pro_expr* body = t->value.binary.right;
-    pro_expr* pattern = t->value.binary.left;
+    pro_ref body_ref = t->value.binary.right;
+    pro_ref pattern_ref = t->value.binary.left;
+
+    pro_expr* body;
+    pro_expr* pattern;
+    pro_ud_write(s, body_ref, (void**)&body);
+    pro_ud_write(s, pattern_ref, (void**)&pattern);
 
     unsigned int msg_length;
     pro_list_length(s, msg, &msg_length);
@@ -88,7 +94,10 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         pro_ref arg;
         pro_list_get(s, msg, index, &arg);
         
-        pro_expr* match = match_list->value;
+        pro_ref match_ref = match_list->value;
+        pro_expr* match;
+        pro_ud_write(s, match_ref, (void**)&match);
+        
         switch (pro_expr_get_type(match))
         {
         case PRO_CAPTURE_IDENTIFIER_EXPR_TYPE:
@@ -97,9 +106,9 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         default:
         {
             pro_matching do_match;
-            pro_ref match_ref = pro_eval_expr(s, match);
-            pro_match(s, match_ref, arg, &do_match);
-            pro_release(s, match_ref);
+            pro_ref match_val = pro_eval_expr(s, match_ref);
+            pro_match(s, match_val, arg, &do_match);
+            pro_release(s, match_val);
             switch (do_match)
             {
             case PRO_MATCH_FAIL:
@@ -125,7 +134,7 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
     
     if (body)
     {
-        pro_ref out = pro_eval_expr(s, body);
+        pro_ref out = pro_eval_expr(s, body_ref);
         pro_release(s, out);
     }
     

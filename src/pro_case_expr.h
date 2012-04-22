@@ -11,8 +11,8 @@ extern const pro_expr_type_info pro_case_expr_type_info;
 
 
 
-PRO_INTERNAL pro_expr* pro_case_expr_create(pro_state_ref s,
-    pro_expr* pattern, pro_expr* body);
+PRO_INTERNAL pro_ref pro_case_expr_create(pro_state_ref s,
+    pro_ref pattern, pro_ref body);
 
 
 PRO_INTERNAL int pro_case_expr_match(pro_state_ref,

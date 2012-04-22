@@ -10,7 +10,7 @@
 extern const pro_expr_type_info pro_list_expr_type_info;
 
 
-PRO_INTERNAL pro_expr* pro_list_expr_create(pro_state_ref s,
+PRO_INTERNAL pro_ref pro_list_expr_create(pro_state_ref s,
     pro_expr_list* list);
 
 /**
@@ -21,7 +21,7 @@ PRO_INTERNAL pro_expr* pro_list_expr_create(pro_state_ref s,
 PRO_INTERNAL pro_expr* pro_list_expr_join(
     pro_expr* list1, pro_expr* list2);
     
-PRO_INTERNAL pro_expr* pro_list_expr_append(pro_state_ref s,
-    pro_expr* expr, pro_expr* list);
+PRO_INTERNAL pro_ref pro_list_expr_append(pro_state_ref s,
+     pro_ref expr_ref, pro_ref val_ref);
 
 #endif

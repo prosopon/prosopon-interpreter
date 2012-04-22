@@ -12,7 +12,7 @@
 static pro_ref actor_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
-    pro_expr* behavior_expr =  t->value.behavior;
+    pro_ref behavior_expr =  t->value.behavior;
     
     pro_behavior* behavior = 0;
     pro_ref ud = 0;
@@ -52,14 +52,19 @@ static void behavior(pro_state_ref s,
     pro_bind(s, t, "self"); // setup self
     pro_bind(s, msg, "msg"); // setup msg
 
-    pro_expr** behavior_expr;
+    pro_ref* behavior_expr;
     pro_ud_write(s, data, (void**)&behavior_expr);
     
-    pro_expr_list* case_list = (*behavior_expr)->value.list;
+    pro_expr* behavior_val;
+    pro_ud_write(s, *behavior_expr, (void**)&behavior_val);
+    
+    pro_expr_list* case_list = behavior_val->value.list;
     while (case_list)
     {
-        pro_expr* case_expr = case_list->value;
-        if (pro_case_expr_match(s, case_expr, msg) != 0)
+        pro_ref case_expr = case_list->value;
+        pro_expr* case_expr_data;
+        pro_ud_write(s, case_expr, (void**)&case_expr_data);
+        if (pro_case_expr_match(s, case_expr_data, msg) != 0)
             break;
         case_list = case_list->next;
     }
@@ -88,12 +93,13 @@ const pro_expr_type_info pro_actor_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_actor_expr_create(pro_state_ref s,
-    pro_expr* behavior)
+PRO_INTERNAL pro_ref pro_actor_expr_create(pro_state_ref s,
+    pro_ref behavior)
 {
-    pro_expr* t = pro_expr_create(s, PRO_ACTOR_EXPR_TYPE);
+    pro_expr* t;
+    pro_ref ref = pro_expr_create(s, PRO_ACTOR_EXPR_TYPE, &t);
     t->value.behavior = behavior;
-    return t;
+    return ref;
 }
 
 
@@ -101,13 +107,12 @@ PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state_ref s,
     pro_expr* t, pro_ref* ud)
 {
     assert(pro_expr_get_type(t) == PRO_ACTOR_EXPR_TYPE);
-    pro_expr* behavior_expr = t->value.behavior;
+    pro_ref behavior_expr = t->value.behavior;
 
     pro_ud_create(s, sizeof(t), behavior_deconstructor, ud);
     
-    void* ud_ptr;
-    pro_ud_write(s, *ud, &ud_ptr);
-    pro_expr** expr_data = ud_ptr;
+    pro_ref* expr_data;
+    pro_ud_write(s, *ud, (void**)&expr_data);
     *expr_data = behavior_expr;
     
     return behavior;

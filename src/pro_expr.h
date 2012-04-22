@@ -11,7 +11,7 @@ typedef struct pro_expr_list pro_expr_list;
 
 struct pro_expr_list
 {
-    pro_expr* value;
+    pro_ref value;
     pro_expr_list* next;
 };
 
@@ -27,8 +27,7 @@ struct pro_expr
         struct
         {
             char* identifier;
-            pro_expr* left;
-            pro_expr* right;
+            pro_ref left, right;
         } binary;
         struct
         {
@@ -36,7 +35,7 @@ struct pro_expr
             pro_expr_list* arguments;
         } constructor;
         pro_expr_list* list;
-        pro_expr* behavior;
+        pro_ref behavior;
     } value;
 };
 
@@ -44,12 +43,12 @@ struct pro_expr
 /**
  * @return A new exprssion of a given type.
  */
-PRO_INTERNAL pro_expr* pro_expr_create(pro_state_ref s, pro_expr_type type);
+PRO_INTERNAL pro_ref pro_expr_create(pro_state_ref s, pro_expr_type type, pro_expr** data);
 
 /**
  * Evaluates a given expression.
  */
-PRO_INTERNAL pro_ref pro_eval_expr(pro_state_ref, pro_expr*);
+PRO_INTERNAL pro_ref pro_eval_expr(pro_state_ref, pro_ref);
 
 /**
  * Prints a given expression
@@ -60,7 +59,7 @@ PRO_INTERNAL void pro_print_expr(pro_state_ref, const pro_expr* t,
 /**
  * Releases a given expression for memory collection.
  */
-PRO_INTERNAL void pro_release_expr(pro_state_ref, pro_expr* t);
+PRO_INTERNAL void pro_release_expr(pro_state_ref, pro_ref t);
 
 
 /**

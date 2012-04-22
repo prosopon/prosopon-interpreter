@@ -14,7 +14,7 @@ static pro_ref list_expr_eval(pro_state_ref s, pro_expr* t)
     pro_expr_list* list = t->value.list;
     while (list) 
     {
-        pro_expr* value = list->value;
+        pro_ref value = list->value;
         if (value)
             pro_release(s, pro_eval_expr(s, value));
         list = list->next;
@@ -46,12 +46,13 @@ const pro_expr_type_info pro_list_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_list_expr_create(pro_state_ref s,
+PRO_INTERNAL pro_ref pro_list_expr_create(pro_state_ref s,
     pro_expr_list* list)
 {
-    pro_expr* t = pro_expr_create(s, PRO_LIST_EXPR_TYPE);
+    pro_expr* t;
+    pro_ref ref = pro_expr_create(s, PRO_LIST_EXPR_TYPE, &t);
     t->value.list = list;
-    return t;
+    return ref;
 }
 
 
@@ -73,13 +74,14 @@ PRO_INTERNAL pro_expr* pro_list_expr_join(
 }
 
 
-PRO_INTERNAL pro_expr* pro_list_expr_append(pro_state_ref s,
-    pro_expr* expr, pro_expr* val)
+PRO_INTERNAL pro_ref pro_list_expr_append(pro_state_ref s,
+    pro_ref expr_ref, pro_ref val_ref)
 {
-    assert(expr);
+    pro_expr* expr;
+    pro_ud_write(s, expr_ref, (void**)&expr);
 
-    pro_expr_list_join(expr->value.list, pro_expr_list_create(s, val, 0));
-    return expr;
+    pro_expr_list_join(expr->value.list, pro_expr_list_create(s, val_ref, 0));
+    return expr_ref;
 }
 
 

@@ -16,7 +16,7 @@
  * @returns The new list expression.
  */
 PRO_INTERNAL pro_expr_list* pro_expr_list_create(pro_state_ref s,
-    pro_expr* value, pro_expr_list* next);
+    pro_ref expr, pro_expr_list* next);
 
 
 /**

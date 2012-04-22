@@ -70,7 +70,7 @@
 				"${DERIVED_FILES_DIR}/gram.tab.h",
 				"${DERIVED_FILES_DIR}/gram.tab.c",
 			);
-			script = "cd $DERIVED_FILES_DIR\n${DEVELOPER_BIN_DIR}/bison --debug -d ${INPUT_FILE_PATH}\n";
+			script = "cd $DERIVED_FILES_DIR\nbison -V\n${DEVELOPER_BIN_DIR}/bison --debug -d ${INPUT_FILE_PATH}\n";
 		};
 		89ABF6DE151C2E0D00DE1A07 /* PBXBuildRule */ = {
 			isa = PBXBuildRule;

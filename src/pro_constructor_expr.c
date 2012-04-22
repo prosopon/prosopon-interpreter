@@ -35,7 +35,7 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_expr* t)
 
     for (pro_expr_list* expr_arg = expr_arg_list; expr_arg; expr_arg = expr_arg->next)
     {
-        pro_expr* value = expr_arg->value;
+        pro_ref value = expr_arg->value;
         if (value)
         {
             pro_ref new_list = PRO_EMPTY_REF;
@@ -84,11 +84,15 @@ const pro_expr_type_info pro_constructor_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_constructor_expr_create(pro_state_ref s,
-    char* identifier, pro_expr* arguments)
+PRO_INTERNAL pro_ref pro_constructor_expr_create(pro_state_ref s,
+    char* identifier, pro_ref arguments_ref)
 {
-    pro_expr* t = pro_expr_create(s, PRO_CONSTRUCTOR_EXPR_TYPE);
+    pro_expr* t;
+    pro_ref ref = pro_expr_create(s, PRO_CONSTRUCTOR_EXPR_TYPE, &t);
     t->value.constructor.identifier = identifier;
+    
+    pro_expr* arguments;
+    pro_ud_write(s, arguments_ref, (void**)&arguments);
     t->value.constructor.arguments = arguments->value.list;
-    return t;
+    return ref;
 }

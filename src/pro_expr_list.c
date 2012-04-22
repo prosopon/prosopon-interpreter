@@ -29,7 +29,7 @@ PRO_INTERNAL void pro_print_expr_list(pro_state_ref s, pro_expr_list* t, const c
     pro_expr_list* list = t;
     while (list) 
     {
-        pro_expr* value = list->value;
+        pro_ref value = list->value;
         if (value)
             pro_print_expr(s, value, list->next ? ", " : "");
         list = list->next;
@@ -40,14 +40,18 @@ PRO_INTERNAL void pro_print_expr_list(pro_state_ref s, pro_expr_list* t, const c
 
 
 PRO_INTERNAL pro_expr_list* pro_expr_list_create(pro_state_ref s, 
-    pro_expr* value, pro_expr_list* next)
+    pro_ref expr, pro_expr_list* next)
 {
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
     pro_expr_list* t = alloc(0, sizeof(*t));
     if (!t) return 0;
     
-    t->value = value;
+    
+    pro_expr* expr_val;
+    pro_ud_write(s, expr, (void**)&expr_val);
+    
+    t->value = expr;
     t->next = next;
     return t;
 }
@@ -72,7 +76,7 @@ PRO_INTERNAL void pro_release_expr_list(pro_state_ref s, pro_expr_list* t)
     while (list) 
     {
         pro_expr_list* old = list;
-        pro_expr* value = list->value;
+        pro_ref value = list->value;
         
         if (value)
             pro_release_expr(s, value);

@@ -1,18 +1,18 @@
-%{
-#include "prosopon.h"
+%require "2.5"
 
-#include "pro_expr.h"
-#include "pro_expressions.h"
-#include "pro_expr_list.h"
+%code top {
+    #include "pro_expr.h"
+    #include "pro_expressions.h"
+    #include "pro_expr_list.h"
 
-#include <stdio.h>
+    #include <stdio.h>
 
 
-void yyerror(pro_state_ref, const char *p);
+    void yyerror(pro_state_ref, const char *p);
 
-extern int yydebug;
+    extern int yydebug;
+}
 
-%}
 
 %debug
 
@@ -20,14 +20,16 @@ extern int yydebug;
 %parse-param {pro_state_ref state} 
 %lex-param   {pro_state_ref state}
 
-
+%code requires {
+    #include "prosopon.h"
+}
 %union
 {
     int token;
     char* identifier;
     char* string;
     double number;
-    struct pro_expr* expr;
+    pro_ref expr;
 }
 
 %token <identifier> IDENTIFIER

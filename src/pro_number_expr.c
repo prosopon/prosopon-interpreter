@@ -41,9 +41,10 @@ const pro_expr_type_info pro_number_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_number_expr_create(pro_state_ref s, double value)
+PRO_INTERNAL pro_ref pro_number_expr_create(pro_state_ref s, double value)
 {
-    pro_expr* t = pro_expr_create(s, PRO_NUMBER_EXPR_TYPE);
+    pro_expr* t;
+    pro_ref ref = pro_expr_create(s, PRO_NUMBER_EXPR_TYPE, &t);
     t->value.number = value;
-    return t;
+    return ref;
 }

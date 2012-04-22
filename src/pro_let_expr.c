@@ -30,13 +30,15 @@ static void bind_arguments(pro_state_ref s, pro_expr_list* id_list, pro_ref valu
     pro_list_length(s, values, &len);
     for (unsigned int i = 0; i < len; ++i)
     {
-        pro_expr* value = list->value;
+        pro_ref value = list->value;
         pro_ref lookup;
         pro_list_get(s, values, i, &lookup);
         if (value)
         {
-            assert(pro_expr_get_type(value) == PRO_IDENTIFIER_EXPR_TYPE);
-            pro_bind(s, lookup, value->value.identifier);
+            pro_expr* val_expr;
+            pro_ud_write(s, value, (void**)&val_expr);
+            assert(pro_expr_get_type(val_expr) == PRO_IDENTIFIER_EXPR_TYPE);
+            pro_bind(s, lookup, val_expr->value.identifier);
         }
         pro_release(s, lookup);
         list = list->next;
@@ -70,16 +72,21 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
     
-    pro_expr* left = t->value.binary.left;
-    pro_expr* right = t->value.binary.right;
+    pro_ref left_ref = t->value.binary.left;
+    pro_ref right_ref = t->value.binary.right;
+    
+    pro_expr* left;
+    pro_expr* right;
+    pro_ud_write(s, left_ref, (void**)&left);
+    pro_ud_write(s, right_ref, (void**)&right);
     
     switch (pro_expr_get_type(left))
     {
     case PRO_IDENTIFIER_EXPR_TYPE:
     {
-        pro_ref right_ref = pro_eval_expr(s, right);
-        pro_bind(s, right_ref, left->value.identifier);
-        pro_release(s, right_ref);
+        pro_ref right_eval = pro_eval_expr(s, right_ref);
+        pro_bind(s, right_eval, left->value.identifier);
+        pro_release(s, right_eval);
     }   break;
     case PRO_CONSTRUCTOR_EXPR_TYPE:
     {
@@ -111,7 +118,7 @@ static void let_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 {
     assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
     pro_expr* identifier =  t->value.binary.left;
-    pro_expr* value = t->value.binary.right;
+    pro_ref value = t->value.binary.right;
     
     printf("<let identifier:");
     pro_print_expr(s, identifier, " ");
@@ -141,31 +148,13 @@ const pro_expr_type_info pro_let_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_let_expr_create(pro_state_ref s,
-    pro_expr* identifier, pro_expr* value)
+PRO_INTERNAL pro_ref pro_let_expr_create(pro_state_ref s,
+    pro_ref identifier, pro_ref value)
 {
-    pro_type identifier_type = pro_expr_get_type(identifier);
-    pro_type value_type = pro_expr_get_type(value);
-
-    switch (identifier_type)
-    {
-    case PRO_IDENTIFIER_EXPR_TYPE:
-        assert(
-            value_type == PRO_ACTOR_EXPR_TYPE ||
-            value_type == PRO_STRING_EXPR_TYPE ||
-            value_type == PRO_NUMBER_EXPR_TYPE ||
-            value_type == PRO_CONSTRUCTOR_EXPR_TYPE);
-        break;
-    case PRO_CONSTRUCTOR_EXPR_TYPE:
-        assert(value_type == PRO_ACTOR_EXPR_TYPE);
-        break;
-    default:
-        assert(0);
-        break;
-    }
     
-    pro_expr* t = pro_expr_create(s, PRO_LET_EXPR_TYPE);
+    pro_expr* t;
+    pro_ref ref = pro_expr_create(s, PRO_LET_EXPR_TYPE, &t);
     t->value.binary.left = identifier;
     t->value.binary.right = value;
-    return t;
+    return ref;
 }

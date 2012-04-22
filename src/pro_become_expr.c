@@ -10,8 +10,8 @@ static pro_ref become_expr_eval(pro_state_ref s, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_BECOME_EXPR_TYPE);
     
-    pro_expr* left = t->value.binary.left;
-    pro_expr* right = t->value.binary.right;
+    pro_ref left = t->value.binary.left;
+    pro_ref right = t->value.binary.right;
     
     pro_ref left_result = pro_eval_expr(s, left);
     pro_ref right_result = pro_eval_expr(s, right);
@@ -25,8 +25,8 @@ static pro_ref become_expr_eval(pro_state_ref s, pro_expr* t)
 
 static void become_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 {
-    pro_expr* left = t->value.binary.left;
-    pro_expr* right = t->value.binary.right;
+    pro_ref left = t->value.binary.left;
+    pro_ref right = t->value.binary.right;
 
     printf("<Become id:");
     pro_print_expr(s, left, " ");
@@ -56,11 +56,12 @@ const pro_expr_type_info pro_become_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_become_expr_create(pro_state_ref s,
-    pro_expr* identifier, pro_expr* value)
+PRO_INTERNAL pro_ref pro_become_expr_create(pro_state_ref s,
+    pro_ref identifier, pro_ref value)
 {
-    pro_expr* t = pro_expr_create(s, PRO_BECOME_EXPR_TYPE);
+    pro_expr* t;
+    pro_ref ref = pro_expr_create(s, PRO_BECOME_EXPR_TYPE, &t);
     t->value.binary.left = identifier;
     t->value.binary.right = value;
-    return t;
+    return ref;
 }

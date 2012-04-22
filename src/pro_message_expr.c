@@ -16,7 +16,10 @@ static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
     
     for (pro_expr_list* list = t->value.list; list; list = list->next)
     {
-        pro_expr* value = list->value;
+        pro_ref value_ref = list->value;
+        pro_expr* value;
+        pro_ud_write(s, value_ref, (void **)&value);
+        
         pro_ref lookup = 0;
         
         switch (pro_expr_get_type(value))
@@ -29,7 +32,7 @@ static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
             pro_env_release(s, env);
         }   break;
         default:
-            lookup = pro_eval_expr(s, value);
+            lookup = pro_eval_expr(s, value_ref);
             break;
         }
         
@@ -75,10 +78,14 @@ const pro_expr_type_info pro_message_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_expr* pro_message_expr_create(pro_state_ref s,
-    pro_expr* list)
+PRO_INTERNAL pro_ref pro_message_expr_create(pro_state_ref s,
+    pro_ref list_ref)
 {
-    pro_expr* t = pro_expr_create(s, PRO_MESSAGE_EXPR_TYPE);
+    pro_expr* list;
+    pro_ud_write(s, list_ref, (void**)&list);
+    
+    pro_expr* t;
+    pro_ref ref = pro_expr_create(s, PRO_MESSAGE_EXPR_TYPE, &t);
     t->value.list = list->value.list;
-    return t;
+    return ref;
 }
