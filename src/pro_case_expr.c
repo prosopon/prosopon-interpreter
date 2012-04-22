@@ -82,8 +82,15 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
 
     pro_expr* body;
     pro_expr* pattern;
-    pro_ud_write(s, body_ref, (void**)&body);
-    pro_ud_write(s, pattern_ref, (void**)&pattern);
+    if (body_ref)
+        pro_ud_write(s, body_ref, (void**)&body);
+    else
+        body = 0;
+    
+    if (pattern_ref)
+        pro_ud_write(s, pattern_ref, (void**)&pattern);
+    else
+        pattern = 0;
 
     unsigned int msg_length;
     pro_list_length(s, msg, &msg_length);
