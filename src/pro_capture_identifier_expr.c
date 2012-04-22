@@ -1,6 +1,7 @@
 #include "pro_capture_identifier_expr.h"
 
 #include "prosopon_actor_type.h"
+#include "prosopon_macros.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -18,27 +19,16 @@ static pro_matching capture_identifier_match(pro_state_ref s,
 }
 
 pro_actor_type_info capture_identifier_type = {
-    .match = capture_identifier_match
+    .match = capture_identifier_match,
+    .to_string = 0
 };
 
 static pro_ref identifier_expr_eval(pro_state_ref s, pro_expr* t)
 {    
     pro_register_actor_type(s, "interpreter.capture_identifier_type", &capture_identifier_type);
-    
-    const char* identifier = t->value.identifier;
-    
-    pro_ref ud;
-    size_t size = identifier ? sizeof(*identifier) * (strlen(identifier) + 1) : 0;
-    pro_ud_create(s, size, PRO_DEFAULT_UD_DECONSTRUCTOR, &ud);
-    
-    if (identifier)
-    {
-        void* ud_ptr;
-        pro_ud_write(s, ud, &ud_ptr);
-        strcpy(ud_ptr, identifier);
-    }
         
     pro_ref actor;
+    pro_ref ud = pro_string_ud_create(s, t->value.identifier);
     pro_actor_create(s, "interpreter.capture_identifier_type", 0, ud, &actor);
     pro_release(s, ud);
     
@@ -54,12 +44,12 @@ static void identifier_expr_print(pro_state_ref s,
     printf("<capture_identifier %s>\n", value);
 }
 
-static void string_expr_release(pro_state_ref s, void* data)
+static void identifier_expr_release(pro_state_ref s, void* data)
 {
     pro_expr* t = data;
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
-    alloc(t->value.string, 0);
+    alloc(t->value.identifier, 0);
     alloc(t, 0);
 }
 
@@ -70,7 +60,7 @@ static void string_expr_release(pro_state_ref s, void* data)
 const pro_expr_type_info pro_capture_identifier_expr_type_info = {
     .eval = identifier_expr_eval,
     .print = identifier_expr_print,
-    .release = string_expr_release
+    .release = identifier_expr_release
 };
 
 
