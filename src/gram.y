@@ -215,11 +215,10 @@ message
     | /* non empty message */
     MESSAGE_START value_list MESSAGE_END
     {
+        $$ = pro_message_expr_create(state, $2);
+        
         pro_alloc* alloc;
         pro_get_alloc(state, &alloc);
-        
-        $$ = pro_message_expr_create(state, $2->value.list);
-        
         alloc($2, 0);
     }
     ;
@@ -257,7 +256,7 @@ constructor
     | /* non empty constructor */
     IDENTIFIER CONSTRUCTOR_START value_list CONSTRUCTOR_END
     {
-        $$ = pro_constructor_expr_create(state, $1, $3->value.list);
+        $$ = pro_constructor_expr_create(state, $1, $3);
         
         pro_alloc* alloc;
         pro_get_alloc(state, &alloc);
