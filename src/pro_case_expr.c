@@ -99,30 +99,20 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         pro_expr* match;
         pro_ud_write(s, match_ref, (void**)&match);
         
-        switch (pro_expr_get_type(match))
+        pro_matching do_match;
+        pro_ref match_val = pro_eval_expr(s, match_ref);
+        pro_match(s, match_val, arg, &do_match);
+        pro_release(s, match_val);
+        switch (do_match)
         {
-        case PRO_CAPTURE_IDENTIFIER_EXPR_TYPE:
-            pro_bind(s, arg, match->value.identifier);
-            break;
-        default:
-        {
-            pro_matching do_match;
-            pro_ref match_val = pro_eval_expr(s, match_ref);
-            pro_match(s, match_val, arg, &do_match);
-            pro_release(s, match_val);
-            switch (do_match)
-            {
-            case PRO_MATCH_FAIL:
-                pro_release(s, arg);
-                pro_pop_env(s);
-                return 0;
-            case PRO_MATCH_CONTINUE:
-                pro_release(s, arg);
-                continue;
-            }
-        }   break;
+        case PRO_MATCH_FAIL:
+            pro_release(s, arg);
+            pro_pop_env(s);
+            return 0;
+        case PRO_MATCH_CONTINUE:
+            pro_release(s, arg);
+            continue;
         }
-        
         
         pro_release(s, arg);
         

@@ -38,10 +38,11 @@ static void become_expr_print(pro_state_ref s, const pro_expr* t, const char* en
 static void become_expr_release(pro_state_ref s, void* data)
 {
     pro_expr* t = data;
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
     pro_release(s, t->value.binary.left);
     pro_release(s, t->value.binary.right);
+    
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
     alloc(t, 0);
 }
 

@@ -90,13 +90,10 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_expr* t)
     }   break;
     case PRO_CONSTRUCTOR_EXPR_TYPE:
     {
-        constructor_data* cData = 0;
+        constructor_data* cData;
         pro_ref ud;
         pro_ud_create(s, sizeof(*cData), constructor_data_deconstructor, &ud);
         pro_ud_write(s, ud, (void**)&cData);
-        
-        pro_env_ref env;
-        pro_get_env(s, &env);
         cData->actor_expr = right;
         cData->constructor_expr = left;
         
@@ -131,10 +128,11 @@ static void let_expr_print(pro_state_ref s, const pro_expr* t, const char* end)
 static void let_expr_release(pro_state_ref s, void* data)
 {
     pro_expr* t = data;
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
     pro_release(s, t->value.binary.left);
     pro_release(s, t->value.binary.right);
+    
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
     alloc(t, 0);
 }
 

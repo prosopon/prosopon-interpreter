@@ -56,7 +56,6 @@ PRO_INTERNAL pro_ref pro_eval_expr(pro_state_ref, pro_ref);
 PRO_INTERNAL void pro_print_expr(pro_state_ref, const pro_expr* t,
     const char* end);
 
-
 /**
  * @returns The type identifier of a given expression.
  */

@@ -1,13 +1,48 @@
 #include "pro_capture_identifier_expr.h"
 
+#include "prosopon_actor_type.h"
+
 #include <assert.h>
 #include <stdio.h>
+#include <string.h>
 
+
+static pro_matching capture_identifier_match(pro_state_ref s,
+    pro_ref t, pro_ref tData,
+    pro_ref o, pro_ref oData)
+{
+    char* identifier;
+    pro_ud_read(s, tData, (const void**)&identifier);
+    pro_bind(s, o, identifier);
+    return PRO_MATCH_SUCCEED;
+}
+
+pro_actor_type_info capture_identifier_type = {
+    .match = capture_identifier_match
+};
 
 static pro_ref identifier_expr_eval(pro_state_ref s, pro_expr* t)
-{
-    assert(0);
-    return PRO_EMPTY_REF;
+{    
+    pro_register_actor_type(s, "interpreter.capture_identifier_type", &capture_identifier_type);
+    
+    const char* identifier = t->value.identifier;
+    
+    pro_ref ud;
+    size_t size = identifier ? sizeof(*identifier) * (strlen(identifier) + 1) : 0;
+    pro_ud_create(s, size, PRO_DEFAULT_UD_DECONSTRUCTOR, &ud);
+    
+    if (identifier)
+    {
+        void* ud_ptr;
+        pro_ud_write(s, ud, &ud_ptr);
+        strcpy(ud_ptr, identifier);
+    }
+        
+    pro_ref actor;
+    pro_actor_create(s, "interpreter.capture_identifier_type", 0, ud, &actor);
+    pro_release(s, ud);
+    
+    return actor;
 }
 
 static void identifier_expr_print(pro_state_ref s,
