@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8931DD83153203D800B974C7 /* pro_capture_identifier_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 8931DD81153203D700B974C7 /* pro_capture_identifier_expr.c */; };
 		8931DD84153203D800B974C7 /* pro_capture_identifier_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 8931DD81153203D700B974C7 /* pro_capture_identifier_expr.c */; };
+		89A2892115448D06006FE304 /* prosopon_interpreter_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 89A2892015448D06006FE304 /* prosopon_interpreter_config.h */; };
 		89ABF6C6151C2AF500DE1A07 /* prosopon.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC74151241E600F78EB0 /* prosopon.c */; };
 		89ABF6C7151C2AF500DE1A07 /* pro_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FCB81512457A00F78EB0 /* pro_expr.c */; };
 		89ABF6C8151C2AF500DE1A07 /* pro_become_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5B151241E600F78EB0 /* pro_become_expr.c */; };
@@ -160,6 +161,7 @@
 /* Begin PBXFileReference section */
 		8931DD81153203D700B974C7 /* pro_capture_identifier_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_capture_identifier_expr.c; sourceTree = "<group>"; };
 		8931DD82153203D700B974C7 /* pro_capture_identifier_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_capture_identifier_expr.h; sourceTree = "<group>"; };
+		89A2892015448D06006FE304 /* prosopon_interpreter_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prosopon_interpreter_config.h; sourceTree = "<group>"; };
 		89ABF6B4151C24E100DE1A07 /* pro_list_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = pro_list_expr.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		89ABF6B5151C24E100DE1A07 /* pro_list_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_list_expr.h; sourceTree = "<group>"; };
 		89ABF6BC151C29E500DE1A07 /* prosopon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = prosopon; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				89AFC37F1538ABEC0083E8E8 /* prosopon_interpreter.h */,
+				89A2892015448D06006FE304 /* prosopon_interpreter_config.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 			files = (
 				89AFC3841538AED50083E8E8 /* prosopon_interpreter.h in Headers */,
 				89FCC670153BCB1D006C6FFF /* pro_alloc.h in Headers */,
+				89A2892115448D06006FE304 /* prosopon_interpreter_config.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

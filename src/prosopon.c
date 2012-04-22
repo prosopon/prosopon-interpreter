@@ -1,12 +1,14 @@
 #include "prosopon.h"
 
 #include "prosopon_interpreter.h"
+#include "prosopon_interpreter_config.h"
 
 #include "pro_alloc.h"
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <dirent.h>
 
 
 extern FILE* yyin;
@@ -58,6 +60,14 @@ struct cl_state
 /**
  *
  */
+static int process_file(pro_state_ref state, const char* arg)
+{
+    return pro_eval(state, arg);
+}
+
+/**
+ *
+ */
 static int process_library(pro_state_ref state, const char* file)
 {
     if (pro_library_load(state, file) == PRO_OK)
@@ -65,14 +75,32 @@ static int process_library(pro_state_ref state, const char* file)
     return 1;
 }
 
-
-/**
- *
- */
-static int process_file(pro_state_ref state, const char* arg)
+static int load_stdlib_library(pro_state_ref state, const char* path)
 {
-    return pro_eval(state, arg);
+    DIR* dir = opendir(path);
+    if (!dir)
+        return -1;
+        
+    char buffer[1024];
+    
+    for (struct dirent* entry; (entry = readdir(dir)); )
+    {
+        size_t len = strlen(entry->d_name);
+        if (len >= 4)
+        {
+            if (strcmp (".pro", &(entry->d_name[len - 4])) == 0)
+            {
+                snprintf(buffer, 1024, "%s/%s", path, entry->d_name);
+                process_file(state, buffer);
+            }
+        }
+    }
+
+    closedir(dir);
+    return 0;
 }
+
+
 
 
 /**
@@ -193,11 +221,14 @@ int main(int argc, char** argv)
     }
     
     // load standard library
-    // //"/Users/mattbierner/Projects/prosopon/prosopon-stdlib/libprosopon-stdlib.so.1") != 0)
-
     if (cl.load_standard_library)
-        if (process_library(state, "/Users/mattbierner/Projects/prosopon/build/Debug/libprosopon-stdlib.dylib"))
+    {
+        if (process_library(state, PRO_STDLIB_PATH))
             return 0;
+        
+        if (load_stdlib_library(state, PRO_STDLIB_PRO_PATH))
+            return 0;
+    }
     
     // load libraries
     file_list* libraries = cl.libraries;
