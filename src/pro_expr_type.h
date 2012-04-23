@@ -31,7 +31,7 @@ typedef enum
 /**
  * A function that evaluates an expression. 
  */
-typedef pro_ref(pro_expr_eval)(pro_state_ref, pro_ref, struct pro_expr*);
+typedef pro_ref(pro_expr_eval)(pro_state_ref, pro_ref, struct pro_expr* t);
 
 /**
  * Print out the human readable representation of an expression.
@@ -43,13 +43,21 @@ typedef void(pro_expr_print)(pro_state_ref,
     const struct pro_expr* t, const char* end);
 
 /**
+ * Release an expression for memory collection.
+ *
+ * @param t This, the expression to release.
+ */
+typedef void(pro_expr_release)(pro_state_ref, void* t);
+
+
+/**
  * A structure to hold information on a given type.
  */
 typedef struct 
 {
     pro_expr_eval* const eval;
     pro_expr_print* const print;
-    pro_ud_deconstructor* release;
+    pro_expr_release* const release;
 } pro_expr_type_info;
 
 
