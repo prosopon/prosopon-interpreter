@@ -147,7 +147,13 @@ static int process_args(cl_state* cl, pro_interpreter_state* state, const char* 
  */
 int main(int argc, char** argv)
 {
-    pro_interpreter_state* istate = pro_interpreter_state_create(simple_alloc);
+    // create pro_state for execution
+    pro_state_ref state;
+    if (pro_state_create(simple_alloc, &state) != PRO_OK)
+        return 0;
+    
+    // create interpreter state
+    pro_interpreter_state* istate = pro_interpreter_state_create(state);
     
     cl_state cl = {
         .load_standard_library = 1

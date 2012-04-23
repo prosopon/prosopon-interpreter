@@ -5,7 +5,6 @@
 
 struct pro_interpreter_state
 {
-    pro_alloc* alloc;
     pro_state_ref state;
     struct 
     {

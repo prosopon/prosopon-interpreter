@@ -11,18 +11,15 @@ extern FILE* yyin;
 extern int yyparse(pro_state_ref);
 
 
-PRO_INTERPRETER pro_interpreter_state* pro_interpreter_state_create(pro_alloc* alloc)
+PRO_INTERPRETER pro_interpreter_state* pro_interpreter_state_create(pro_state_ref s)
 {
+    pro_alloc* alloc;
+    pro_get_alloc(s, &alloc);
+    
     pro_interpreter_state* t = alloc(0, sizeof(*t));
     memset(t, 0, sizeof(*t));
-    t->alloc = alloc;
     
-    // process command line arguments
-    pro_state_ref state;
-    if (pro_state_create(alloc, &state) != PRO_OK)
-        return 0;
-    
-    t->state = state;
+    t->state = s;
     
     return t;
 }
@@ -30,9 +27,7 @@ PRO_INTERPRETER pro_interpreter_state* pro_interpreter_state_create(pro_alloc* a
 PRO_INTERPRETER void pro_interpreter_state_release(pro_interpreter_state* t)
 {
     pro_alloc* alloc = pro_interpreter_state_get_alloc(t);
-
     pro_state_release(t->state);
-    
     alloc(t, 0);
 }
 
@@ -43,29 +38,29 @@ PRO_INTERPRETER pro_alloc* pro_interpreter_state_get_alloc(pro_interpreter_state
     return alloc;
 }
 
-
-PRO_INTERPRETER void pro_interpreter_state_set_debug(
-    pro_interpreter_state* t, int val)
+PRO_INTERPRETER 
+void pro_interpreter_state_set_debug(pro_interpreter_state* t, int val)
 {
     t->flags.debug = val;
 }
 
-PRO_INTERPRETER void pro_interpreter_state_set_yacc_debug(
-    pro_interpreter_state* t, int val)
+PRO_INTERPRETER
+void pro_interpreter_state_set_yacc_debug(pro_interpreter_state* t, int val)
 {
     yydebug = val;
     t->flags.yacc_debug = val;
 }
 
-PRO_INTERPRETER void pro_interpreter_state_set_flex_debug(
-    pro_interpreter_state* t, int val)
+PRO_INTERPRETER
+void pro_interpreter_state_set_flex_debug(pro_interpreter_state* t, int val)
 {
     yy_flex_debug = val;
     t->flags.flex_debug = val;
 }
 
 
-PRO_INTERPRETER int pro_eval(pro_interpreter_state* istate, const char* file)
+PRO_INTERPRETER
+int pro_eval(pro_interpreter_state* istate, const char* file)
 {
     if ((yyin = fopen(file, "r")))
     {
@@ -78,7 +73,8 @@ PRO_INTERPRETER int pro_eval(pro_interpreter_state* istate, const char* file)
 }
 
 
-PRO_INTERPRETER int (pro_process_library) (pro_interpreter_state* istate, const char* file)
+PRO_INTERPRETER
+int (pro_process_library) (pro_interpreter_state* istate, const char* file)
 {
     if (pro_library_load(istate->state, file) == PRO_OK)
         return 0;
@@ -86,7 +82,8 @@ PRO_INTERPRETER int (pro_process_library) (pro_interpreter_state* istate, const 
 }
 
 
-PRO_INTERPRETER int (load_stdlib_library) (pro_interpreter_state* istate, const char* path)
+PRO_INTERPRETER
+int (load_stdlib_library) (pro_interpreter_state* istate, const char* path)
 {
     DIR* dir = opendir(path);
     if (!dir)
