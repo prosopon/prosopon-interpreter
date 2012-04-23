@@ -1,6 +1,6 @@
 #include "prosopon.h"
-
 #include "prosopon_interpreter.h"
+
 #include "prosopon_interpreter_config.h"
 
 #include "pro_alloc.h"
@@ -8,13 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <dirent.h>
 
-
-extern FILE* yyin;
-extern int yyparse(pro_state_ref);
-extern int yydebug;
-extern int yy_flex_debug;
 
 typedef enum
 {
@@ -30,11 +24,10 @@ struct file_list
     const char* file;
 };
 
-static file_list* file_list_new(pro_state_ref s,
+static file_list* file_list_new(pro_interpreter_state* s,
     const char* file, file_list* next)
 {
-    pro_alloc* alloc;
-    pro_get_alloc(s, &alloc);
+    pro_alloc* alloc = pro_interpreter_state_get_alloc(s);
 
     file_list* l = alloc(0, sizeof(*l));
     if (!l) return 0;
@@ -60,54 +53,7 @@ struct cl_state
 /**
  *
  */
-static int process_file(pro_state_ref state, const char* arg)
-{
-    return pro_eval(state, arg);
-}
-
-/**
- *
- */
-static int process_library(pro_state_ref state, const char* file)
-{
-    if (pro_library_load(state, file) == PRO_OK)
-        return 0;
-    return 1;
-}
-
-static int load_stdlib_library(pro_state_ref state, const char* path)
-{
-    DIR* dir = opendir(path);
-    if (!dir)
-        return -1;
-        
-    char buffer[1024];
-    
-    for (struct dirent* entry; (entry = readdir(dir)); )
-    {
-        size_t len = strlen(entry->d_name);
-        if (len >= 4)
-        {
-            if (strcmp (".pro", &(entry->d_name[len - 4])) == 0)
-            {
-                snprintf(buffer, 1024, "%s/%s", path, entry->d_name);
-                if (process_file(state, buffer))
-                    return -1;
-            }
-        }
-    }
-
-    closedir(dir);
-    return 0;
-}
-
-
-
-
-/**
- *
- */
-static int process_flag(cl_state* cl, pro_state_ref state, const char* flag, size_t len)
+static int process_flag(cl_state* cl, pro_interpreter_state* istate, const char* flag, size_t len)
 {
     if (len == 0)
         return -1;
@@ -125,12 +71,12 @@ static int process_flag(cl_state* cl, pro_state_ref state, const char* flag, siz
     {
         if (strcmp(flag, "yydebug") == 0)
         {
-            yydebug = 1;
+            pro_interpreter_state_set_yacc_debug(istate, 1);
             return 0;
         }
         else if (strcmp(flag, "yy_flex_debug") == 0)
         {
-            yy_flex_debug = 1;
+            pro_interpreter_state_set_flex_debug(istate, 1);
             return 0;
         }
         else if (strcmp(flag, "no_std") == 0)
@@ -150,7 +96,7 @@ static int process_flag(cl_state* cl, pro_state_ref state, const char* flag, siz
  * Arguments beginning with '-' are processed as flags.
  * Everything else is processed depending on the current state. 
  */
-static int process_args(cl_state* cl, pro_state_ref state, const char* arg)
+static int process_args(cl_state* cl, pro_interpreter_state* state, const char* arg)
 {
     size_t len = strlen(arg);
     if (len == 0)
@@ -179,7 +125,7 @@ static int process_args(cl_state* cl, pro_state_ref state, const char* arg)
         }   break;
         case LOAD_LIBRARY_CL_STATE_FLAG:
             cl->flag = CL_STATE_FLAG_NONE;
-            return process_library(state, arg);
+            return pro_process_library(state, arg);
         default: return -1;
         }
     }
@@ -201,22 +147,21 @@ static int process_args(cl_state* cl, pro_state_ref state, const char* arg)
  */
 int main(int argc, char** argv)
 {
+    pro_interpreter_state* istate = pro_interpreter_state_create(simple_alloc);
+    
     cl_state cl = {
         .load_standard_library = 1
     };
  
     // set default options
-    yydebug = 0;
-    yy_flex_debug = 0;
+    pro_interpreter_state_set_debug(istate, 0);
+    pro_interpreter_state_set_yacc_debug(istate, 0);
+    pro_interpreter_state_set_flex_debug(istate, 0);
     
-    // process command line arguments
-    pro_state_ref state;
-    if (pro_state_create(simple_alloc, &state) != PRO_OK)
-        return 0;
-    
+    // process arguments
     for (unsigned int i = 1; i < argc; ++i)
     {
-        int status = process_args(&cl, state, argv[i]);
+        int status = process_args(&cl, istate, argv[i]);
         if (status != 0)
             return -1;
     }
@@ -224,10 +169,9 @@ int main(int argc, char** argv)
     // load standard library
     if (cl.load_standard_library)
     {
-        if (process_library(state, PRO_STDLIB_PATH))
+        if (pro_process_library(istate, PRO_STDLIB_PATH))
             return 0;
-        
-        if (load_stdlib_library(state, PRO_STDLIB_PRO_PATH))
+        if (load_stdlib_library(istate, PRO_STDLIB_PRO_PATH))
             return 0;
     }
     
@@ -236,7 +180,7 @@ int main(int argc, char** argv)
     for (const char* library = 0; library && (library = libraries->file); )
     {
         file_list* next = libraries->next;
-        int status = process_library(state, library);
+        int status = pro_process_library(istate, library);
         simple_alloc(libraries, 0);
         if (status != 0)
             return -1;
@@ -249,7 +193,7 @@ int main(int argc, char** argv)
     for (const char* file = 0; files && (file = files->file); )
     {
         file_list* next = files->next;
-        int status = process_file(state, file);
+        int status = pro_eval(istate, file);
         simple_alloc(files, 0);
         if (status != 0)
             return -1;
@@ -257,6 +201,9 @@ int main(int argc, char** argv)
         files = next;
     }
     
-    pro_state_release(state);
+    pro_interpreter_state_release(istate);
+    
     return 0;
 }
+
+
