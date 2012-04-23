@@ -74,7 +74,7 @@ static pro_ref contructor(pro_state_ref s, pro_ref arguments, pro_ref d)
 }
 
 
-static pro_ref let_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref let_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_LET_EXPR_TYPE);
     

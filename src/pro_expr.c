@@ -22,7 +22,7 @@ PRO_INTERNAL pro_ref pro_eval_expr(pro_state_ref s, pro_ref ref)
     pro_ud_write(s, ref, (void**)&t);
     
     const pro_expr_type type = pro_expr_get_type(t);
-    return pro_types[type]->eval(s, t);
+    return pro_types[type]->eval(s, ref, t);
 }
 
 

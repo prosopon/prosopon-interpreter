@@ -1,13 +1,14 @@
 #include "pro_message_expr.h"
 
 #include "pro_expr_list.h"
+#include "prosopon_macros.h"
 
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
 
 
-static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref message_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_MESSAGE_EXPR_TYPE);
     
@@ -17,24 +18,33 @@ static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
     for (pro_expr_list* list = t->value.list; list; list = list->next)
     {
         pro_ref value_ref = list->value;
-        pro_expr* value;
-        pro_ud_write(s, value_ref, (void **)&value);
-        
         pro_ref lookup = 0;
+
+        if (pro_match_type(s, value_ref, PRO_UD_TYPE))
+        {
+            pro_expr* value;
+            pro_ud_write(s, value_ref, (void **)&value);
         
-        switch (pro_expr_get_type(value))
-        {
-        case PRO_IDENTIFIER_EXPR_TYPE:
-        {
-            pro_env_ref env;
-            pro_get_env(s, &env);
-            pro_get_binding(s, env, value->value.identifier, &lookup);
-            pro_env_release(s, env);
-        }   break;
-        default:
-            lookup = pro_eval_expr(s, value_ref);
-            break;
+            switch (pro_expr_get_type(value))
+            {
+            case PRO_IDENTIFIER_EXPR_TYPE:
+            {
+                pro_env_ref env;
+                pro_get_env(s, &env);
+                pro_get_binding(s, env, value->value.identifier, &lookup);
+                pro_env_release(s, env);
+            }   break;
+            default:
+                lookup = pro_eval_expr(s, value_ref);
+                break;
+            }
         }
+        else
+        {
+            pro_retain(s, value_ref);
+            lookup = value_ref;
+        }
+
         
         pro_ref new_msg = 0;
         pro_list_append(s, msg, lookup, &new_msg);
@@ -43,6 +53,7 @@ static pro_ref message_expr_eval(pro_state_ref s, pro_expr* t)
 
         msg = new_msg;
     }
+    
     return msg;
 }
 

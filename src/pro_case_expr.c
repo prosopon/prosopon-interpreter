@@ -1,10 +1,12 @@
 #include "pro_case_expr.h"
 
+#include "prosopon_macros.h"
+
 #include <stdio.h>
 #include <assert.h>
 
 
-static pro_ref case_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref case_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
 {
     assert(0);
     return PRO_EMPTY_REF;
@@ -102,11 +104,16 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         pro_list_get(s, msg, index, &arg);
         
         pro_ref match_ref = match_list->value;
-        pro_expr* match;
-        pro_ud_write(s, match_ref, (void**)&match);
-        
+        pro_ref match_val;
+        if (pro_match_type(s, match_ref, PRO_UD_TYPE))
+            match_val = pro_eval_expr(s, match_ref);
+        else
+        {
+            pro_retain(s, match_ref);
+            match_val = match_ref;
+        }
+            
         pro_matching do_match;
-        pro_ref match_val = pro_eval_expr(s, match_ref);
         pro_match(s, match_val, arg, &do_match);
         pro_release(s, match_val);
         switch (do_match)

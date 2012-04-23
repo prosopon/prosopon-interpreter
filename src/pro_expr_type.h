@@ -31,7 +31,7 @@ typedef enum
 /**
  * A function that evaluates an expression. 
  */
-typedef pro_ref(pro_expr_eval)(pro_state_ref, struct pro_expr* t);
+typedef pro_ref(pro_expr_eval)(pro_state_ref, pro_ref, struct pro_expr*);
 
 /**
  * Print out the human readable representation of an expression.

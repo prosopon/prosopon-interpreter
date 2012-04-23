@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 
-static pro_ref constructor_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref constructor_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_CONSTRUCTOR_EXPR_TYPE);
     
@@ -48,13 +48,13 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_expr* t)
     }
     
     // Call the constructor
-    pro_ref ref;
-    pro_constructor_call(s, constructor, arg_list, &ref);
+    pro_ref out;
+    pro_constructor_call(s, constructor, arg_list, &out);
     pro_release(s, constructor);
     
     pro_release(s, arg_list);
     
-    return ref;
+    return out;
 }
 
 static void constructor_expr_print(pro_state_ref s,

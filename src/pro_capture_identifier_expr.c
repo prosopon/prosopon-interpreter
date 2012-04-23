@@ -23,7 +23,7 @@ pro_actor_type_info capture_identifier_type = {
     .to_string = 0
 };
 
-static pro_ref identifier_expr_eval(pro_state_ref s, pro_expr* t)
+static pro_ref identifier_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
 {    
     pro_register_actor_type(s, "interpreter.capture_identifier_type", &capture_identifier_type);
         

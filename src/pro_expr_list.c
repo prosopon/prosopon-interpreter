@@ -47,10 +47,6 @@ PRO_INTERNAL pro_expr_list* pro_expr_list_create(pro_state_ref s,
     pro_expr_list* t = alloc(0, sizeof(*t));
     if (!t) return 0;
     
-    
-    pro_expr* expr_val;
-    pro_ud_write(s, expr, (void**)&expr_val);
-    
     t->value = expr;
     t->next = next;
     return t;
