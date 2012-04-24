@@ -149,7 +149,6 @@ static void let_expr_release(pro_state_ref s, void* data)
 const pro_expr_type_info pro_let_expr_type_info = {
     .eval = let_expr_eval,
     .print = let_expr_print,
-    .release = let_expr_release
 };
 
 
@@ -158,7 +157,7 @@ PRO_INTERNAL pro_ref pro_let_expr_create(pro_state_ref s,
 {
     
     pro_expr* t;
-    pro_ref ref = pro_expr_create(s, PRO_LET_EXPR_TYPE, &t);
+    pro_ref ref = pro_expr_create(s, PRO_LET_EXPR_TYPE, let_expr_release, &t);
     t->value.binary.left = identifier;
     t->value.binary.right = value;
     return ref;

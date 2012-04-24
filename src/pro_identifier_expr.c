@@ -26,12 +26,12 @@ static void identifier_expr_print(pro_state_ref s,
     printf("<identifier %s>\n", value);
 }
 
-static void string_expr_release(pro_state_ref s, void* data)
+static void identifier_expr_release(pro_state_ref s, void* data)
 {
     pro_expr* t = data;
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
-    alloc(t->value.string, 0);
+    alloc(t->value.identifier, 0);
     PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
@@ -42,7 +42,6 @@ static void string_expr_release(pro_state_ref s, void* data)
 const pro_expr_type_info pro_identifier_expr_type_info = {
     .eval = identifier_expr_eval,
     .print = identifier_expr_print,
-    .release = string_expr_release
 };
 
 
@@ -50,7 +49,8 @@ PRO_INTERNAL pro_ref pro_identifier_expr_create(pro_state_ref s,
     char* value)
 {
     pro_expr* t;
-    pro_ref ref = pro_expr_create(s, PRO_IDENTIFIER_EXPR_TYPE, &t);
+    pro_ref ref = pro_expr_create(s, PRO_IDENTIFIER_EXPR_TYPE,
+        identifier_expr_release, &t);
     t->value.identifier = value;
     return ref;
 }

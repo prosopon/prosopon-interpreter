@@ -60,7 +60,6 @@ static void identifier_expr_release(pro_state_ref s, void* data)
 const pro_expr_type_info pro_capture_identifier_expr_type_info = {
     .eval = identifier_expr_eval,
     .print = identifier_expr_print,
-    .release = identifier_expr_release
 };
 
 
@@ -68,7 +67,8 @@ PRO_INTERNAL pro_ref pro_capture_identifier_expr_create(pro_state_ref s,
     char* value)
 {
     pro_expr* t;
-    pro_ref ref = pro_expr_create(s, PRO_CAPTURE_IDENTIFIER_EXPR_TYPE, &t);
+    pro_ref ref = pro_expr_create(s, PRO_CAPTURE_IDENTIFIER_EXPR_TYPE,
+        identifier_expr_release, &t);
     t->value.identifier = value;
     return ref;
 }

@@ -83,7 +83,6 @@ static void message_expr_release(pro_state_ref s, void* data)
 const pro_expr_type_info pro_message_expr_type_info = {
     .eval = message_expr_eval,
     .print = message_expr_print,
-    .release = message_expr_release
 };
 
 
@@ -91,7 +90,7 @@ PRO_INTERNAL pro_ref pro_message_expr_create(pro_state_ref s,
     pro_ref list_ref)
 {    
     pro_expr* t;
-    pro_ref ref = pro_expr_create(s, PRO_MESSAGE_EXPR_TYPE, &t);
+    pro_ref ref = pro_expr_create(s, PRO_MESSAGE_EXPR_TYPE, message_expr_release, &t);
     
     if (list_ref)
     {

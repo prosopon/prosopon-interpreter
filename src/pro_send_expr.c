@@ -51,7 +51,6 @@ static void send_expr_release(pro_state_ref s, void* data)
 const pro_expr_type_info pro_send_expr_type_info = {
     .eval = send_expr_eval,
     .print = send_expr_print,
-    .release = send_expr_release
 };
 
 
@@ -59,7 +58,7 @@ PRO_INTERNAL pro_ref pro_send_expr_create(pro_state_ref s,
     pro_ref identifier, pro_ref msg)
 {
     pro_expr* t;
-    pro_ref ref = pro_expr_create(s, PRO_SEND_EXPR_TYPE, &t);
+    pro_ref ref = pro_expr_create(s, PRO_SEND_EXPR_TYPE, send_expr_release, &t);
     t->value.binary.left = identifier;
     t->value.binary.right = msg;
     return ref;

@@ -81,7 +81,6 @@ static void constructor_expr_release(pro_state_ref s, void* data)
 const pro_expr_type_info pro_constructor_expr_type_info = {
     .eval = constructor_expr_eval,
     .print = constructor_expr_print,
-    .release = constructor_expr_release
 };
 
 
@@ -89,7 +88,7 @@ PRO_INTERNAL pro_ref pro_constructor_expr_create(pro_state_ref s,
     char* identifier, pro_ref arguments_ref)
 {
     pro_expr* t;
-    pro_ref ref = pro_expr_create(s, PRO_CONSTRUCTOR_EXPR_TYPE, &t);
+    pro_ref ref = pro_expr_create(s, PRO_CONSTRUCTOR_EXPR_TYPE, constructor_expr_release, &t);
     t->value.constructor.identifier = identifier;
     
     pro_expr* arguments;

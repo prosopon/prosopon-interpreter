@@ -391,8 +391,8 @@
 				89E7FD4E151B8915009472C2 /* pro_actor_expr.c */,
 				89FCC66F153BCB1C006C6FFF /* pro_alloc.h */,
 				89FCC671153BCB26006C6FFF /* pro_alloc.c */,
-				89A2897115450BDE006FE304 /* pro_expr_type.c */,
 				89A2897315450BF0006FE304 /* pro_expr_type.h */,
+				89A2897115450BDE006FE304 /* pro_expr_type.c */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -666,6 +666,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -702,7 +703,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

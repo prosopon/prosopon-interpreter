@@ -5,10 +5,11 @@
 #include <stdio.h>
 
 
-PRO_INTERNAL pro_ref pro_expr_create(pro_state_ref s, pro_expr_type type, pro_expr** data)
+PRO_INTERNAL pro_ref pro_expr_create(pro_state_ref s,
+    pro_expr_type type, pro_ud_deconstructor* dec, pro_expr** data)
 {
     pro_ref ref;
-    pro_ud_create(s, sizeof(pro_expr), pro_types[type]->release, &ref);
+    pro_ud_create(s, sizeof(pro_expr), dec, &ref);
     
     pro_ud_write(s, ref, (void**)data);
     (*data)->type = type;

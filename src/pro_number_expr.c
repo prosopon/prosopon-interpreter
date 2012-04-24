@@ -31,7 +31,6 @@ static void number_expr_print(pro_state_ref s, const pro_expr* t, const char* en
 const pro_expr_type_info pro_number_expr_type_info = {
     .eval = number_expr_eval,
     .print = number_expr_print,
-    .release = PRO_DEFAULT_UD_DECONSTRUCTOR
 };
 
 

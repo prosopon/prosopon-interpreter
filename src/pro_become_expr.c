@@ -50,7 +50,6 @@ static void become_expr_release(pro_state_ref s, void* data)
 const pro_expr_type_info pro_become_expr_type_info = {
     .eval = become_expr_eval,
     .print = become_expr_print,
-    .release = become_expr_release
 };
 
 
@@ -58,7 +57,7 @@ PRO_INTERNAL pro_ref pro_become_expr_create(pro_state_ref s,
     pro_ref identifier, pro_ref value)
 {
     pro_expr* t;
-    pro_ref ref = pro_expr_create(s, PRO_BECOME_EXPR_TYPE, &t);
+    pro_ref ref = pro_expr_create(s, PRO_BECOME_EXPR_TYPE, become_expr_release, &t);
     t->value.binary.left = identifier;
     t->value.binary.right = value;
     return ref;

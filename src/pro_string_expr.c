@@ -39,14 +39,13 @@ static void string_expr_release(pro_state_ref s, void* data)
 const pro_expr_type_info pro_string_expr_type_info = {
     .eval = string_expr_eval,
     .print = string_expr_print,
-    .release = string_expr_release
 };
 
 
 PRO_INTERNAL pro_ref pro_string_expr_create(pro_state_ref s, char* value)
 {
     pro_expr* t;
-    pro_ref ref = pro_expr_create(s, PRO_STRING_EXPR_TYPE, &t);
+    pro_ref ref = pro_expr_create(s, PRO_STRING_EXPR_TYPE, string_expr_release, &t);
     t->value.string = value;
     return ref;
 }

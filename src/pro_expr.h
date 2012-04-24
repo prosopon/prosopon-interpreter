@@ -43,7 +43,8 @@ struct pro_expr
 /**
  * @return A new exprssion of a given type.
  */
-PRO_INTERNAL pro_ref pro_expr_create(pro_state_ref s, pro_expr_type type, pro_expr** data);
+PRO_INTERNAL pro_ref pro_expr_create(pro_state_ref s,
+    pro_expr_type type, pro_ud_deconstructor*, pro_expr** data);
 
 /**
  * Evaluates a given expression.

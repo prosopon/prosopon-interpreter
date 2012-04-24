@@ -50,7 +50,6 @@ static void case_expr_release(pro_state_ref s, void* data)
 const pro_expr_type_info pro_case_expr_type_info = {
     .eval = case_expr_eval,
     .print = case_expr_print,
-    .release = case_expr_release
 };
 
 
@@ -58,7 +57,7 @@ PRO_INTERNAL pro_ref pro_case_expr_create(pro_state_ref s,
     pro_ref pattern, pro_ref body)
 {
     pro_expr* t;
-    pro_ref ref = pro_expr_create(s, PRO_CASE_EXPR_TYPE, &t);
+    pro_ref ref = pro_expr_create(s, PRO_CASE_EXPR_TYPE, case_expr_release, &t);
     if (!t) return 0;
     t->value.binary.left = pattern;
     t->value.binary.right = body;
