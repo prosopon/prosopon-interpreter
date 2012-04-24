@@ -3,6 +3,8 @@
 #include "pro_expr.h"
 #include "pro_expr_list.h"
 
+#include "prosopon_macros.h"
+
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,12 +40,9 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
         pro_ref value = expr_arg->value;
         if (value)
         {
-            pro_ref new_list = PRO_EMPTY_REF;
             pro_ref lookup = pro_eval_expr(s, value);
-            pro_list_append(s, arg_list, lookup, &new_list);
+            pro_list_append_inplace(s, &arg_list, lookup);
             pro_release(s, lookup);
-            pro_release(s, arg_list);
-            arg_list = new_list;
         }
     }
     

@@ -45,13 +45,8 @@ static pro_ref message_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
             lookup = value_ref;
         }
 
-        
-        pro_ref new_msg = 0;
-        pro_list_append(s, msg, lookup, &new_msg);
-        pro_release(s, msg);
+        pro_list_append_inplace(s, &msg, lookup);
         pro_release(s, lookup);
-
-        msg = new_msg;
     }
     
     return msg;

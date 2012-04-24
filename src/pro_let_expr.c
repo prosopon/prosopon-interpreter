@@ -82,9 +82,7 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
     pro_ref right_ref = t->value.binary.right;
     
     pro_expr* left;
-    pro_expr* right;
     pro_ud_write(s, left_ref, (void**)&left);
-    pro_ud_write(s, right_ref, (void**)&right);
     
     switch (pro_expr_get_type(left))
     {
@@ -116,6 +114,7 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
         assert(0);
         break;
     }
+    
     return PRO_EMPTY_REF;
 }
 
@@ -155,7 +154,6 @@ const pro_expr_type_info pro_let_expr_type_info = {
 PRO_INTERNAL pro_ref pro_let_expr_create(pro_state_ref s,
     pro_ref identifier, pro_ref value)
 {
-    
     pro_expr* t;
     pro_ref ref = pro_expr_create(s, PRO_LET_EXPR_TYPE, let_expr_release, &t);
     t->value.binary.left = identifier;
