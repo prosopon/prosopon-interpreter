@@ -55,16 +55,19 @@ static pro_ref contructor(pro_state_ref s, pro_ref arguments, pro_ref d)
     
     pro_ref constructor_ref = data->constructor_expr;
     pro_ref actor_ref = data->actor_expr;
-    pro_expr* constructor_expr;
-    pro_expr* actor_expr;
-
-    pro_ud_write(s, constructor_ref, (void**)&constructor_expr);
-    pro_ud_write(s, actor_ref, (void**)&actor_expr);
     
-    // bind all arguments in the new environment
+    // get the constructor expression
+    const pro_expr* constructor_expr;
+    pro_ud_read(s, constructor_ref, (const void**)&constructor_expr);
+    
+    // bind all arguments in the environment
     bind_arguments(s, constructor_expr->value.constructor.arguments, arguments);
     
-    // Create a new actor in the new environment.
+    // get the actor expression
+    const pro_expr* actor_expr;
+    pro_ud_read(s, actor_ref, (const void**)&actor_expr);
+    
+    // create a new actor in the new environment.
     pro_ref ud;
     pro_behavior* behavior = pro_actor_expr_get_behavior(s, actor_expr, &ud);
     pro_actor_create(s, PRO_DEFAULT_ACTOR_TYPE, behavior, ud, &actor);
@@ -81,8 +84,8 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
     pro_ref left_ref = t->value.binary.left;
     pro_ref right_ref = t->value.binary.right;
     
-    pro_expr* left;
-    pro_ud_write(s, left_ref, (void**)&left);
+    const pro_expr* left;
+    pro_ud_read(s, left_ref, (const void**)&left);
     
     switch (pro_expr_get_type(left))
     {
