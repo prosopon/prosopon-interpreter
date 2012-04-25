@@ -163,7 +163,7 @@
 		89CE9C51151D747200CE5511 /* test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
 		89CE9C57151D74B100CE5511 /* test-expressions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "test-expressions.h"; sourceTree = "<group>"; };
 		89CE9C59151D74F900CE5511 /* test-pro_let_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-pro_let_expr.c"; sourceTree = "<group>"; };
-		89CE9C5F151D751800CE5511 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
+		89CE9C5F151D751800CE5511 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = test; path = "prosopon-interpreter-tests"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89CE9C6B151D75B600CE5511 /* libcunit.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcunit.1.dylib; path = ../../../../../usr/local/lib/libcunit.1.dylib; sourceTree = "<group>"; };
 		89CE9C74151D767B00CE5511 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		89CE9C85151E1A6800CE5511 /* test-expressions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-expressions.c"; sourceTree = "<group>"; };
@@ -435,7 +435,8 @@
 		8944F78A154783350054A366 /* test */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
-			path = test;
+			name = test;
+			path = "prosopon-tests";
 			remoteRef = 8944F789154783350054A366 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
