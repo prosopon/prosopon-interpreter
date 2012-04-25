@@ -1,5 +1,7 @@
 #include "pro_interpreter_state.h"
 
+#include "pro_expressions.h"
+
 #include <string.h>
 #include <stdio.h>
 #include <dirent.h>
@@ -20,6 +22,7 @@ PRO_INTERPRETER pro_interpreter_state* pro_interpreter_state_create(pro_state_re
     memset(t, 0, sizeof(*t));
     
     t->state = s;
+    pro_register_expr_types(s);
     
     return t;
 }

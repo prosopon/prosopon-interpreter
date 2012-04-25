@@ -20,18 +20,21 @@ static pro_matching capture_identifier_match(pro_state_ref s,
     return PRO_MATCH_SUCCEED;
 }
 
-pro_actor_type_info capture_identifier_type = {
+const pro_actor_type_info pro_capture_identifier_type_info = {
     .match = capture_identifier_match,
     .to_string = 0
 };
 
+pro_actor_type pro_capture_identifier_type =
+    "interpreter.capture_identifier_type";
+
+
 static pro_ref identifier_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
 {    
-    pro_register_actor_type(s, "interpreter.capture_identifier_type", &capture_identifier_type);
         
     pro_ref actor;
     pro_ref ud = pro_string_ud_create(s, t->value.identifier);
-    pro_actor_create(s, "interpreter.capture_identifier_type", 0, ud, &actor);
+    pro_actor_create(s, pro_capture_identifier_type, 0, ud, &actor);
     pro_release(s, ud);
     
     return actor;
@@ -52,7 +55,7 @@ static void identifier_expr_release(pro_state_ref s, void* data)
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
     alloc(t->value.identifier, 0);
-    alloc(t, 0);
+    PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
 

@@ -1,6 +1,9 @@
 #ifndef prosopon_pro_expressions_h
 #define prosopon_pro_expressions_h
 
+#include <prosopon/prosopon.h>
+
+
 /**
  * Includes for all expression headers.
  */
@@ -18,5 +21,7 @@
 #include "pro_actor_expr.h"
 #include "pro_constructor_expr.h"
 
+
+PRO_INTERNAL void pro_register_expr_types(pro_state_ref);
 
 #endif

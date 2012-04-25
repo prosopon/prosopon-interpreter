@@ -218,7 +218,7 @@ message
     MESSAGE_START value_list MESSAGE_END
     {
         $$ = pro_message_expr_create(state, $2);
-        pro_release(state, $2);
+        pro_release(state, $2); // TODO, fix hack
     }
     ;
     

@@ -10,6 +10,8 @@
 		8931DD84153203D800B974C7 /* pro_capture_identifier_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 8931DD81153203D700B974C7 /* pro_capture_identifier_expr.c */; };
 		8944F793154785090054A366 /* libprosopon-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8944F788154783350054A366 /* libprosopon-core.dylib */; };
 		8944F7A3154785810054A366 /* libprosopon-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8944F788154783350054A366 /* libprosopon-core.dylib */; };
+		895790E21548C29300F9EF6D /* pro_expressions.c in Sources */ = {isa = PBXBuildFile; fileRef = 895790E11548C29300F9EF6D /* pro_expressions.c */; };
+		895790E31548C29300F9EF6D /* pro_expressions.c in Sources */ = {isa = PBXBuildFile; fileRef = 895790E11548C29300F9EF6D /* pro_expressions.c */; };
 		89A289411544EFEB006FE304 /* pro_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FCB81512457A00F78EB0 /* pro_expr.c */; };
 		89A289431544EFEB006FE304 /* pro_become_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5B151241E600F78EB0 /* pro_become_expr.c */; };
 		89A289441544EFEB006FE304 /* pro_expr_list.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5D151241E600F78EB0 /* pro_expr_list.c */; };
@@ -150,6 +152,7 @@
 		8931DD81153203D700B974C7 /* pro_capture_identifier_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_capture_identifier_expr.c; sourceTree = "<group>"; };
 		8931DD82153203D700B974C7 /* pro_capture_identifier_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_capture_identifier_expr.h; sourceTree = "<group>"; };
 		8944F782154783340054A366 /* prosopon-core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "prosopon-core.xcodeproj"; path = "../prosopon-core/prosopon-core.xcodeproj"; sourceTree = "<group>"; };
+		895790E11548C29300F9EF6D /* pro_expressions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_expressions.c; sourceTree = "<group>"; };
 		89A2892015448D06006FE304 /* prosopon_interpreter_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prosopon_interpreter_config.h; sourceTree = "<group>"; };
 		89A289341544EF55006FE304 /* libprosopon-interpreter.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libprosopon-interpreter.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A289561544F15E006FE304 /* pro_interpreter_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_interpreter_state.h; sourceTree = "<group>"; };
@@ -299,6 +302,7 @@
 				89D1FCB91512457A00F78EB0 /* pro_expr.h */,
 				89D1FCB81512457A00F78EB0 /* pro_expr.c */,
 				89D1FC61151241E600F78EB0 /* pro_expressions.h */,
+				895790E11548C29300F9EF6D /* pro_expressions.c */,
 				89D1FC5C151241E600F78EB0 /* pro_become_expr.h */,
 				89D1FC5B151241E600F78EB0 /* pro_become_expr.c */,
 				89D1FC5E151241E600F78EB0 /* pro_expr_list.h */,
@@ -472,6 +476,7 @@
 				89A2894F1544EFEB006FE304 /* pro_actor_expr.c in Sources */,
 				89A289591544F30A006FE304 /* pro_interpreter_state.c in Sources */,
 				89A2897215450BDE006FE304 /* pro_expr_type.c in Sources */,
+				895790E21548C29300F9EF6D /* pro_expressions.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +506,7 @@
 				89EDA0CA15212CD4004EE3FC /* test-pro_send_expr.c in Sources */,
 				89EDA0CD1521326F004EE3FC /* test-pro_become_expr.c in Sources */,
 				8931DD84153203D800B974C7 /* pro_capture_identifier_expr.c in Sources */,
+				895790E31548C29300F9EF6D /* pro_expressions.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
