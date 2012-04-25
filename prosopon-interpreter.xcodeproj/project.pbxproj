@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8931DD84153203D800B974C7 /* pro_capture_identifier_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 8931DD81153203D700B974C7 /* pro_capture_identifier_expr.c */; };
+		8944F793154785090054A366 /* libprosopon-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8944F788154783350054A366 /* libprosopon-core.dylib */; };
+		8944F7A3154785810054A366 /* libprosopon-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8944F788154783350054A366 /* libprosopon-core.dylib */; };
 		89A289411544EFEB006FE304 /* pro_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FCB81512457A00F78EB0 /* pro_expr.c */; };
 		89A289431544EFEB006FE304 /* pro_become_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5B151241E600F78EB0 /* pro_become_expr.c */; };
 		89A289441544EFEB006FE304 /* pro_expr_list.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5D151241E600F78EB0 /* pro_expr_list.c */; };
@@ -22,7 +24,6 @@
 		89A2894D1544EFEB006FE304 /* pro_message_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD48151B839F009472C2 /* pro_message_expr.c */; };
 		89A2894E1544EFEB006FE304 /* pro_constructor_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD4A151B865C009472C2 /* pro_constructor_expr.c */; };
 		89A2894F1544EFEB006FE304 /* pro_actor_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89E7FD4E151B8915009472C2 /* pro_actor_expr.c */; };
-		89A289501544F022006FE304 /* libprosopon.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */; };
 		89A289511544F024006FE304 /* libprosopon-stdlib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89AF57F61538BA17008D8426 /* libprosopon-stdlib.dylib */; };
 		89A289521544F043006FE304 /* prosopon_interpreter.h in Headers */ = {isa = PBXBuildFile; fileRef = 89AFC37F1538ABEC0083E8E8 /* prosopon_interpreter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89A289531544F043006FE304 /* prosopon_interpreter_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 89A2892015448D06006FE304 /* prosopon_interpreter_config.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,17 +31,12 @@
 		89A289551544F073006FE304 /* gram.y in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC59151241E600F78EB0 /* gram.y */; };
 		89A289571544F15F006FE304 /* pro_interpreter_state.h in Headers */ = {isa = PBXBuildFile; fileRef = 89A289561544F15E006FE304 /* pro_interpreter_state.h */; };
 		89A289591544F30A006FE304 /* pro_interpreter_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 89A289581544F309006FE304 /* pro_interpreter_state.c */; };
-		89A2895A1544F8D2006FE304 /* libprosopon-interpreter.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A289341544EF55006FE304 /* libprosopon-interpreter.dylib */; };
 		89A2897215450BDE006FE304 /* pro_expr_type.c in Sources */ = {isa = PBXBuildFile; fileRef = 89A2897115450BDE006FE304 /* pro_expr_type.c */; };
 		89A2897415450BF0006FE304 /* pro_expr_type.h in Headers */ = {isa = PBXBuildFile; fileRef = 89A2897315450BF0006FE304 /* pro_expr_type.h */; };
-		89ABF6C6151C2AF500DE1A07 /* prosopon.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC74151241E600F78EB0 /* prosopon.c */; };
-		89ABF6DC151C2B1C00DE1A07 /* libprosopon.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */; };
-		89AF57F91538BA2D008D8426 /* libprosopon-stdlib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89AF57F61538BA17008D8426 /* libprosopon-stdlib.dylib */; };
 		89AF58071539107F008D8426 /* libprosopon-stdlib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89AF57F61538BA17008D8426 /* libprosopon-stdlib.dylib */; };
 		89CE9C69151D753800CE5511 /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = 89CE9C51151D747200CE5511 /* test.c */; };
 		89CE9C6C151D75B600CE5511 /* libcunit.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CE9C6B151D75B600CE5511 /* libcunit.1.dylib */; };
 		89CE9C6D151D75E000CE5511 /* test-pro_let_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89CE9C59151D74F900CE5511 /* test-pro_let_expr.c */; };
-		89CE9C73151D762000CE5511 /* libprosopon.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */; };
 		89CE9C77151D76B400CE5511 /* pro_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FCB81512457A00F78EB0 /* pro_expr.c */; };
 		89CE9C78151D76B400CE5511 /* pro_become_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5B151241E600F78EB0 /* pro_become_expr.c */; };
 		89CE9C79151D76B400CE5511 /* pro_expr_list.c in Sources */ = {isa = PBXBuildFile; fileRef = 89D1FC5D151241E600F78EB0 /* pro_expr_list.c */; };
@@ -60,8 +56,6 @@
 		89CE9C90151E238B00CE5511 /* test-pro_number_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89CE9C8E151E233E00CE5511 /* test-pro_number_expr.c */; };
 		89EDA0CA15212CD4004EE3FC /* test-pro_send_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89EDA0C815212CD4004EE3FC /* test-pro_send_expr.c */; };
 		89EDA0CD1521326F004EE3FC /* test-pro_become_expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 89EDA0CB1521326F004EE3FC /* test-pro_become_expr.c */; };
-		89FCC672153BCB27006C6FFF /* pro_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 89FCC671153BCB26006C6FFF /* pro_alloc.c */; };
-		89FCC673153BCB27006C6FFF /* pro_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 89FCC671153BCB26006C6FFF /* pro_alloc.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -86,47 +80,33 @@
 			);
 			script = "cd $DERIVED_FILES_DIR\n${DEVELOPER_BIN_DIR}/bison --debug -d ${INPUT_FILE_PATH}\n";
 		};
-		89ABF6DD151C2B2900DE1A07 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			fileType = sourcecode.yacc;
-			isEditable = 1;
-			outputFiles = (
-				"${DERIVED_FILES_DIR}/gram.tab.h",
-				"${DERIVED_FILES_DIR}/gram.tab.c",
-			);
-			script = "cd $DERIVED_FILES_DIR\n${DEVELOPER_BIN_DIR}/bison --debug -d ${INPUT_FILE_PATH}\n";
-		};
-		89ABF6DE151C2E0D00DE1A07 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			fileType = sourcecode.lex;
-			isEditable = 1;
-			outputFiles = (
-				"${DERIVED_FILES_DIR}/lex.yy.c",
-			);
-			script = "cd $DERIVED_FILES_DIR\n${DEVELOPER_BIN_DIR}/flex -dv ${INPUT_FILE_PATH}\n";
-		};
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
-		892B96BC151D1C09009D5B53 /* PBXContainerItemProxy */ = {
+		8944F787154783350054A366 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */;
+			containerPortal = 8944F782154783340054A366 /* prosopon-core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 890024E81511A3430012E749;
+			remoteInfo = prosopon;
+		};
+		8944F789154783350054A366 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8944F782154783340054A366 /* prosopon-core.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 89F1111B151CC40100317A20;
-			remoteInfo = test;
+			remoteInfo = "prosopon-tests";
 		};
-		89A289381544EF62006FE304 /* PBXContainerItemProxy */ = {
+		8944F791154785010054A366 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 890025011512409A0012E749 /* Project object */;
+			containerPortal = 8944F782154783340054A366 /* prosopon-core.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 89A289331544EF55006FE304;
-			remoteInfo = "prosopon-interpreter";
+			remoteGlobalIDString = 890024E71511A3430012E749;
+			remoteInfo = prosopon;
 		};
-		89A2893A1544EF70006FE304 /* PBXContainerItemProxy */ = {
+		8944F7A11547857E0054A366 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */;
+			containerPortal = 8944F782154783340054A366 /* prosopon-core.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 890024E71511A3430012E749;
 			remoteInfo = prosopon;
@@ -138,25 +118,11 @@
 			remoteGlobalIDString = 8900248B1511A2300012E749;
 			remoteInfo = "prosopon-stdlib";
 		};
-		89ABF6D9151C2B1200DE1A07 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 890024E71511A3430012E749;
-			remoteInfo = prosopon;
-		};
 		89AF57F51538BA17008D8426 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 89AFC3851538B9710083E8E8 /* prosopon-stdlib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8900248C1511A2300012E749;
-			remoteInfo = "prosopon-stdlib";
-		};
-		89AF57F71538BA28008D8426 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 89AFC3851538B9710083E8E8 /* prosopon-stdlib.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8900248B1511A2300012E749;
 			remoteInfo = "prosopon-stdlib";
 		};
 		89AF57FB1538BA37008D8426 /* PBXContainerItemProxy */ = {
@@ -166,32 +132,9 @@
 			remoteGlobalIDString = 8900248B1511A2300012E749;
 			remoteInfo = "prosopon-stdlib";
 		};
-		89CE9C70151D761C00CE5511 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 890024E71511A3430012E749;
-			remoteInfo = prosopon;
-		};
-		89D1FC9D1512421E00F78EB0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 890024E81511A3430012E749;
-			remoteInfo = prosopon;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		89ABF6BA151C29E500DE1A07 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 		89CE9C5D151D751800CE5511 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -206,6 +149,7 @@
 /* Begin PBXFileReference section */
 		8931DD81153203D700B974C7 /* pro_capture_identifier_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_capture_identifier_expr.c; sourceTree = "<group>"; };
 		8931DD82153203D700B974C7 /* pro_capture_identifier_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_capture_identifier_expr.h; sourceTree = "<group>"; };
+		8944F782154783340054A366 /* prosopon-core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "prosopon-core.xcodeproj"; path = "../prosopon-core/prosopon-core.xcodeproj"; sourceTree = "<group>"; };
 		89A2892015448D06006FE304 /* prosopon_interpreter_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prosopon_interpreter_config.h; sourceTree = "<group>"; };
 		89A289341544EF55006FE304 /* libprosopon-interpreter.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libprosopon-interpreter.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A289561544F15E006FE304 /* pro_interpreter_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_interpreter_state.h; sourceTree = "<group>"; };
@@ -214,7 +158,6 @@
 		89A2897315450BF0006FE304 /* pro_expr_type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_expr_type.h; sourceTree = "<group>"; };
 		89ABF6B4151C24E100DE1A07 /* pro_list_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = pro_list_expr.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		89ABF6B5151C24E100DE1A07 /* pro_list_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_list_expr.h; sourceTree = "<group>"; };
-		89ABF6BC151C29E500DE1A07 /* prosopon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = prosopon; sourceTree = BUILT_PRODUCTS_DIR; };
 		89AFC37F1538ABEC0083E8E8 /* prosopon_interpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prosopon_interpreter.h; sourceTree = "<group>"; };
 		89AFC3851538B9710083E8E8 /* prosopon-stdlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "prosopon-stdlib.xcodeproj"; path = "../prosopon-stdlib/prosopon-stdlib.xcodeproj"; sourceTree = "<group>"; };
 		89CE9C51151D747200CE5511 /* test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
@@ -243,9 +186,7 @@
 		89D1FC6D151241E600F78EB0 /* pro_send_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_send_expr.h; sourceTree = "<group>"; };
 		89D1FC72151241E600F78EB0 /* pro_string_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = pro_string_expr.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		89D1FC73151241E600F78EB0 /* pro_string_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_string_expr.h; sourceTree = "<group>"; };
-		89D1FC74151241E600F78EB0 /* prosopon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = prosopon.c; sourceTree = "<group>"; };
 		89D1FC78151241E600F78EB0 /* scan.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = scan.l; sourceTree = "<group>"; };
-		89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = prosopon.xcodeproj; path = ../prosopon/prosopon.xcodeproj; sourceTree = "<group>"; };
 		89D1FCB81512457A00F78EB0 /* pro_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = pro_expr.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		89D1FCB91512457A00F78EB0 /* pro_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_expr.h; sourceTree = "<group>"; };
 		89D1FCBC151249C000F78EB0 /* pro_case_expr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_case_expr.h; sourceTree = "<group>"; };
@@ -258,8 +199,6 @@
 		89E7FD4E151B8915009472C2 /* pro_actor_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = pro_actor_expr.c; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		89EDA0C815212CD4004EE3FC /* test-pro_send_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-pro_send_expr.c"; sourceTree = "<group>"; };
 		89EDA0CB1521326F004EE3FC /* test-pro_become_expr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-pro_become_expr.c"; sourceTree = "<group>"; };
-		89FCC66F153BCB1C006C6FFF /* pro_alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pro_alloc.h; sourceTree = "<group>"; };
-		89FCC671153BCB26006C6FFF /* pro_alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pro_alloc.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,18 +206,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8944F7A3154785810054A366 /* libprosopon-core.dylib in Frameworks */,
 				89A289511544F024006FE304 /* libprosopon-stdlib.dylib in Frameworks */,
-				89A289501544F022006FE304 /* libprosopon.dylib in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		89ABF6B9151C29E500DE1A07 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				89A2895A1544F8D2006FE304 /* libprosopon-interpreter.dylib in Frameworks */,
-				89AF57F91538BA2D008D8426 /* libprosopon-stdlib.dylib in Frameworks */,
-				89ABF6DC151C2B1C00DE1A07 /* libprosopon.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,8 +215,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8944F793154785090054A366 /* libprosopon-core.dylib in Frameworks */,
 				89AF58071539107F008D8426 /* libprosopon-stdlib.dylib in Frameworks */,
-				89CE9C73151D762000CE5511 /* libprosopon.dylib in Frameworks */,
 				89CE9C6C151D75B600CE5511 /* libcunit.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,10 +227,10 @@
 		890024FF1512409A0012E749 = {
 			isa = PBXGroup;
 			children = (
+				8944F782154783340054A366 /* prosopon-core.xcodeproj */,
+				89AFC3851538B9710083E8E8 /* prosopon-stdlib.xcodeproj */,
 				89CE9C74151D767B00CE5511 /* Makefile */,
 				89CE9C6B151D75B600CE5511 /* libcunit.1.dylib */,
-				89AFC3851538B9710083E8E8 /* prosopon-stdlib.xcodeproj */,
-				89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */,
 				89AFC37E1538ABD30083E8E8 /* include */,
 				89D1FC58151241E600F78EB0 /* src */,
 				89CE9C4C151D747200CE5511 /* test */,
@@ -312,9 +241,17 @@
 		8900250B1512409A0012E749 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				89ABF6BC151C29E500DE1A07 /* prosopon */,
 				89CE9C5F151D751800CE5511 /* test */,
 				89A289341544EF55006FE304 /* libprosopon-interpreter.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8944F783154783340054A366 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8944F788154783350054A366 /* libprosopon-core.dylib */,
+				8944F78A154783350054A366 /* test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -355,7 +292,6 @@
 		89D1FC58151241E600F78EB0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				89D1FC74151241E600F78EB0 /* prosopon.c */,
 				89A289561544F15E006FE304 /* pro_interpreter_state.h */,
 				89A289581544F309006FE304 /* pro_interpreter_state.c */,
 				89D1FCB91512457A00F78EB0 /* pro_expr.h */,
@@ -389,21 +325,10 @@
 				89E7FD4A151B865C009472C2 /* pro_constructor_expr.c */,
 				89E7FD4C151B88FD009472C2 /* pro_actor_expr.h */,
 				89E7FD4E151B8915009472C2 /* pro_actor_expr.c */,
-				89FCC66F153BCB1C006C6FFF /* pro_alloc.h */,
-				89FCC671153BCB26006C6FFF /* pro_alloc.c */,
 				89A2897315450BF0006FE304 /* pro_expr_type.h */,
 				89A2897115450BDE006FE304 /* pro_expr_type.c */,
 			);
 			path = src;
-			sourceTree = "<group>";
-		};
-		89D1FC9A1512421D00F78EB0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */,
-				892B96BD151D1C09009D5B53 /* test */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,13 +342,6 @@
 				89A289531544F043006FE304 /* prosopon_interpreter_config.h in Headers */,
 				89A289571544F15F006FE304 /* pro_interpreter_state.h in Headers */,
 				89A2897415450BF0006FE304 /* pro_expr_type.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		89AFC3831538AED30083E8E8 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,40 +361,17 @@
 				89A2893E1544EF89006FE304 /* PBXBuildRule */,
 			);
 			dependencies = (
+				8944F7A21547857E0054A366 /* PBXTargetDependency */,
 				89A2893D1544EF73006FE304 /* PBXTargetDependency */,
-				89A2893B1544EF70006FE304 /* PBXTargetDependency */,
 			);
 			name = "prosopon-interpreter";
 			productName = "prosopon-interpreter";
 			productReference = 89A289341544EF55006FE304 /* libprosopon-interpreter.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
-		89ABF6BB151C29E500DE1A07 /* prosopon */ = {
+		89CE9C5E151D751800CE5511 /* prosopon-interpreter-tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 89ABF6C3151C29E500DE1A07 /* Build configuration list for PBXNativeTarget "prosopon" */;
-			buildPhases = (
-				89ABF6B8151C29E500DE1A07 /* Sources */,
-				89ABF6B9151C29E500DE1A07 /* Frameworks */,
-				89ABF6BA151C29E500DE1A07 /* CopyFiles */,
-				89AFC3831538AED30083E8E8 /* Headers */,
-			);
-			buildRules = (
-				89ABF6DE151C2E0D00DE1A07 /* PBXBuildRule */,
-				89ABF6DD151C2B2900DE1A07 /* PBXBuildRule */,
-			);
-			dependencies = (
-				89AF57F81538BA28008D8426 /* PBXTargetDependency */,
-				89ABF6DA151C2B1200DE1A07 /* PBXTargetDependency */,
-				89A289391544EF62006FE304 /* PBXTargetDependency */,
-			);
-			name = prosopon;
-			productName = prosopon;
-			productReference = 89ABF6BC151C29E500DE1A07 /* prosopon */;
-			productType = "com.apple.product-type.tool";
-		};
-		89CE9C5E151D751800CE5511 /* test */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 89CE9C66151D751900CE5511 /* Build configuration list for PBXNativeTarget "test" */;
+			buildConfigurationList = 89CE9C66151D751900CE5511 /* Build configuration list for PBXNativeTarget "prosopon-interpreter-tests" */;
 			buildPhases = (
 				89CE9C5B151D751800CE5511 /* Sources */,
 				89CE9C5C151D751800CE5511 /* Frameworks */,
@@ -485,10 +380,10 @@
 			buildRules = (
 			);
 			dependencies = (
+				8944F792154785010054A366 /* PBXTargetDependency */,
 				89AF57FC1538BA37008D8426 /* PBXTargetDependency */,
-				89CE9C71151D761C00CE5511 /* PBXTargetDependency */,
 			);
-			name = test;
+			name = "prosopon-interpreter-tests";
 			productName = test;
 			productReference = 89CE9C5F151D751800CE5511 /* test */;
 			productType = "com.apple.product-type.tool";
@@ -513,29 +408,35 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 89AF57F21538BA17008D8426 /* Products */;
-					ProjectRef = 89AFC3851538B9710083E8E8 /* prosopon-stdlib.xcodeproj */;
+					ProductGroup = 8944F783154783340054A366 /* Products */;
+					ProjectRef = 8944F782154783340054A366 /* prosopon-core.xcodeproj */;
 				},
 				{
-					ProductGroup = 89D1FC9A1512421D00F78EB0 /* Products */;
-					ProjectRef = 89D1FC991512421D00F78EB0 /* prosopon.xcodeproj */;
+					ProductGroup = 89AF57F21538BA17008D8426 /* Products */;
+					ProjectRef = 89AFC3851538B9710083E8E8 /* prosopon-stdlib.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
 				89A289331544EF55006FE304 /* prosopon-interpreter */,
-				89ABF6BB151C29E500DE1A07 /* prosopon */,
-				89CE9C5E151D751800CE5511 /* test */,
+				89CE9C5E151D751800CE5511 /* prosopon-interpreter-tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		892B96BD151D1C09009D5B53 /* test */ = {
+		8944F788154783350054A366 /* libprosopon-core.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = "libprosopon-core.dylib";
+			remoteRef = 8944F787154783350054A366 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8944F78A154783350054A366 /* test */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			path = test;
-			remoteRef = 892B96BC151D1C09009D5B53 /* PBXContainerItemProxy */;
+			remoteRef = 8944F789154783350054A366 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		89AF57F61538BA17008D8426 /* libprosopon-stdlib.dylib */ = {
@@ -543,13 +444,6 @@
 			fileType = "compiled.mach-o.dylib";
 			path = "libprosopon-stdlib.dylib";
 			remoteRef = 89AF57F51538BA17008D8426 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		89D1FC9E1512421E00F78EB0 /* libprosopon.dylib */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.dylib";
-			path = libprosopon.dylib;
-			remoteRef = 89D1FC9D1512421E00F78EB0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -580,15 +474,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		89ABF6B8151C29E500DE1A07 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				89ABF6C6151C2AF500DE1A07 /* prosopon.c in Sources */,
-				89FCC672153BCB27006C6FFF /* pro_alloc.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		89CE9C5B151D751800CE5511 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -615,47 +500,31 @@
 				89EDA0CA15212CD4004EE3FC /* test-pro_send_expr.c in Sources */,
 				89EDA0CD1521326F004EE3FC /* test-pro_become_expr.c in Sources */,
 				8931DD84153203D800B974C7 /* pro_capture_identifier_expr.c in Sources */,
-				89FCC673153BCB27006C6FFF /* pro_alloc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		89A289391544EF62006FE304 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 89A289331544EF55006FE304 /* prosopon-interpreter */;
-			targetProxy = 89A289381544EF62006FE304 /* PBXContainerItemProxy */;
-		};
-		89A2893B1544EF70006FE304 /* PBXTargetDependency */ = {
+		8944F792154785010054A366 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = prosopon;
-			targetProxy = 89A2893A1544EF70006FE304 /* PBXContainerItemProxy */;
+			targetProxy = 8944F791154785010054A366 /* PBXContainerItemProxy */;
+		};
+		8944F7A21547857E0054A366 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = prosopon;
+			targetProxy = 8944F7A11547857E0054A366 /* PBXContainerItemProxy */;
 		};
 		89A2893D1544EF73006FE304 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "prosopon-stdlib";
 			targetProxy = 89A2893C1544EF73006FE304 /* PBXContainerItemProxy */;
 		};
-		89ABF6DA151C2B1200DE1A07 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = prosopon;
-			targetProxy = 89ABF6D9151C2B1200DE1A07 /* PBXContainerItemProxy */;
-		};
-		89AF57F81538BA28008D8426 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "prosopon-stdlib";
-			targetProxy = 89AF57F71538BA28008D8426 /* PBXContainerItemProxy */;
-		};
 		89AF57FC1538BA37008D8426 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "prosopon-stdlib";
 			targetProxy = 89AF57FB1538BA37008D8426 /* PBXContainerItemProxy */;
-		};
-		89CE9C71151D761C00CE5511 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = prosopon;
-			targetProxy = 89CE9C70151D761C00CE5511 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -744,22 +613,6 @@
 			};
 			name = Release;
 		};
-		89ABF6C4151C29E500DE1A07 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		89ABF6C5151C29E500DE1A07 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		89CE9C67151D751900CE5511 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -797,16 +650,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		89ABF6C3151C29E500DE1A07 /* Build configuration list for PBXNativeTarget "prosopon" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				89ABF6C4151C29E500DE1A07 /* Debug */,
-				89ABF6C5151C29E500DE1A07 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		89CE9C66151D751900CE5511 /* Build configuration list for PBXNativeTarget "test" */ = {
+		89CE9C66151D751900CE5511 /* Build configuration list for PBXNativeTarget "prosopon-interpreter-tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				89CE9C67151D751900CE5511 /* Debug */,
