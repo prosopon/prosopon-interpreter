@@ -1,7 +1,7 @@
 #ifndef prosopon_interpreter_prosopon_interpreter_h
 #define prosopon_interpreter_prosopon_interpreter_h
 
-#include "prosopon.h"
+#include <prosopon/prosopon.h>
 
 
 #pragma mark -

@@ -1,6 +1,6 @@
 #include "pro_case_expr.h"
 
-#include "prosopon_macros.h"
+#include <prosopon/prosopon_macros.h>
 
 #include <stdio.h>
 #include <assert.h>
@@ -83,15 +83,19 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
 
     pro_expr* body;
     pro_expr* pattern;
-    if (body_ref)
-        pro_ud_write(s, body_ref, (void**)&body);
-    else
-        body = 0;
     
     if (pattern_ref)
         pro_ud_write(s, pattern_ref, (void**)&pattern);
     else
-        pattern = 0;
+    {
+        pro_pop_env(s);
+        return 0;
+    }
+    
+    if (body_ref)
+        pro_ud_write(s, body_ref, (void**)&body);
+    else
+        body = 0;
 
     unsigned int msg_length;
     pro_list_length(s, msg, &msg_length);
@@ -103,15 +107,8 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         pro_list_get(s, msg, index, &arg);
         
         pro_ref match_ref = match_list->value;
-        pro_ref match_val;
-        if (pro_match_type(s, match_ref, PRO_UD_TYPE))
-            match_val = pro_eval_expr(s, match_ref);
-        else
-        {
-            pro_retain(s, match_ref);
-            match_val = match_ref;
-        }
-            
+        pro_ref match_val = pro_eval_expr(s, match_ref);
+
         pro_matching do_match;
         pro_match(s, match_val, arg, &do_match);
         pro_release(s, match_val);

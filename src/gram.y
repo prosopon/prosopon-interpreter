@@ -21,7 +21,7 @@
 %lex-param   {pro_state_ref state}
 
 %code requires {
-    #include "prosopon.h"
+    #include <prosopon/prosopon.h>
 }
 %union
 {
@@ -95,7 +95,6 @@ capture_identifier
 program
     : statements
     {
-      //  pro_print_expr(state, $1, "\n");
         pro_release(state, pro_eval_expr(state, $1));
         pro_release(state, $1);
         pro_run(state);
@@ -105,9 +104,10 @@ program
 statements
     : statements statement
     {
-        pro_list_expr_append(state, $1, $2);
+        $$ = pro_list_expr_append(state, $1, $2);
     }
     | statement
+    
     {
         pro_expr_list* list = pro_expr_list_create(state, $1, 0);
         $$ = pro_list_expr_create(state, list);
@@ -148,7 +148,7 @@ definition
 expression
     : expression term
     {
-        pro_list_expr_append(state, $1, $2);
+        $$ = pro_list_expr_append(state, $1, $2);
     }
     | term
     {
@@ -218,17 +218,14 @@ message
     MESSAGE_START value_list MESSAGE_END
     {
         $$ = pro_message_expr_create(state, $2);
-        
-        pro_alloc* alloc;
-        pro_get_alloc(state, &alloc);
-        alloc($2, 0);
+        pro_release(state, $2);
     }
     ;
     
 value_list
     : value_list value
     {
-        pro_list_expr_append(state, $1, $2);
+        $$ = pro_list_expr_append(state, $1, $2);
     }
     | value
     {
@@ -259,10 +256,6 @@ constructor
     IDENTIFIER CONSTRUCTOR_START value_list CONSTRUCTOR_END
     {
         $$ = pro_constructor_expr_create(state, $1, $3);
-        
-        pro_alloc* alloc;
-        pro_get_alloc(state, &alloc);
-        alloc($3, 0);
     }
     ;
 
@@ -286,7 +279,7 @@ actor
 behavior
     : behavior case
     {
-        pro_list_expr_append(state, $1, $2);
+        $$ = pro_list_expr_append(state, $1, $2);
     }
     | case
     {
@@ -317,7 +310,7 @@ case
 argument_list
     : argument_list argument
     {
-        pro_list_expr_append(state, $1, $2);
+        $$ = pro_list_expr_append(state, $1, $2);
     }
     | argument
     {

@@ -1,8 +1,7 @@
 #ifndef prosopon_pro_expr_list_h
 #define prosopon_pro_expr_list_h
 
-#include "prosopon.h"
-#include "prosopon_config.h"
+#include <prosopon/prosopon.h>
 
 #include "pro_expr.h"
 #include "pro_expr_type.h"

@@ -1,7 +1,8 @@
 #include "pro_message_expr.h"
 
 #include "pro_expr_list.h"
-#include "prosopon_macros.h"
+
+#include <prosopon/prosopon_macros.h>
 
 #include <stdio.h>
 #include <assert.h>
@@ -92,6 +93,7 @@ PRO_INTERNAL pro_ref pro_message_expr_create(pro_state_ref s,
         pro_expr* list;
         pro_ud_write(s, list_ref, (void**)&list);
         t->value.list = list->value.list;
+        list->value.list = 0;
     }
     else
         t->value.list = 0;

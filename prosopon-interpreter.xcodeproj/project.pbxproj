@@ -292,12 +292,12 @@
 		89D1FC58151241E600F78EB0 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				89D1FC78151241E600F78EB0 /* scan.l */,
+				89D1FC59151241E600F78EB0 /* gram.y */,
 				89A289561544F15E006FE304 /* pro_interpreter_state.h */,
 				89A289581544F309006FE304 /* pro_interpreter_state.c */,
 				89D1FCB91512457A00F78EB0 /* pro_expr.h */,
 				89D1FCB81512457A00F78EB0 /* pro_expr.c */,
-				89D1FC78151241E600F78EB0 /* scan.l */,
-				89D1FC59151241E600F78EB0 /* gram.y */,
 				89D1FC61151241E600F78EB0 /* pro_expressions.h */,
 				89D1FC5C151241E600F78EB0 /* pro_become_expr.h */,
 				89D1FC5B151241E600F78EB0 /* pro_become_expr.c */,
@@ -573,7 +573,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

@@ -74,7 +74,7 @@ int pro_eval(pro_interpreter_state* istate, const char* file)
 
 
 PRO_INTERPRETER
-int (pro_process_library) (pro_interpreter_state* istate, const char* file)
+int pro_process_library(pro_interpreter_state* istate, const char* file)
 {
     if (pro_library_load(istate->state, file) == PRO_OK)
         return 0;
@@ -83,7 +83,7 @@ int (pro_process_library) (pro_interpreter_state* istate, const char* file)
 
 
 PRO_INTERPRETER
-int (load_stdlib_library) (pro_interpreter_state* istate, const char* path)
+int load_stdlib_library(pro_interpreter_state* istate, const char* path)
 {
     DIR* dir = opendir(path);
     if (!dir)

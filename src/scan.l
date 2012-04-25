@@ -113,7 +113,7 @@ char* identifier(const char* yytext, unsigned long yyleng)
 {
     if (yyleng > 0)
     {
-        char* str = (char*)malloc(sizeof(char) * (yyleng + 1));
+        char* str = malloc(sizeof(*str) * (yyleng + 1));
         memcpy(str, yytext, yyleng + 1);
         return str;
     }

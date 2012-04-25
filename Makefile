@@ -1,31 +1,56 @@
 SHELL=/bin/bash
 
+prefix = /usr/local
+exec_prefix = $(prefix)
+libdir = $(exec_prefix)/lib
+includedir = $(prefix)/include
+
+
+LIBTOOL = glibtool --tag="junk"
 CC = gcc
 LINK = gcc
 LEX = flex
 BISON = bison
+DOC = doxygen
 
 BISON_FLAGS = --debug -d
 LEX_FLAGS = -dv -ll
-CFLAGS = -std=c99 -g -I../prosopon-core/include -I../prosopon-stdlib/include -I./include -Isrc
+CFLAGS = -std=c99 -g -I./include -I./build -I./src
 LFLAGS = -lprosopon -lprosopon-stdlib
 
 SRC_DIR = src
+SRC_INCLUDE_DIR = include
 
-OBJS = pro_actor_expr.o pro_become_expr.o pro_case_expr.o pro_constructor_expr.o pro_expr.o \
-    pro_expr_list.o pro_expr_type.o pro_identifier_expr.o pro_let_expr.o pro_list_expr.o \
-    pro_message_expr.o pro_number_expr.o pro_send_expr.o pro_string_expr.o  \
-    pro_capture_identifier_expr.o prosopon_interpreter.o pro_interpreter_state.o gram.tab.o lex.yy.o 
+LIBPROSOPON_INTERPRETER = libprosopon-interpreter.la
+PROSOPON_HEADER_DIR = $(includedir)/prosopon
+
+
+OBJS = pro_actor_expr pro_become_expr pro_case_expr pro_constructor_expr pro_expr \
+    pro_expr_list pro_expr_type pro_identifier_expr pro_let_expr pro_list_expr \
+    pro_message_expr pro_number_expr pro_send_expr pro_string_expr  \
+    pro_capture_identifier_expr pro_interpreter_state lex.yy gram.tab
 
 OUT_DIR = build
 OUT_OBJS = $(addprefix $(OUT_DIR)/,$(OBJS))
 
 
-all : $(OUT_OBJS)
-	$(LINK) $(LFLAGS) -shared $^ -lc -Wl,-install_name,libprosopon-interpreter.so.1 -o libprosopon-interpreter.so.1
+HEADERS = prosopon_interpreter.h prosopon_interpreter_config.h
+OUT_HEADERS = $(addprefix $(SRC_INCLUDE_DIR)/,$(HEADERS))
 
-$(OUT_DIR)/%.o : $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+
+all : $(LIBPROSOPON_INTERPRETER)
+
+$(LIBPROSOPON_INTERPRETER) : $(addsuffix .lo,$(OUT_OBJS))
+	$(LIBTOOL) --mode=link gcc $(CFLAGS) -O -o $@  $^ -rpath $(libdir) $(LFLAGS)
+
+$(OUT_DIR)/%.lo : $(SRC_DIR)/%.c
+	$(LIBTOOL) --mode=compile gcc $(CFLAGS) -fPIC -c $^ -o $@
+
+$(OUT_DIR)/lex.yy.lo : $(OUT_DIR)/lex.yy.c $(OUT_DIR)/gram.tab.lo
+	$(LIBTOOL) --mode=compile gcc $(CFLAGS) -fPIC -c $+ -o $@
+
+$(OUT_DIR)/gram.tab.lo : $(OUT_DIR)/gram.tab.c
+	$(LIBTOOL) --mode=compile gcc $(CFLAGS) -fPIC -c $^ -o $@
 
 $(OUT_DIR)/lex.yy.c : $(SRC_DIR)/scan.l
 	$(LEX) $(LEX_FLAGS) -o $@ $<
@@ -34,10 +59,13 @@ $(OUT_DIR)/gram.tab.c : $(SRC_DIR)/gram.y
 	$(BISON) $(BISON_FLAGS) -o $@ $<
 
 
+install: $(LIBPROSOPON_INTERPRETER) copy_headers	
+	$(LIBTOOL) --mode=install cp $< $(libdir)/$<
 
-install:
-	cp libprosopon-interpreter.so.1 /usr/local/lib/
-
+copy_headers: 
+	if [ ! -d $(PROSOPON_HEADER_DIR) ]; then mkdir $(PROSOPON_HEADER_DIR); fi
+	cp $(OUT_HEADERS) $(PROSOPON_HEADER_DIR)
+	
 
 .PHONY : doc
 doc :

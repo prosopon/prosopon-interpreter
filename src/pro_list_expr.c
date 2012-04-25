@@ -11,13 +11,11 @@ static pro_ref list_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
 {
     assert(pro_expr_get_type(t) == PRO_LIST_EXPR_TYPE);
     
-    pro_expr_list* list = t->value.list;
-    while (list) 
+    for (pro_expr_list* list = t->value.list; list; list = list->next) 
     {
         pro_ref value = list->value;
         if (value)
             pro_release(s, pro_eval_expr(s, value));
-        list = list->next;
     }
     return PRO_EMPTY_REF;
 }
@@ -35,6 +33,7 @@ static void list_expr_release(pro_state_ref s, void* data)
 {
     pro_expr* t = data;
     pro_release_expr_list(s, t->value.list);
+    
     PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
@@ -51,24 +50,6 @@ PRO_INTERNAL pro_ref pro_list_expr_create(pro_state_ref s,
     pro_ref ref = pro_expr_create(s, PRO_LIST_EXPR_TYPE, list_expr_release, &t);
     t->value.list = list;
     return ref;
-}
-
-
-PRO_INTERNAL pro_expr* pro_list_expr_join(
-    pro_expr* list1, pro_expr* list2)
-{
-    assert(list1); // o1 must be an expression but o2 may be null
-    assert(pro_expr_get_type(list1) == PRO_LIST_EXPR_TYPE);
-    
-    if (!list2)
-        return list1;
-    else
-    {
-        assert(pro_expr_get_type(list2) == PRO_LIST_EXPR_TYPE);
-        
-        pro_expr_list_join(list1->value.list, list2->value.list);
-        return list1;
-    }
 }
 
 

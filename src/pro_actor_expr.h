@@ -1,7 +1,7 @@
 #ifndef prosopon_pro_actor_expr_h
 #define prosopon_pro_actor_expr_h
 
-#include "prosopon.h"
+#include <prosopon/prosopon.h>
 
 #include "pro_expr.h"
 #include "pro_expr_type.h"

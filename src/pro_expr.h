@@ -1,7 +1,8 @@
 #ifndef prosopon_pro_expr_h
 #define prosopon_pro_expr_h
 
-#include "prosopon.h"
+#include <prosopon/prosopon.h>
+
 #include "pro_expr_type.h"
 
 
@@ -32,7 +33,7 @@ struct pro_expr
         struct
         {
             char* identifier;
-            pro_expr_list* arguments;
+            pro_ref arguments;
         } constructor;
         pro_expr_list* list;
         pro_ref behavior;

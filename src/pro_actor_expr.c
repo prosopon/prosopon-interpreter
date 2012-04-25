@@ -72,8 +72,8 @@ static void behavior(pro_state_ref s,
 
 static void behavior_deconstructor(pro_state_ref s, void* data)
 {
-    pro_ref expr = data;
-    pro_release(s, expr);
+    pro_ref* expr = data;
+    pro_release(s, *expr);
     PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
@@ -105,9 +105,9 @@ PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state_ref s,
     pro_ref behavior_expr = t->value.behavior;
     pro_retain(s, behavior_expr);
     
-    pro_ud_create(s, sizeof(t), behavior_deconstructor, ud);
-    
     pro_ref* expr_data;
+    pro_ud_create(s, sizeof(*expr_data), behavior_deconstructor, ud);
+
     pro_ud_write(s, *ud, (void**)&expr_data);
     *expr_data = behavior_expr;
     

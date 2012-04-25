@@ -3,7 +3,7 @@
 #include "pro_expr.h"
 #include "pro_expr_list.h"
 
-#include "prosopon_macros.h"
+#include <prosopon/prosopon_macros.h>
 
 #include <assert.h>
 #include <stdio.h>
@@ -30,7 +30,11 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
         return PRO_EMPTY_REF;
     
     // build the list of arguments
-    pro_expr_list* expr_arg_list = t->value.constructor.arguments;
+    pro_ref arguments =  t->value.constructor.arguments;
+    pro_expr* arguments_expr;
+    pro_ud_write(s, arguments, (void**)&arguments_expr);
+
+    pro_expr_list* expr_arg_list = arguments_expr->value.list;
 
     pro_ref arg_list;
     pro_list_create(s, &arg_list);
@@ -73,7 +77,7 @@ static void constructor_expr_release(pro_state_ref s, void* data)
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
     alloc(t->value.constructor.identifier, 0);
-    pro_release_expr_list(s, t->value.constructor.arguments);
+    pro_release(s, t->value.constructor.arguments);
     PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
 }
 
@@ -89,9 +93,6 @@ PRO_INTERNAL pro_ref pro_constructor_expr_create(pro_state_ref s,
     pro_expr* t;
     pro_ref ref = pro_expr_create(s, PRO_CONSTRUCTOR_EXPR_TYPE, constructor_expr_release, &t);
     t->value.constructor.identifier = identifier;
-    
-    pro_expr* arguments;
-    pro_ud_write(s, arguments_ref, (void**)&arguments);
-    t->value.constructor.arguments = arguments->value.list;
+    t->value.constructor.arguments = arguments_ref;
     return ref;
 }

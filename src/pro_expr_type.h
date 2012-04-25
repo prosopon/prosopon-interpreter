@@ -1,7 +1,7 @@
 #ifndef prosopon_pro_expr_type_h
 #define prosopon_pro_expr_type_h
 
-#include "prosopon.h"
+#include <prosopon/prosopon.h>
 
 struct pro_expr;
 

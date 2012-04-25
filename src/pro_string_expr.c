@@ -1,6 +1,8 @@
 #include "pro_string_expr.h"
 
-#include "prosopon_stdlib.h"
+#include "pro_expr.h"
+
+#include <prosopon/prosopon_stdlib.h>
 
 #include <assert.h>
 #include <stdio.h>

@@ -1,7 +1,5 @@
 #include "pro_let_expr.h"
 
-#include "prosopon.h"
-
 #include <assert.h>
 #include <stdio.h>
 
@@ -17,7 +15,6 @@ typedef struct {
 static void constructor_data_deconstructor(pro_state_ref s, void* data)
 {
     constructor_data* t = data;
-    
     pro_release(s, t->actor_expr);
     pro_release(s, t->constructor_expr);
     PRO_DEFAULT_UD_DECONSTRUCTOR(s, data);
@@ -32,16 +29,18 @@ static void bind_arguments(pro_state_ref s, pro_expr_list* id_list, pro_ref valu
     for (unsigned int i = 0; i < len; ++i)
     {
         pro_ref value = list->value;
-        pro_ref lookup;
-        pro_list_get(s, values, i, &lookup);
         if (value)
         {
+            pro_ref lookup;
+            pro_list_get(s, values, i, &lookup);
+
             pro_expr* val_expr;
             pro_ud_write(s, value, (void**)&val_expr);
             assert(pro_expr_get_type(val_expr) == PRO_IDENTIFIER_EXPR_TYPE);
             pro_bind(s, lookup, val_expr->value.identifier);
+                
+            pro_release(s, lookup);
         }
-        pro_release(s, lookup);
         list = list->next;
     }
 }
@@ -61,7 +60,10 @@ static pro_ref contructor(pro_state_ref s, pro_ref arguments, pro_ref d)
     pro_ud_read(s, constructor_ref, (const void**)&constructor_expr);
     
     // bind all arguments in the environment
-    bind_arguments(s, constructor_expr->value.constructor.arguments, arguments);
+    pro_ref c_arguments =  constructor_expr->value.constructor.arguments;
+    const pro_expr* c_arguments_expr;
+    pro_ud_read(s, c_arguments, (const void**)&c_arguments_expr);
+    bind_arguments(s, c_arguments_expr->value.list, arguments);
     
     // get the actor expression
     const pro_expr* actor_expr;

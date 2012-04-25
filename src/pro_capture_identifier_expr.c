@@ -1,7 +1,9 @@
 #include "pro_capture_identifier_expr.h"
 
-#include "prosopon_actor_type.h"
-#include "prosopon_macros.h"
+#include "pro_expr.h"
+
+#include <prosopon/prosopon_actor_type.h>
+#include <prosopon/prosopon_macros.h>
 
 #include <assert.h>
 #include <stdio.h>
