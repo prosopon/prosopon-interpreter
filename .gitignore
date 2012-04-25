@@ -10,6 +10,7 @@ bin
 build
 prosopon
 prosopon.dSYM
+libprosopon*
 
 # Project Files #
 #################
