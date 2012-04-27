@@ -31,10 +31,13 @@ static pro_ref constructor_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
     
     // build the list of arguments
     pro_ref arguments =  t->value.constructor.arguments;
-    pro_expr* arguments_expr;
-    pro_ud_write(s, arguments, (void**)&arguments_expr);
-
-    pro_expr_list* expr_arg_list = arguments_expr->value.list;
+    pro_expr* arguments_expr = 0;
+    pro_expr_list* expr_arg_list = 0;
+    if (arguments)
+    {
+        pro_ud_write(s, arguments, (void**)&arguments_expr);
+        expr_arg_list = arguments_expr->value.list;
+    }
 
     pro_ref arg_list;
     pro_list_create(s, &arg_list);

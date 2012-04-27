@@ -61,9 +61,12 @@ static pro_ref contructor(pro_state_ref s, pro_ref arguments, pro_ref d)
     
     // bind all arguments in the environment
     pro_ref c_arguments =  constructor_expr->value.constructor.arguments;
-    const pro_expr* c_arguments_expr;
-    pro_ud_read(s, c_arguments, (const void**)&c_arguments_expr);
-    bind_arguments(s, c_arguments_expr->value.list, arguments);
+    if (c_arguments)
+    {
+        const pro_expr* c_arguments_expr;
+        pro_ud_read(s, c_arguments, (const void**)&c_arguments_expr);
+        bind_arguments(s, c_arguments_expr->value.list, arguments);
+    }
     
     // get the actor expression
     const pro_expr* actor_expr;
