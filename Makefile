@@ -28,7 +28,7 @@ PROSOPON_HEADER_DIR = $(includedir)/prosopon
 OBJS = pro_actor_expr pro_become_expr pro_case_expr pro_constructor_expr pro_expr \
     pro_expr_list pro_expr_type pro_identifier_expr pro_let_expr pro_list_expr \
     pro_message_expr pro_number_expr pro_send_expr pro_string_expr  \
-    pro_capture_identifier_expr pro_interpreter_state lex.yy gram.tab
+    pro_capture_identifier_expr pro_interpreter_state pro_expressions lex.yy gram.tab
 
 OUT_DIR = build
 OUT_OBJS = $(addprefix $(OUT_DIR)/,$(OBJS))

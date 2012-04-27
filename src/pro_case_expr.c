@@ -132,6 +132,7 @@ PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
         }
     }
     
+    
     if (body)
     {
         pro_ref out = pro_eval_expr(s, body_ref);
