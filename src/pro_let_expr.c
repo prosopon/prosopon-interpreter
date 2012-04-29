@@ -1,5 +1,7 @@
 #include "pro_let_expr.h"
 
+#include <prosopon/prosopon_stdlib.h>
+
 #include <assert.h>
 #include <stdio.h>
 
@@ -77,7 +79,7 @@ static pro_ref contructor(pro_state_ref s, pro_ref arguments, pro_ref d)
     pro_behavior* behavior = pro_actor_expr_get_behavior(s, actor_expr, &ud);
     pro_actor_create(s, PRO_DEFAULT_ACTOR_TYPE, behavior, ud, &actor);
     pro_release(s, ud);
-    
+        
     return actor;
 }
 
@@ -88,7 +90,7 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
     
     pro_ref left_ref = t->value.binary.left;
     pro_ref right_ref = t->value.binary.right;
-    
+        
     const pro_expr* left;
     pro_ud_read(s, left_ref, (const void**)&left);
     
@@ -96,9 +98,17 @@ static pro_ref let_expr_eval(pro_state_ref s, pro_ref ref, pro_expr* t)
     {
     case PRO_IDENTIFIER_EXPR_TYPE:
     {
+        // Create self future for recursive references
+        pro_ref self = pro_future_create(s);
+        pro_bind(s, self, left->value.identifier);
+
+        // evaluate the expression
         pro_ref right_eval = pro_eval_expr(s, right_ref);
-        pro_bind(s, right_eval, left->value.identifier);
+        
+        // write self future value
+        pro_future_write(s, self, right_eval);
         pro_release(s, right_eval);
+        pro_release(s, self);
     }   break;
     case PRO_CONSTRUCTOR_EXPR_TYPE:
     {
