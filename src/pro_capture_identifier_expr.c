@@ -2,7 +2,7 @@
 
 #include "pro_expr.h"
 
-#include <prosopon/prosopon_actor_type.h>
+#include <prosopon/prosopon.h>
 #include <prosopon/prosopon_macros.h>
 
 #include <assert.h>

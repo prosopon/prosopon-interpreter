@@ -2,7 +2,6 @@
 #define prosopon_pro_captrue_identifier_expr_h
 
 #include <prosopon/prosopon.h>
-#include <prosopon/prosopon_actor_type.h>
 
 #include "pro_expr_type.h"
 

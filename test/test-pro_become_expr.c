@@ -1,6 +1,6 @@
 #include "test-expressions.h"
 
-#include "prosopon.h"
+#include <prosopon/prosopon.h>
 
 #include "pro_become_expr.h"
 #include "pro_identifier_expr.h"
