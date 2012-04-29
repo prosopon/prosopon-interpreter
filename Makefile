@@ -19,7 +19,7 @@ CFLAGS = -std=c99 -g -I./include -I./build -I./src
 LFLAGS = -lprosopon -lprosopon-stdlib
 
 SRC_DIR = src
-SRC_INCLUDE_DIR = include
+SRC_INCLUDE_DIR = include/prosopon
 
 LIBPROSOPON_INTERPRETER = libprosopon-interpreter.la
 PROSOPON_HEADER_DIR = $(includedir)/prosopon
@@ -34,7 +34,7 @@ OUT_DIR = build
 OUT_OBJS = $(addprefix $(OUT_DIR)/,$(OBJS))
 
 
-HEADERS = prosopon_interpreter.h prosopon_interpreter_config.h
+HEADERS = interpreter.h interpreter_config.h
 OUT_HEADERS = $(addprefix $(SRC_INCLUDE_DIR)/,$(HEADERS))
 
 

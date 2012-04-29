@@ -68,7 +68,8 @@ const pro_expr_type_info pro_capture_identifier_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_ref pro_capture_identifier_expr_create(pro_state_ref s, 
+PRO_INTERNAL
+pro_ref pro_capture_identifier_expr_create(pro_state_ref s, 
     char* value)
 {
     pro_expr* t;

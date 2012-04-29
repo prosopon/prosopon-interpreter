@@ -22,6 +22,7 @@
 #include "pro_constructor_expr.h"
 
 
-PRO_INTERNAL void pro_register_expr_types(pro_state_ref);
+PRO_INTERNAL
+void pro_register_expr_types(pro_state_ref);
 
 #endif

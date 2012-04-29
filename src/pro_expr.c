@@ -5,7 +5,8 @@
 #include <stdio.h>
 
 
-PRO_INTERNAL pro_ref pro_expr_create(pro_state_ref s,
+PRO_INTERNAL
+pro_ref pro_expr_create(pro_state_ref s,
     pro_expr_type type, pro_ud_deconstructor* dec, pro_expr** data)
 {
     pro_ref ref;
@@ -17,7 +18,8 @@ PRO_INTERNAL pro_ref pro_expr_create(pro_state_ref s,
 }
 
 
-PRO_INTERNAL pro_ref pro_eval_expr(pro_state_ref s, pro_ref ref)
+PRO_INTERNAL
+pro_ref pro_eval_expr(pro_state_ref s, pro_ref ref)
 {
     pro_expr* t;
     pro_ud_write(s, ref, (void**)&t);
@@ -27,7 +29,8 @@ PRO_INTERNAL pro_ref pro_eval_expr(pro_state_ref s, pro_ref ref)
 }
 
 
-PRO_INTERNAL void pro_print_expr(pro_state_ref s, const pro_expr* t, const char* end)
+PRO_INTERNAL
+void pro_print_expr(pro_state_ref s, const pro_expr* t, const char* end)
 {
     assert(t);
     const pro_expr_type type = pro_expr_get_type(t);
@@ -35,7 +38,8 @@ PRO_INTERNAL void pro_print_expr(pro_state_ref s, const pro_expr* t, const char*
 }
 
 
-PRO_INTERNAL pro_expr_type pro_expr_get_type(const pro_expr* t)
+PRO_INTERNAL
+pro_expr_type pro_expr_get_type(const pro_expr* t)
 {
     assert(t);
     return t->type;

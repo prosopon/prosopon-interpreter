@@ -10,7 +10,8 @@
 extern const pro_expr_type_info pro_actor_expr_type_info;
 
 
-PRO_INTERNAL pro_ref pro_actor_expr_create(pro_state_ref s,
+PRO_INTERNAL
+pro_ref pro_actor_expr_create(pro_state_ref s,
     pro_ref behavior);
 
 /**
@@ -18,7 +19,8 @@ PRO_INTERNAL pro_ref pro_actor_expr_create(pro_state_ref s,
  *
  * @return
  */
-PRO_INTERNAL pro_behavior* pro_actor_expr_get_behavior(pro_state_ref,
+PRO_INTERNAL
+pro_behavior* pro_actor_expr_get_behavior(pro_state_ref,
     const pro_expr* t, pro_ref* ud);
 
 #endif

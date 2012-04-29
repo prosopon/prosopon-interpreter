@@ -44,24 +44,28 @@ struct pro_expr
 /**
  * @return A new exprssion of a given type.
  */
-PRO_INTERNAL pro_ref pro_expr_create(pro_state_ref s,
+PRO_INTERNAL
+pro_ref pro_expr_create(pro_state_ref s,
     pro_expr_type type, pro_ud_deconstructor*, pro_expr** data);
 
 /**
  * Evaluates a given expression.
  */
-PRO_INTERNAL pro_ref pro_eval_expr(pro_state_ref, pro_ref);
+PRO_INTERNAL
+pro_ref pro_eval_expr(pro_state_ref, pro_ref);
 
 /**
  * Prints a given expression
  */
-PRO_INTERNAL void pro_print_expr(pro_state_ref, const pro_expr* t,
+PRO_INTERNAL
+void pro_print_expr(pro_state_ref, const pro_expr* t,
     const char* end);
 
 /**
  * @returns The type identifier of a given expression.
  */
-PRO_INTERNAL pro_expr_type pro_expr_get_type(const pro_expr*);
+PRO_INTERNAL
+pro_expr_type pro_expr_get_type(const pro_expr*);
 
 
 

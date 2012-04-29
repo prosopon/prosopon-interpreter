@@ -53,7 +53,8 @@ const pro_expr_type_info pro_case_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_ref pro_case_expr_create(pro_state_ref s,
+PRO_INTERNAL
+pro_ref pro_case_expr_create(pro_state_ref s,
     pro_ref pattern, pro_ref body)
 {
     pro_expr* t;
@@ -65,7 +66,8 @@ PRO_INTERNAL pro_ref pro_case_expr_create(pro_state_ref s,
 }
 
 
-PRO_INTERNAL int pro_case_expr_match(pro_state_ref s,
+PRO_INTERNAL
+int pro_case_expr_match(pro_state_ref s,
     pro_expr* t, pro_ref msg)
 {
     // Setup the environment for matching.

@@ -44,7 +44,8 @@ const pro_expr_type_info pro_string_expr_type_info = {
 };
 
 
-PRO_INTERNAL pro_ref pro_string_expr_create(pro_state_ref s, char* value)
+PRO_INTERNAL
+pro_ref pro_string_expr_create(pro_state_ref s, char* value)
 {
     pro_expr* t;
     pro_ref ref = pro_expr_create(s, PRO_STRING_EXPR_TYPE, string_expr_release, &t);

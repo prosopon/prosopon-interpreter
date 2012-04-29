@@ -24,7 +24,8 @@ static pro_expr_list* pro_expr_list_tail(pro_expr_list* t)
 #pragma mark -
 #pragma mark Internal
 
-PRO_INTERNAL void pro_print_expr_list(pro_state_ref s, pro_expr_list* t, const char* end)
+PRO_INTERNAL
+void pro_print_expr_list(pro_state_ref s, pro_expr_list* t, const char* end)
 {    
     pro_expr_list* list = t;
     while (list) 
@@ -39,7 +40,8 @@ PRO_INTERNAL void pro_print_expr_list(pro_state_ref s, pro_expr_list* t, const c
 }
 
 
-PRO_INTERNAL pro_expr_list* pro_expr_list_create(pro_state_ref s, 
+PRO_INTERNAL
+pro_expr_list* pro_expr_list_create(pro_state_ref s, 
     pro_ref expr, pro_expr_list* next)
 {
     pro_alloc* alloc;
@@ -54,7 +56,8 @@ PRO_INTERNAL pro_expr_list* pro_expr_list_create(pro_state_ref s,
 
 
 
-PRO_INTERNAL pro_expr_list* pro_expr_list_join(pro_expr_list* o1, pro_expr_list* o2)
+PRO_INTERNAL
+pro_expr_list* pro_expr_list_join(pro_expr_list* o1, pro_expr_list* o2)
 {
     assert(o1); // o1 must be an expression but o2 may be null
     pro_expr_list* tail = pro_expr_list_tail(o1);
@@ -63,7 +66,8 @@ PRO_INTERNAL pro_expr_list* pro_expr_list_join(pro_expr_list* o1, pro_expr_list*
 }
 
 
-PRO_INTERNAL void pro_release_expr_list(pro_state_ref s, pro_expr_list* t)
+PRO_INTERNAL
+void pro_release_expr_list(pro_state_ref s, pro_expr_list* t)
 {
     pro_alloc* alloc;
     pro_get_alloc(s, &alloc);
